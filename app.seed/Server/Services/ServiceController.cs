@@ -1,11 +1,8 @@
 ﻿using Server.Contracts;
 using Server.Model;
 using Server.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel.Channels;
 using System.Windows;
 
 namespace Server.Services
@@ -17,7 +14,9 @@ namespace Server.Services
 
         public List<Controller> GetAllControllers()
         {
-            return ControllerRepository.GetAllControllers();
+
+            List<Controller> controllers = ControllerRepository.GetAllControllers();
+            return new List<Controller>(controllers);
         }
 
         public void SendControllers(List<Controller> controllers)

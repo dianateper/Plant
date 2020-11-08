@@ -74,10 +74,12 @@
     <Compile Include="DBManager.cs" />
     <Compile Include="Model\Condition.cs" />
     <Compile Include="Model\Controller.cs" />
+    <Compile Include="Model\ControllerHistory.cs" />
     <Compile Include="Model\Machine.cs" />
     <Compile Include="Model\Plant.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Repository\ConditionRepository.cs" />
+    <Compile Include="Repository\ControllerRepository.cs" />
     <Compile Include="Repository\PlantRepository.cs" />
     <Compile Include="Repository\PositionRepository.cs" />
     <Compile Include="Resource.Designer.cs">

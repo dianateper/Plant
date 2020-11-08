@@ -13,15 +13,15 @@ namespace Server.Repository
 
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT controller_id, position_id FROM 
                                 dblink('{0}','SELECT controller_id, position_id from controller') 
-                                AS t(controller_id int, position_id)", DBManager.DBController), DBManager.con);
+                                AS t(controller_id int, position_id int)", DBManager.DBController), DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
                     Controller controller = new Controller();
-                    controller.controllerId = reader.GetInt16(0);
-                    controller.positionId = reader.GetInt16(1);
+                    controller.ControllerId = reader.GetInt16(0);
+                    controller.PositionId = reader.GetInt16(1);
                     controllers.Add(controller);
                 }
             }
@@ -34,13 +34,13 @@ namespace Server.Repository
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
                 @"SELECT dblink('{0}','INSERT INTO controller(temperature, humidity) VALUES("
                                     +controller.temperature + " ," + controller.humidity + ") WHERE controller_id="
-                                    +controller.controllerId + ";')", DBManager.DBController), DBManager.con);
+                                    +controller.ControllerId + ";')", DBManager.DBController), DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader()){}
 
             cmd = new NpgsqlCommand(string.Format(
                 @"SELECT dblink('{0}','INSERT INTO controller_history(controller_id, temperature, humidity, datetime) VALUES("
-                                    + controller.controllerId + " ," + controller.temperature + " ," + controller.humidity + " ," 
+                                    + controller.ControllerId + " ," + controller.temperature + " ," + controller.humidity + " ," 
                                     + DateTime.Now + ");')", DBManager.DBController), DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }

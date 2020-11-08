@@ -7,15 +7,17 @@ namespace Controllers
 {
     class Program
     {
-        static Uri address = new Uri("http://127.0.0.1:4000/IContractWeb");
+        static Uri address = new Uri("http://127.0.0.1:4000/IContractControllers");
         static BasicHttpBinding binding = new BasicHttpBinding();
         static ChannelFactory<IContractControllers> factory = null;
         public static IContractControllers channel = null;
-
-        public List<Controller> controllers = new List<Controller>();
+        Random rnd = new Random();
+        public static List<Controller> controllers = new List<Controller>();
 
         static void Main(string[] args)
         {
+            Program pr = new Program();
+            Console.ReadLine();
             try
             {
                 if (factory == null)
@@ -25,13 +27,44 @@ namespace Controllers
                 }
                 if (factory != null && channel != null)
                 {
-                   
+                    controllers = channel.GetAllControllers();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);  
             }
+
+            pr.ShowMenu();
+            string action = Console.ReadLine();
+            while (action.Equals("1"))
+            {
+                pr.SetParameter();
+                pr.ShowMenu();
+                action = Console.ReadLine();
+            }
+
+            Console.ReadLine();
+           
+        }
+
+
+        void ShowMenu()
+        {
+            Console.WriteLine("====================================================================================================");
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1) Get temperature and humidity");
+            Console.WriteLine("2) Exit");
+            Console.Write("\r\nSelect an option: ");
+        }
+
+        void SetParameter()
+        {
+            controllers.ForEach(c =>
+            {
+                c.temperature = rnd.Next(15, 31);
+                c.humidity = rnd.Next(50, 81);
+            });
         }
     }
 }

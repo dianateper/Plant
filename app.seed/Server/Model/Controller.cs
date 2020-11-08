@@ -1,23 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Server.Model
 {
+    [DataContract(Namespace = "Controllers")]
     public class Controller
     {
-        public int controllerId { get; set; }
+        int controllerId;
 
+        int positionId;
+
+        [DataMember]
+        public int ControllerId { get { return controllerId; } set { controllerId = value; } }
+
+        [DataMember(IsRequired = false)]
         public double temperature { get; set; }
 
+        [DataMember(IsRequired = false)]
         public double humidity { get; set; }
 
+        [DataMember(IsRequired = false)]
         public DateTime date { get; set; }
 
-        public int positionId { get; set; }
-
+        [DataMember]
+        public int PositionId { get { return positionId; } set { positionId = value; } }
     }
 }
