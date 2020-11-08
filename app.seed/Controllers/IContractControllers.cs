@@ -13,5 +13,8 @@ namespace Controllers
     {
         [OperationContract]
         void SendControllers(List<Controller> controllers);
+
+        [OperationContract]
+        List<Controller> GetAllControllers();
     }
 }

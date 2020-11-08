@@ -13,5 +13,8 @@ namespace Server.Contracts
     {
         [OperationContract]
         void SendControllers(List<Controller> controllers);
+
+        [OperationContract]
+        List<Controller> GetAllControllers();
     }
 }

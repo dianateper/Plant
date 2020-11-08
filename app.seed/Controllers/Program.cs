@@ -12,6 +12,8 @@ namespace Controllers
         static ChannelFactory<IContractControllers> factory = null;
         public static IContractControllers channel = null;
 
+        public List<Controller> controllers = new List<Controller>();
+
         static void Main(string[] args)
         {
             try
@@ -23,7 +25,6 @@ namespace Controllers
                 }
                 if (factory != null && channel != null)
                 {
-                    
                    
                 }
             }
