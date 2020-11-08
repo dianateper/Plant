@@ -40,6 +40,7 @@ namespace Controllers
             while (action.Equals("1"))
             {
                 pr.SetParameter();
+                pr.ShowController();
                 pr.ShowMenu();
                 action = Console.ReadLine();
             }
@@ -48,6 +49,12 @@ namespace Controllers
            
         }
 
+        void ShowController()
+        {
+            controllers.ForEach(c => {
+                Console.WriteLine(c.ControllerId + " " + c.PositionId + " " + c.temperature + " " + c.humidity);
+            });
+        }
 
         void ShowMenu()
         {
@@ -60,10 +67,21 @@ namespace Controllers
 
         void SetParameter()
         {
+
+            int temperature = rnd.Next(15, 31);
+            int humidity = rnd.Next(50, 81);
+
+
+            double minT = 0.3;
+            double maxT = 1.7;
+
+            double minH = 1;
+            double maxH = 3;
+
             controllers.ForEach(c =>
             {
-                c.temperature = rnd.Next(15, 31);
-                c.humidity = rnd.Next(50, 81);
+                c.temperature = Math.Round(temperature  + minT + rnd.NextDouble() * (maxT - minT), 1);
+                c.humidity = Math.Round(humidity + minH + rnd.NextDouble() * (maxH - minH),2);
             });
         }
     }
