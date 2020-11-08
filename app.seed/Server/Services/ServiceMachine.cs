@@ -1,5 +1,6 @@
 ﻿using Server.Contracts;
 using Server.Model;
+using Server.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,19 @@ namespace Server.Services
 {
     class ServiceMachine : IContractMachine
     {
+        MachineRepository MachineRepository = new MachineRepository();
+        
+        public List<Machine> GetAllMachines()
+        {
+            return MachineRepository.GetAllMachines();
+        }
+
         public void SendMachines(List<Machine> machines)
         {
-            machines.ForEach(m => { MessageBox.Show(m.machineId + " " + m.X + " " + m.Y); });
+            machines.ForEach(m =>
+            {
+                MachineRepository.SendMachines(m);
+            });
         }
     }
 }

@@ -13,5 +13,8 @@ namespace Machines
     {
         [OperationContract]
         void SendMachines(List<Machine> machines);
+
+        [OperationContract]
+        List<Machine> GetAllMachines();
     }
 }

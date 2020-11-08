@@ -47,13 +47,16 @@ namespace Server.Repository
 
         }
 
-        public List<ControllerHistory> GetControllerHistory(int conttroller_id)
+        public List<ControllerHistory> GetControllerHistory(int controller_id)
         {
             List<ControllerHistory> controllerHistories = new List<ControllerHistory>();
 
-            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT controller_history_id, temperature, humidity, datetime FROM 
-                                dblink('{0}','SELECT controller_history_id, temperature, humidity, datetime from controller_history') 
-                                AS t(controller_history_id int, temperature numeric, humidity numeric, datetime date)", DBManager.DBController), 
+            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
+                @"SELECT controller_history_id, temperature, humidity, datetime FROM 
+                                dblink('{0}',
+                                'SELECT controller_history_id, temperature, humidity, datetime 
+                                from controller_history
+                                where controller_id="+controller_id+";') AS t(controller_history_id int, temperature numeric, humidity numeric, datetime date)", DBManager.DBController), 
                                 DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader())

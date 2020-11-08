@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -13,9 +14,13 @@ namespace Machines
         static BasicHttpBinding binding = new BasicHttpBinding();
         static ChannelFactory<IContractMachine> factory = null;
         public static IContractMachine channel = null;
+   
+        public static List<Machine> machines = new List<Machine>();
 
         static void Main(string[] args)
         {
+            Program pr = new Program();
+            Console.ReadLine();
             try
             {
                 if (factory == null)
@@ -25,14 +30,27 @@ namespace Machines
                 }
                 if (factory != null && channel != null)
                 {
-
-
+                    machines = channel.GetAllMachines();
+                    pr.ShowMachines();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+        
+            Console.ReadLine();
+
         }
+
+        void ShowMachines()
+        {
+            machines.ForEach(m => {
+                Console.WriteLine(m.machineId + " " + m.Name + " " + m.Type + " " + m.X + " " + m.Y);
+            });
+        }
+
+    
     }
 }
