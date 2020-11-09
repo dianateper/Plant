@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Server.Model;
 
 namespace app.seed
 {
@@ -19,14 +20,70 @@ namespace app.seed
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
 
+        public List<Machine> Machines { get; set; }
+        public List<string> MachinesNames { get; set; }
+        public int selected_machine;
+
+        public string ImagePlayPath
+        {
+            get
+            {
+                return "..\\..\\..\\..\\Images\\play.png";
+            }
+        }
+        public string ImageUpPath
+        {
+            get
+            {
+                return "..\\..\\..\\..\\Images\\up.png";
+            }
+        }
+        public string ImagePausePath
+        {
+            get
+            {
+                return "..\\..\\..\\..\\Images\\pause.png";
+            }
+        }
+        public string ImageLeftPath
+        {
+            get
+            {
+                return "..\\..\\..\\..\\Images\\left.png";
+            }
+        }
+        public string ImageDownPath
+        {
+            get
+            {
+                return "..\\..\\..\\..\\Images\\down.png";
+            }
+        }
+        public string ImageRightPath
+        {
+            get
+            {
+                return "..\\..\\..\\..\\Images\\right.png";
+            }
+        }
+
+
+
         public MainPage()
         {
+            MachinesNames.Add("Jnt");
+            MachinesNames.Add("Two");
+
+
             InitializeComponent();
+            Connect();
+
             BindingContext = this;
         }
 
-        void Greeting(object sender, EventArgs args)
+        void Connect()
         {
+            /*
             try
             {
                 if (factory == null)
@@ -37,14 +94,37 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
-                    Message.Text = channel.Greeting();
+                    Machines = channel.GetListMachines();
+                    GetMachinesNames();
+
                 }
             }
             catch (Exception)
             {
-                Message.Text = "Error";
+
+
             }
+            */
         }
 
+
+
+        void GetMachinesNames()
+        {
+            Machines.ForEach(i =>
+            {
+                MachinesNames.Add(i.Name);
+            });
+        }
+
+        private void machineListPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selected_machine = machineListPicker.SelectedIndex;
+        }
+
+        private void change_mod_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
