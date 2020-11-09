@@ -59,6 +59,9 @@
     <Compile Include="Planting.xaml.cs">
       <DependentUpon>Planting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatisticaPage.xaml.cs">
+      <DependentUpon>StatisticaPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +76,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Planting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatisticaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

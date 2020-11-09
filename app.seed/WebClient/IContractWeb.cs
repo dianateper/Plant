@@ -19,7 +19,9 @@ namespace WebClient
 
         [OperationContract]
         List<Plant> GetPlantedSeeds();
-
+       
+        [OperationContract]
+        ControllerStatistica GetControllerStatistica(int X, int Y);
     }
 
 }

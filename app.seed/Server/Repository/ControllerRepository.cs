@@ -47,6 +47,22 @@ namespace Server.Repository
 
         }
 
+
+        public int GetContollerIdByPosition(int X, int Y)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand(
+                string.Format("SELECT controller_id FROM dblink('{0}','SELECT c.controller_id from CONTROLLER c inner join POSITION p on c.position_id=p.position_id where p.x=" + X + " and p.y=" + Y + "') AS t(controller_id int)", DBManager.DBController), DBManager.con);
+
+            int rs;
+            using (NpgsqlDataReader result = cmd.ExecuteReader())
+            {
+                result.Read();
+                rs = int.Parse(result["controller_id"].ToString());
+            }
+
+            return rs;
+        }
+
         public List<ControllerHistory> GetControllerHistory(int controller_id)
         {
             List<ControllerHistory> controllerHistories = new List<ControllerHistory>();

@@ -1,5 +1,4 @@
 ﻿using Server.Model;
-using Server.Repository;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -27,5 +26,8 @@ namespace Server.Contracts
         [FaultContract(typeof(FaultException))]
         List<Plant> GetPlantedSeeds();
 
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        ControllerStatistica GetControllerStatistica(int X, int Y);
     }
 }

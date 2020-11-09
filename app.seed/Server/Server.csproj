@@ -75,9 +75,11 @@
     <Compile Include="Model\Condition.cs" />
     <Compile Include="Model\Controller.cs" />
     <Compile Include="Model\ControllerHistory.cs" />
+    <Compile Include="Model\ControllerStatistica.cs" />
     <Compile Include="Model\Machine.cs" />
     <Compile Include="Model\Plant.cs" />
     <Compile Include="Model\Position.cs" />
+    <Compile Include="Model\StatisticaView.cs" />
     <Compile Include="Repository\ConditionRepository.cs" />
     <Compile Include="Repository\ControllerRepository.cs" />
     <Compile Include="Repository\MachineRepository.cs" />

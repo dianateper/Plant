@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.Model
 {
-    class ControllerHistory
+    public class ControllerHistory
     {
         public int controllerHistoryId { get; set; }
 

@@ -10,6 +10,8 @@ namespace Server.Services
     class ServiceWeb : IContractWeb
     {
         PlantRepository plantRepository = new PlantRepository();
+        ControllerRepository controllerRepository = new ControllerRepository();
+        PositionRepository positionRepository = new PositionRepository();
 
         public List<Plant> GetListPlants()
         {
@@ -33,5 +35,18 @@ namespace Server.Services
         {
             plants.ForEach(plant => plantRepository.SetPlantPosition(plant.PlantId, plant.X, plant.Y));
         }
+
+
+        public ControllerStatistica GetControllerStatistica(int X, int Y)
+        {
+            int controllerId = controllerRepository.GetContollerIdByPosition(X, Y);
+            List<ControllerHistory> histories = controllerRepository.GetControllerHistory(controllerId);
+            ControllerStatistica controllerStatistica = new ControllerStatistica(histories);
+
+            return controllerStatistica;
+
+        }
+
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,28 +7,32 @@ using Server.Statistica;
 
 namespace Server.Model
 {
-    class StatisticaView
+    public class StatisticaView
     {
+        public StatisticaView() { }
+        public StatisticaView(List<double> values, string name) { this.values = values;  this.name = name; }
 
-        public List<double> array { get; set; }
+        public List<double> values = new List<double>();
 
-        public double Min => Statistica.Statistica.Min(array);
+        public string name { get; set; }
 
-        public double Max => Statistica.Statistica.Max(array);
+        public double Min => Statistica.Statistica.Min(values);
 
-        public double Mean => Statistica.Statistica.Mean(array);
+        public double Max => Statistica.Statistica.Max(values);
 
-        public double Median => Statistica.Statistica.Median(array);
+        public double Mean => Statistica.Statistica.Mean(values);
 
-        public double Range => Statistica.Statistica.Range(array);
+        public double Range => Statistica.Statistica.Range(values);
 
-        public double Variance => Statistica.Statistica.Variance(array);
+        public double Median => Statistica.Statistica.Median(values);
 
-        public double StandartDeriviation => Statistica.Statistica.StandartDeriation(array);
+        public double Variance => Statistica.Statistica.Variance(values);
 
-        public double Skewnes => Statistica.Statistica.Skewnes(array);
+        public double StandartDeriation => Statistica.Statistica.StandartDeriation(values);
 
-        public double Kurtosis => Statistica.Statistica.Kurtosis(array);
+        public double Skewnes => Statistica.Statistica.Skewnes(values);
+
+        public double Kurtosis => Statistica.Statistica.Kurtosis(values);
 
 
     }

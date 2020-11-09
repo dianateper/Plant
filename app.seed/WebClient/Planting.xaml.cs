@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace WebClient
 {
-    public partial class Planting : Page
+    public partial class Planting : Window
     {
         public delegate Point GetPosition(IInputElement element);
         int rowIndex = -1;
