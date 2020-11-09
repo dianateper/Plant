@@ -1,8 +1,10 @@
 ﻿using Server.Repository;
 using Server.Services;
 using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace Server
 {

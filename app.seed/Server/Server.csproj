@@ -92,6 +92,7 @@
     <Compile Include="Services\ServiceMachine.cs" />
     <Compile Include="Services\ServiceWeb.cs" />
     <Compile Include="Services\ServiceXam.cs" />
+    <Compile Include="Statistica\Statistica.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
