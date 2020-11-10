@@ -1,18 +1,8 @@
 ﻿using Models.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WebClient
 {
@@ -22,18 +12,52 @@ namespace WebClient
     public partial class StatisticaPage : Window
     {
 
-        public List<ControllerStatistica> controllerStatisticas = new List<ControllerStatistica>();
+        public static List<ControllerStatistica> controllersStatistica = new List<ControllerStatistica>();
 
         public StatisticaPage()
         {
             InitializeComponent();
+            GetStatisticaValues();
+            
         }
 
 
         public void GetStatisticaValues()
         {
-           
+            int row = Field.RowDefinitions.Count;
+            int col = Field.ColumnDefinitions.Count;
+
+            for (int i = 0; i<row; i++)
+            {
+                for(int j = 0; j<col-9; j++)
+                {
+                    ControllerStatistica c = MainWindow.channel.GetControllerStatistica(i, j);
+                    controllersStatistica.Add(c);
+
+                    TextBlock textBlock = new TextBlock();
+                    textBlock.Text = "\n t:\nMin: " + c.statisticaTemperature.Min + "\nMax: " + c.statisticaTemperature.Max;
+
+
+                    Grid.SetColumn(textBlock, j);
+                    Grid.SetRow(textBlock, i);
+
+                    Field.Children.Add(textBlock);
+
+                }
+            }
+
         }
 
+        private void Field_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var element = (UIElement)e.Source;
+            int row = Grid.GetRow(element);
+            int column = Grid.GetColumn(element);
+
+                   
+            var detail = new StatisticaDetail(row, column);
+            detail.Show();
+
+        }
     }
 }

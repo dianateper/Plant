@@ -6,8 +6,9 @@ namespace Models.Model
     {
 
         public List<ControllerHistory> controllerHistories = new List<ControllerHistory>();
-        public List<StatisticaView> statisticaViews = new List<StatisticaView>();
-       
+        public StatisticaView statisticaTemperature;
+        public StatisticaView statisticaHumidity;
+
         public ControllerStatistica()
         {
             
@@ -25,11 +26,8 @@ namespace Models.Model
                 humidities.Add(c.humidity);
             });
 
-            StatisticaView temperatureStatistica = new StatisticaView(temperatures,"Temperature");
-            StatisticaView humidityStatistica = new StatisticaView(humidities, "Humidity");
-
-            statisticaViews.Add(temperatureStatistica);
-            statisticaViews.Add(humidityStatistica);
+            statisticaTemperature = new StatisticaView(temperatures,"Temperature");
+            statisticaHumidity = new StatisticaView(humidities, "Humidity");
 
         }
 
