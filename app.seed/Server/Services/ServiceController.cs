@@ -20,8 +20,9 @@ namespace Server.Services
         }
 
         public void SendControllers(List<Controller> controllers)
-        {
+        { 
             controllers.ForEach(c => { ControllerRepository.SetTempAndHumidity(c); });
+            controllers.ForEach(c => { ControllerRepository.SetHistory(c); });
         }
     }
 }

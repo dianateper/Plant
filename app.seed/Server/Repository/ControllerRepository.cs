@@ -2,6 +2,9 @@
 using Models.Model;
 using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Data;
+using System.Globalization;
 
 namespace Server.Repository
 {
@@ -31,24 +34,30 @@ namespace Server.Repository
 
         public void SetTempAndHumidity(Controller controller)
         {
+          
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
-                @"SELECT dblink('{0}','INSERT INTO controller(temperature, humidity) VALUES("
-                                    +controller.temperature + " ," + controller.humidity + ") WHERE controller_id="
-                                    +controller.ControllerId + ";')", DBManager.DBController), DBManager.con);
+               @"SELECT dblink('{0}','UPDATE controller SET temperature={1} , humidity={2} WHERE controller_id={3}')", DBManager.DBController, 
+               controller.temperature.ToString("0.0", CultureInfo.GetCultureInfo("en-US")), controller.humidity.ToString("0.0", CultureInfo.GetCultureInfo("en-US")), controller.ControllerId), DBManager.con);
+           
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader()){}
+    
+        }
 
-            cmd = new NpgsqlCommand(string.Format(
-                @"SELECT dblink('{0}','INSERT INTO controller_history(controller_id, temperature, humidity, datetime) VALUES("
-                                    + controller.ControllerId + " ," + controller.temperature + " ," + controller.humidity + " ," 
-                                    + DateTime.Now + ");')", DBManager.DBController), DBManager.con);
+        public void SetHistory(Controller controller)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
+                  @"SELECT dblink('{0}','INSERT INTO controller_history(controller_id, temperature, humidity, datetime) VALUES("
+                                      + controller.ControllerId + ", " + controller.temperature.ToString("0.0", CultureInfo.GetCultureInfo("en-US"))
+                                      + " ," + controller.humidity.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", current_timestamp);')", DBManager.DBController), DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }
-
         }
 
 
-        public int GetContollerIdByPosition(int X, int Y)
+
+
+            public int GetContollerIdByPosition(int X, int Y)
         {
             NpgsqlCommand cmd = new NpgsqlCommand(
                 string.Format("SELECT controller_id FROM dblink('{0}','SELECT c.controller_id from CONTROLLER c inner join POSITION p on c.position_id=p.position_id where p.x=" + X + " and p.y=" + Y + "') AS t(controller_id int)", DBManager.DBController), DBManager.con);

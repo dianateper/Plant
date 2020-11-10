@@ -42,6 +42,7 @@ namespace Controllers
                 pr.SetParameter();
                 pr.ShowController();
                 pr.ShowMenu();
+                channel.SendControllers(controllers);
                 action = Console.ReadLine();
             }
 
