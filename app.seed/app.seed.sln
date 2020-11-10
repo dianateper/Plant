@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machines", "Machines\Machin
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Models", "Models\Models.shproj", "{51236160-1BEA-4569-B94B-6025689BB463}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{197DBAD8-DC09-4B86-B1C8-37D848879FB9}"
+	ProjectSection(SolutionItems) = preProject
+		Images\play.png = Images\play.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Models\Models.projitems*{1604a0c2-36b3-4f05-a36b-58361b4560ed}*SharedItemsImports = 4

@@ -72,6 +72,11 @@
     <Compile Include="Contracts\IContractWeb.cs" />
     <Compile Include="Contracts\IContractXam.cs" />
     <Compile Include="DBManager.cs" />
+    <Compile Include="Dijkstra\Graph.cs" />
+    <Compile Include="Dijkstra\GraphBuilder.cs" />
+    <Compile Include="Dijkstra\GraphNode.cs" />
+    <Compile Include="Dijkstra\SearchNode.cs" />
+    <Compile Include="Dijkstra\SortedLinkedList.cs" />
     <Compile Include="Repository\ConditionRepository.cs" />
     <Compile Include="Repository\ControllerRepository.cs" />
     <Compile Include="Repository\MachineRepository.cs" />
@@ -128,6 +133,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Models\Models.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

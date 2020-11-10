@@ -139,16 +139,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFit" Source="{Binding ImagePlayPath}" />
-            <Image Grid.Row="0" Grid.Column="1" Aspect="AspectFit" Source="{Binding ImageUpPath}" />
+            <Image Source="C:\Users\user\Desktop\plant\plant\app.seed\Images\play.png" Grid.Row="0" Grid.Column="0" Aspect="AspectFit" />
+            <Image Source="Images.play.png" Grid.Row="0" Grid.Column="1" Aspect="AspectFit" />
             <Image Grid.Row="0" Grid.Column="2" Aspect="AspectFit" Source="{Binding ImagePausePath}" />
 
             <Image Grid.Row="1" Grid.Column="0" Aspect="AspectFit" Source="{Binding ImageLeftPath}" />
             <Image Grid.Row="1" Grid.Column="1" Aspect="AspectFit" Source="{Binding ImageDownPath}" />
             <Image Grid.Row="1" Grid.Column="2" Aspect="AspectFit" Source="{Binding ImageRightPath}" />
 
-
         </Grid>
+
         <Button Text="connect"  Clicked="Button_Clicked"></Button>
     </StackLayout>
 </ContentPage>

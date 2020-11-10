@@ -12,6 +12,9 @@ namespace app.seed
 
         [OperationContract]
         List<Machine> GetAllMachines();
+
+        [OperationContract]
+        LinkedList<Position> GetPath(Position start, Position end);
     }
 
 }
