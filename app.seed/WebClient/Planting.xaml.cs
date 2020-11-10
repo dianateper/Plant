@@ -30,7 +30,7 @@ namespace WebClient
             plantsGrid.ItemsSource = Plants;
 
             PlantedSeeds = MainWindow.channel.GetPlantedSeeds();
-            PlantedSeeds.ForEach(plant => { SetImageToGrid(plant.IconName, plant.X, plant.Y); });
+            PlantedSeeds.ForEach(plant => { SetImageToGrid(plant.IconName, plant.X/2, plant.Y/2); });
 
             plantsGrid.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(seedsGrid_PreviewMouseLeftButtonDown);
             Field.Drop += new DragEventHandler(savedSeedGrid_Drop);
@@ -53,7 +53,7 @@ namespace WebClient
             bool check = false;
             PlantedSeeds.ForEach(plant =>
             {
-                if (plant.X == row && plant.Y == column)
+                if (plant.X == row*2 && plant.Y == column*2)
                 {
                     check = true;
                 }
@@ -61,8 +61,8 @@ namespace WebClient
 
             if (!check)
             {
-                changedPlant.X = row;
-                changedPlant.Y = column;
+                changedPlant.X = row*2;
+                changedPlant.Y = column*2;
 
                 TextBox item = new TextBox();
                 item.Text = changedPlant.Name;
