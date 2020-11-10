@@ -73,6 +73,7 @@ namespace app.seed
         {
             MachinesNames.Add("Jnt");
             MachinesNames.Add("Two");
+            MachinesNames.Add("Tрwo");
 
 
             InitializeComponent();
