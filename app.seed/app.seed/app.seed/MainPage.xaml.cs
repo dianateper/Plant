@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Models.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Server.Model;
 
 namespace app.seed
 {
@@ -21,7 +18,7 @@ namespace app.seed
         IContractXam channel = null;
 
         public List<Machine> Machines { get; set; }
-        public List<string> MachinesNames { get; set; }
+        public List<string> MachinesNames = new List<string>();
         public int selected_machine;
 
         public string ImagePlayPath
@@ -77,14 +74,14 @@ namespace app.seed
 
 
             InitializeComponent();
-            Connect();
+         
 
             BindingContext = this;
         }
 
         void Connect()
         {
-            /*
+            
             try
             {
                 if (factory == null)
@@ -95,8 +92,13 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
-                    Machines = channel.GetListMachines();
+                    Machines = channel.GetAllMachines();
                     GetMachinesNames();
+
+                    Machines.ForEach(m =>
+                    {
+                        DisplayAlert(m.Name, "ok", "ok");
+                    });
 
                 }
             }
@@ -105,7 +107,7 @@ namespace app.seed
 
 
             }
-            */
+            
         }
 
 
@@ -126,6 +128,11 @@ namespace app.seed
         private void change_mod_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Connect();
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>51236160-1bea-4569-b94b-6025689bb463</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Models</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Condition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Controller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ControllerHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ControllerStatistica.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Machine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Plant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Position.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Statistica.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\StatisticaView.cs" />
+  </ItemGroup>
+</Project>

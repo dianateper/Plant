@@ -1,4 +1,6 @@
-﻿using System.ServiceModel;
+﻿using Models.Model;
+using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace app.seed
 {
@@ -7,6 +9,9 @@ namespace app.seed
     {
         [OperationContract]
         string Greeting();
+
+        [OperationContract]
+        List<Machine> GetAllMachines();
     }
 
 }

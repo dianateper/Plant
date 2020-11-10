@@ -149,6 +149,6 @@
 
 
         </Grid>
-
+        <Button Text="connect"  Clicked="Button_Clicked"></Button>
     </StackLayout>
 </ContentPage>

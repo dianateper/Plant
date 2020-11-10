@@ -1,5 +1,5 @@
 ﻿using Npgsql;
-using Server.Model;
+using Models.Model;
 using System.Collections.Generic;
 using System.Windows;
 

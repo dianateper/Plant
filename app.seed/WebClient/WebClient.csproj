@@ -111,11 +111,6 @@
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Server\Server.csproj">
-      <Project>{1604A0C2-36B3-4F05-A36B-58361B4560ED}</Project>
-      <Name>Server</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\Models\Models.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

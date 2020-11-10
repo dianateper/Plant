@@ -51,11 +51,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Server\Server.csproj">
-      <Project>{1604a0c2-36b3-4f05-a36b-58361b4560ed}</Project>
-      <Name>Server</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\Models\Models.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

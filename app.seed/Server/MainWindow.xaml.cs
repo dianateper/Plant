@@ -16,6 +16,7 @@ namespace Server
         ServiceHost serviceWeb;
         ServiceHost serviceController;
         ServiceHost serviceMachine;
+        ServiceHost serviceXam;
 
         DBManager db = null;
         public MainWindow()
@@ -28,15 +29,17 @@ namespace Server
             
             try
             {
-                if (serviceController == null || serviceWeb == null || serviceMachine == null)
+                if (serviceController == null || serviceWeb == null || serviceMachine == null || serviceXam == null)
                 {
                     serviceWeb = new ServiceHost(typeof(ServiceWeb));
                     serviceController = new ServiceHost(typeof(ServiceController));
                     serviceMachine = new ServiceHost(typeof(ServiceMachine));
+                    serviceXam = new ServiceHost(typeof(ServiceXam));
 
                     serviceWeb.Open();
                     serviceController.Open();
                     serviceMachine.Open();
+                    serviceXam.Open();
 
                     textBox1.Text += "Сервер запущен.         " + DateTime.Now + Environment.NewLine;
                     db = new DBManager();
@@ -57,10 +60,12 @@ namespace Server
                     serviceWeb.Close();
                     serviceController.Close();
                     serviceMachine.Close();
+                    serviceXam.Close();
 
                     serviceWeb = null;
                     serviceController = null;
                     serviceMachine = null;
+                    serviceXam = null;
 
                     textBox1.Text += "Сервер остановлен.    " + DateTime.Now + Environment.NewLine;
                     db.CloseConnection();

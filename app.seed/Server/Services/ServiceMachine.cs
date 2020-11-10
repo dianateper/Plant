@@ -1,13 +1,7 @@
-﻿using Server.Contracts;
-using Server.Model;
+﻿using Models.Model;
+using Server.Contracts;
 using Server.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Server.Services
 {

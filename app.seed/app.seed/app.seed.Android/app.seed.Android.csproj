@@ -33,6 +33,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,10 +89,6 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Server\Server.csproj">
-      <Project>{1604a0c2-36b3-4f05-a36b-58361b4560ed}</Project>
-      <Name>Server</Name>
-    </ProjectReference>
     <ProjectReference Include="..\app.seed\app.seed.csproj">
       <Project>{B9B0D7A2-92AB-4439-9EC2-F3656B248B96}</Project>
       <Name>app.seed</Name>

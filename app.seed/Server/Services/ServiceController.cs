@@ -1,5 +1,5 @@
 ﻿using Server.Contracts;
-using Server.Model;
+using Models.Model;
 using Server.Repository;
 using System.Collections.Generic;
 using System.ServiceModel.Channels;

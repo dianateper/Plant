@@ -72,14 +72,6 @@
     <Compile Include="Contracts\IContractWeb.cs" />
     <Compile Include="Contracts\IContractXam.cs" />
     <Compile Include="DBManager.cs" />
-    <Compile Include="Model\Condition.cs" />
-    <Compile Include="Model\Controller.cs" />
-    <Compile Include="Model\ControllerHistory.cs" />
-    <Compile Include="Model\ControllerStatistica.cs" />
-    <Compile Include="Model\Machine.cs" />
-    <Compile Include="Model\Plant.cs" />
-    <Compile Include="Model\Position.cs" />
-    <Compile Include="Model\StatisticaView.cs" />
     <Compile Include="Repository\ConditionRepository.cs" />
     <Compile Include="Repository\ControllerRepository.cs" />
     <Compile Include="Repository\MachineRepository.cs" />
@@ -94,7 +86,6 @@
     <Compile Include="Services\ServiceMachine.cs" />
     <Compile Include="Services\ServiceWeb.cs" />
     <Compile Include="Services\ServiceXam.cs" />
-    <Compile Include="Statistica\Statistica.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,5 +128,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <Import Project="..\Models\Models.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

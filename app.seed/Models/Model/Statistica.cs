@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Server.Statistica
+namespace Models.Model
 {
     public class Statistica
     {

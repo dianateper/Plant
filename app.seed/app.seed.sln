@@ -15,7 +15,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Machines", "Machines\Machines.csproj", "{C919DF4E-91B9-4A6F-A6C3-A544F9FCF061}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Models", "Models\Models.shproj", "{51236160-1BEA-4569-B94B-6025689BB463}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Models\Models.projitems*{1604a0c2-36b3-4f05-a36b-58361b4560ed}*SharedItemsImports = 4
+		Models\Models.projitems*{51236160-1bea-4569-b94b-6025689bb463}*SharedItemsImports = 13
+		Models\Models.projitems*{52a2abfe-5987-467b-9784-4212900c8783}*SharedItemsImports = 4
+		Models\Models.projitems*{c04d6343-1aa0-4f29-ab36-27a31359b8ca}*SharedItemsImports = 5
+		Models\Models.projitems*{c919df4e-91b9-4a6f-a6c3-a544f9fcf061}*SharedItemsImports = 4
+		Models\Models.projitems*{df8f799b-73e7-4fc9-b5e4-7c2a2618500d}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
