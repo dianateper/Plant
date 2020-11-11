@@ -1,7 +1,6 @@
 ﻿using Npgsql;
 using Models.Model;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace Server.Repository
 {
@@ -31,13 +30,36 @@ namespace Server.Repository
             return plants;
         }
 
-        public void SetPlantPosition(int plantId, int x, int y)
+        public void SetPlantPosition(int plantId, int X, int Y)
         {
-            int positionId = positionRepository.GetPositionIdByXAndY(x, y);
+            int positionId = positionRepository.GetPositionIdByXAndY(X, Y);
 
             NpgsqlCommand cmd = new NpgsqlCommand(
                 string.Format("INSERT INTO PLANT_POSITION(plant_id, position_id) VALUES(" + plantId+", "+positionId+");"), DBManager.con);
   
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
+        public void SetPlantHistory(int plantId, int X, int Y, string state)
+        {
+            int positionId = positionRepository.GetPositionIdByXAndY(X, Y);
+
+            NpgsqlCommand cmd = new NpgsqlCommand(
+             string.Format("INSERT INTO PLANTING_HISTORY(plant_id, position_id, datetime, state) VALUES(" + plantId + ", " + positionId
+             + ", current_timestamp, " + state + ");"), DBManager.con);
+
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
+        public void DeletePlantFromPosition(int X, int Y)
+        {
+            int positionId = positionRepository.GetPositionIdByXAndY(X, Y);
+
+            NpgsqlCommand cmd = new NpgsqlCommand(
+            string.Format("DELETE FROM PLANT_POSITION WHERE position_id = "  + positionId + ";"), DBManager.con);
+
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
@@ -73,6 +95,30 @@ namespace Server.Repository
          
             return plants;
         }
+
+        public List<Plant> GetPlantsHistoryByPosition(int X, int Y)
+        {
+            int positionId = positionRepository.GetPositionIdByXAndY(X, Y);
+            List<Plant> plants = new List<Plant>();
+
+            NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT p.plant_id, p.name from PLANT p inner join planting_history h 
+                                        on p.plant_id=h.plant_id where position_id=" + positionId + " GROUP BY p.plant_id, p.name;", DBManager.con);
+
+            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Plant plant = new Plant();
+                    plant.PlantId = reader.GetInt16(0);
+                    plant.Name = reader.GetString(1);
+                    plant.IconName = reader.GetString(2);
+                    plants.Add(plant);
+                }
+            }
+
+            return plants;
+        }
+
 
     }
 }

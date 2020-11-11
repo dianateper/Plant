@@ -64,10 +64,16 @@ namespace Models.Model
 
             int N = array.Count();
 
+            if (N < 3)
+            {
+                return 0;
+            }
+
             array.ForEach(a =>
             {
                 sum += Math.Pow(((a - mean) / stdDev), 3);
             });
+
 
             return N * sum / (N - 1) / (N - 2);
         }
@@ -79,6 +85,10 @@ namespace Models.Model
             double StdDev = StandartDeriation(array);
 
             int N = array.Count();
+
+            if (N < 4) {
+                return 0;
+            }
 
             array.ForEach(a =>
             {

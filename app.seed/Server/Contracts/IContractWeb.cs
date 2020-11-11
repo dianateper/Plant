@@ -29,5 +29,9 @@ namespace Server.Contracts
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         ControllerStatistica GetControllerStatistica(int X, int Y);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<Plant> GetPlantsHistoryByPosition(int X, int Y);
     }
 }

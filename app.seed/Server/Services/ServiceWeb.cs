@@ -34,6 +34,7 @@ namespace Server.Services
         public void SetPlants(List<Plant> plants)
         {
             plants.ForEach(plant => plantRepository.SetPlantPosition(plant.PlantId, plant.X, plant.Y));
+            plants.ForEach(plant => plantRepository.SetPlantHistory(plant.PlantId, plant.X, plant.Y, "Planted"));
         }
 
 
@@ -45,6 +46,12 @@ namespace Server.Services
 
             return controllerStatistica;
 
+        }
+
+
+        public List<Plant> GetPlantsHistoryByPosition(int X, int Y)
+        {
+            return plantRepository.GetPlantsHistoryByPosition(X,Y);
         }
 
 

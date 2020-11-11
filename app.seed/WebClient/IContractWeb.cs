@@ -22,6 +22,9 @@ namespace WebClient
        
         [OperationContract]
         ControllerStatistica GetControllerStatistica(int X, int Y);
+
+        [OperationContract]
+        List<Plant> GetPlantsHistoryByPosition(int X, int Y);
     }
 
 }
