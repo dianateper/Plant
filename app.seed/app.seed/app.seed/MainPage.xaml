@@ -30,21 +30,31 @@
                 <Setter Property="ColumnSpacing" Value="3" />
                 <Setter Property="RowSpacing" Value="3" />
             </Style>
+            <Style x:Key="BoxViewPathStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="Aquamarine" />
+            </Style>
             <Style x:Key="BoxViewStyle" TargetType="BoxView">
                 <Setter Property="Color" Value="#b5c1c0" />
             </Style>
             <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
             </Style>
+            <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="#5b5b5b" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Style="{StaticResource StackLayoutStyle}">
+        
+        
         <FlexLayout Direction="Row" HeightRequest="50">
             
             <Picker x:Name="machineListPicker"  ItemsSource="{Binding MachinesNames}" 
                     Title="Select machine" WidthRequest="200" 
                     SelectedIndexChanged="machineListPicker_SelectedIndexChanged" />
-            
 
             <Button x:Name="change_mod" Clicked="change_mod_Clicked" WidthRequest="100"
                 ImageSource="" Style="{StaticResource ButtonChangeViewStyle}"
@@ -54,78 +64,217 @@
         <Grid Style="{StaticResource GridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <BoxView Grid.Column="0" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="1" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="0" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="3" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="0" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="5" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="0" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="7" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="0" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="9" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="0" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
 
-            <BoxView Grid.Column="1" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="1" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="3" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="5" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="7" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="1" Grid.Row="9" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="2" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="4" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="6" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="8" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="10" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="12" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="14" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="16" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="1" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
 
             <BoxView Grid.Column="2" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="1" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="2" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="3" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="2" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="5" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="2" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="7" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="2" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="9" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="2" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
 
-            <BoxView Grid.Column="3" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="1" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="3" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="5" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="7" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="3" Grid.Row="9" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="2" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="4" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="6" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="8" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="10" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="12" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="14" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="16" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="3" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
 
             <BoxView Grid.Column="4" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="1" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="4" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="3" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="4" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="5" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="4" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="7" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="4" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="9" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="4" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+
+            <BoxView Grid.Column="5" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="2" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="4" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="6" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="8" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="10" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="12" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="14" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="16" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="5" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
+
+            <BoxView Grid.Column="6" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="6" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+
+            <BoxView Grid.Column="7" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="2" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="4" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="6" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="8" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="10" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="12" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="14" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="16" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="7" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
+
+            <BoxView Grid.Column="8" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
+            <BoxView Grid.Column="8" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+
         </Grid>
 
         <Grid Style="{StaticResource GridControlsStyle}" >
@@ -133,19 +282,37 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Image Source="C:\Users\user\Desktop\plant\plant\app.seed\Images\play.png" Grid.Row="0" Grid.Column="0" Aspect="AspectFit" />
-            <Image Source="Images.play.png" Grid.Row="0" Grid.Column="1" Aspect="AspectFit" />
-            <Image Grid.Row="0" Grid.Column="2" Aspect="AspectFit" Source="{Binding ImagePausePath}" />
+            <BoxView Grid.Row="0" Grid.Column="0" />
+            <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" Source="up.png" />
+            <BoxView Grid.Row="0" Grid.Column="2" />
+            <ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" Source="play.png" />
+            
+            <ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="left_image_button" Source="left.png" />
+            <BoxView Grid.Row="1" Grid.Column="2" />
+            <ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="right_image_button" Source="right.png" />
+            <ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" x:Name="pause_image_button" Source="pause.png" />
 
-            <Image Grid.Row="1" Grid.Column="0" Aspect="AspectFit" Source="{Binding ImageLeftPath}" />
-            <Image Grid.Row="1" Grid.Column="1" Aspect="AspectFit" Source="{Binding ImageDownPath}" />
-            <Image Grid.Row="1" Grid.Column="2" Aspect="AspectFit" Source="{Binding ImageRightPath}" />
+            <!--
+
+            <ImageButton Grid.Row="0" Grid.Column="1" Aspect="AspectFit" Source="up.png" />
+            <ImageButton Grid.Row="0" Grid.Column="3" Aspect="AspectFit" Source="play.png" />
+
+            <ImageButton Grid.Row="1" Grid.Column="0" Aspect="AspectFit" Source="left.png" />
+            <ImageButton Grid.Row="1" Grid.Column="2" Aspect="AspectFit" Source="right.png" />
+            <ImageButton Grid.Row="1" Grid.Column="3" Aspect="AspectFit" Source="pause.png" />
+
+
+            <ImageButton Grid.Row="2" Grid.Column="1" Aspect="AspectFit" x:Name="down_image_button" Source="down.png" Clicked="down_image_button_Clicked" />
+            <ImageButton Grid.Row="2" Grid.Column="3" Aspect="AspectFit" Source="catch_position.png" />
+            -->
 
         </Grid>
 

@@ -21,51 +21,6 @@ namespace app.seed
         public List<string> MachinesNames = new List<string>();
         public int selected_machine;
 
-        public string ImagePlayPath
-        {
-            get
-            {
-                return "..\\..\\..\\..\\Images\\play.png";
-            }
-        }
-        public string ImageUpPath
-        {
-            get
-            {
-                return "..\\..\\..\\..\\Images\\up.png";
-            }
-        }
-        public string ImagePausePath
-        {
-            get
-            {
-                return "..\\..\\..\\..\\Images\\pause.png";
-            }
-        }
-        public string ImageLeftPath
-        {
-            get
-            {
-                return "..\\..\\..\\..\\Images\\left.png";
-            }
-        }
-        public string ImageDownPath
-        {
-            get
-            {
-                return "..\\..\\..\\..\\Images\\down.png";
-            }
-        }
-        public string ImageRightPath
-        {
-            get
-            {
-                return "..\\..\\..\\..\\Images\\right.png";
-            }
-        }
-
-
-
         public MainPage()
         {
             MachinesNames.Add("Jnt");
@@ -133,6 +88,16 @@ namespace app.seed
         private void Button_Clicked(object sender, EventArgs e)
         {
             Connect();
+        }
+
+        private void ImageButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void down_image_button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }
