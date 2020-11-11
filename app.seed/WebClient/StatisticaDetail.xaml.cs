@@ -4,7 +4,9 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Models.Model;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace WebClient
@@ -19,14 +21,28 @@ namespace WebClient
         public SeriesCollection TemperatureCollection { get; set; }
         public SeriesCollection HumidityCollection { get; set; }
 
+        public List<Plant> historyPlants { get; set; }
+
 
         public StatisticaDetail(int X, int Y)
         {
             InitializeComponent();
             statistica = MainWindow.channel.GetControllerStatistica(X, Y);
+            historyPlants = MainWindow.channel.GetPlantsHistoryByPosition(X,Y);
+
+            SetGridsVariable();
+            SetChartsVariable();  
+        }
+
+        public void SetGridsVariable()
+        {
             ShowDetail(statistica.statisticaTemperature, Temperature);
             ShowDetail(statistica.statisticaHumidity, Humidity);
+            PlantsHistoryGrid.ItemsSource = historyPlants;
+        }
 
+        public void SetChartsVariable()
+        {
             TemperatureCollection = new SeriesCollection
             {
                 new  LineSeries
@@ -46,7 +62,7 @@ namespace WebClient
                     Fill = new SolidColorBrush(Colors.Bisque)
                 }
             };
-            
+
             GraphTemperatureAxisX.LabelFormatter = value => new DateTime((long)value).ToString("MM/dd/yy");
             GraphHumidityAxisX.LabelFormatter = value => new DateTime((long)value).ToString("MM/dd/yy");
 

@@ -49,5 +49,11 @@ namespace Server.Services
         }
 
 
+        public List<Plant> GetPlantsHistoryByPosition(int X, int Y)
+        {
+            return plantRepository.GetPlantsHistoryByPosition(X,Y);
+        }
+
+
     }
 }
