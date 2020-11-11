@@ -27,15 +27,20 @@ namespace Server.Services
         Dijkstra.Graph<Position> SetGraph(List<Position> positions)
         {
             Dijkstra.Graph<Position> graph = new Dijkstra.Graph<Position>();
+            List<Position> addedPositions = new List<Position>();
 
             positions.ForEach(i =>
             {
-                graph.AddNode(i);
+                if (i.X % 2 != 0 || i.Y % 2 != 0)
+                {
+                    graph.AddNode(i);
+                    addedPositions.Add(i);
+                }
             });
 
-            positions.ForEach(i =>
+            addedPositions.ForEach(i =>
             {
-                positions.ForEach(j =>
+                addedPositions.ForEach(j =>
                 {
                     if (
                     i.X == j.X + 1 ||
@@ -46,20 +51,11 @@ namespace Server.Services
                     {
                         graph.AddEdge(i, j, 1);
                     }
-                    else if ((i.X == j.X + 1 && i.Y == j.Y + 1) ||
-                    (i.X == j.X - 1 && i.Y == j.Y + 1) ||
-                    (i.X == j.X + 1 && i.Y == j.Y - 1) ||
-                    (i.X == j.X - 1 && i.Y == j.Y - 1))
-                    {
-                        graph.AddEdge(i, j, Math.Sqrt(2));
-                    }
                 });
             });
 
             return graph;
         }
-
-
 
         public List<Machine> GetAllMachines()
         {
