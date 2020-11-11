@@ -4,29 +4,30 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="app.seed.MainPage">
+             x:Class="app.seed.MainPage"
+             Background="#5b5b5b"
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="buttonStyle" TargetType="Button">
-                <Setter Property="TextColor" Value="Black" />
-                <Setter Property="BackgroundColor" Value="Cyan" />
-                <Setter Property="FontSize" Value="Large" />
+            <Style x:Key="ImageButtonChangeViewStyle" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="#5b5b5b" />
+                <Setter Property="WidthRequest" Value="45" />
+                <Setter Property="HeightRequest" Value="45" />
+                <!--<Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderColor" Value="Black" />-->
             </Style>
-            <Style x:Key="ButtonChangeViewStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#b5c1c0" />
-                <Setter Property="Margin" Value="10, 10, 10, 0" />
-                <Setter Property="HorizontalOptions" Value="End" />
-                <Setter Property="WidthRequest" Value="50" />
+            <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="#5b5b5b" />
+                <Setter Property="Aspect" Value="AspectFit" />
             </Style>
             <Style x:Key="GridStyle" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="Margin" Value="10" />
+                <Setter Property="Margin" Value="0" />
                 <Setter Property="ColumnSpacing" Value="3" />
                 <Setter Property="RowSpacing" Value="3" />
             </Style>
             <Style x:Key="GridControlsStyle" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="Margin" Value="60,5" />
                 <Setter Property="ColumnSpacing" Value="3" />
                 <Setter Property="RowSpacing" Value="3" />
             </Style>
@@ -37,29 +38,25 @@
                 <Setter Property="Color" Value="#b5c1c0" />
             </Style>
             <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
-            </Style>
-            <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="BorderColor" Value="Black" />
-                <Setter Property="BorderWidth" Value="1" />
-                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="Margin" Value="10" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Style="{StaticResource StackLayoutStyle}">
-        
-        
-        <FlexLayout Direction="Row" HeightRequest="50">
-            
-            <Picker x:Name="machineListPicker"  ItemsSource="{Binding MachinesNames}" 
-                    Title="Select machine" WidthRequest="200" 
+    <StackLayout Style="{StaticResource StackLayoutStyle}" >
+
+        <RelativeLayout >
+            <Picker x:Name="machineListPicker" ItemsSource="{Binding MachinesNames}" Title="Select machine" WidthRequest="320" 
                     SelectedIndexChanged="machineListPicker_SelectedIndexChanged" />
 
-            <Button x:Name="change_mod" Clicked="change_mod_Clicked" WidthRequest="100"
-                ImageSource="" Style="{StaticResource ButtonChangeViewStyle}"
-                />
-        </FlexLayout>
+            <ImageButton x:Name="change_mod_image_button" Clicked="change_mod_image_button_Clicked" Source="info.png"
+                         Style="{StaticResource ImageButtonChangeViewStyle}"
+                         RelativeLayout.XConstraint= "{ConstraintExpression 
+                Type=RelativeToParent,           
+                Property=Width,
+                Factor=1, 
+                Constant=-45}"
+                         />
+        </RelativeLayout>
 
         <Grid Style="{StaticResource GridStyle}">
             <Grid.ColumnDefinitions>
@@ -277,42 +274,18 @@
 
         </Grid>
 
-        <Grid Style="{StaticResource GridControlsStyle}" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Grid Style="{StaticResource GridControlsStyle}" HeightRequest="120" 
+              RowDefinitions="*, *, *"
+              ColumnDefinitions="25, *, 25, 25, 25, *, 25"
+              >
+            <ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" x:Name="up_image_button" Source="up.png" Clicked="up_image_button_Clicked" />
+            <ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="left_image_button" Source="left.png" Clicked="left_image_button_Clicked" />
+            <ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource ImageButtonStyle}" x:Name="right_image_button" Source="right.png" Clicked="right_image_button_Clicked" />
+            <ImageButton Grid.Row="2" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" x:Name="down_image_button" Source="down.png" Clicked="down_image_button_Clicked" />
 
-            <BoxView Grid.Row="0" Grid.Column="0" />
-            <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" Source="up.png" />
-            <BoxView Grid.Row="0" Grid.Column="2" />
-            <ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" Source="play.png" />
-            
-            <ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="left_image_button" Source="left.png" />
-            <BoxView Grid.Row="1" Grid.Column="2" />
-            <ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="right_image_button" Source="right.png" />
-            <ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" x:Name="pause_image_button" Source="pause.png" />
-
-            <!--
-
-            <ImageButton Grid.Row="0" Grid.Column="1" Aspect="AspectFit" Source="up.png" />
-            <ImageButton Grid.Row="0" Grid.Column="3" Aspect="AspectFit" Source="play.png" />
-
-            <ImageButton Grid.Row="1" Grid.Column="0" Aspect="AspectFit" Source="left.png" />
-            <ImageButton Grid.Row="1" Grid.Column="2" Aspect="AspectFit" Source="right.png" />
-            <ImageButton Grid.Row="1" Grid.Column="3" Aspect="AspectFit" Source="pause.png" />
-
-
-            <ImageButton Grid.Row="2" Grid.Column="1" Aspect="AspectFit" x:Name="down_image_button" Source="down.png" Clicked="down_image_button_Clicked" />
-            <ImageButton Grid.Row="2" Grid.Column="3" Aspect="AspectFit" Source="catch_position.png" />
-            -->
+            <ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" Source="play.png" Clicked="ImageButton_Clicked_2" />
+            <ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="pause_image_button" Source="pause.png" Clicked="pause_image_button_Clicked" />
+            <ImageButton Grid.Row="2" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="catch_position_image_button" Source="catch_position.png" Clicked="catch_position_image_button_Clicked" />
 
         </Grid>
 

@@ -99,5 +99,45 @@ namespace app.seed
         {
 
         }
+
+        private void left_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void right_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pause_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ImageButton_Clicked_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ImageButton_Clicked_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void catch_position_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void up_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void change_mod_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
