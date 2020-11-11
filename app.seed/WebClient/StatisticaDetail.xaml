@@ -3,10 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WebClient"
+        xmlns:local="clr-namespace:WebClient" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="StatisticaDetail" Height="450" Width="800">
+        Title="StatisticaDetail" Height="700" Width="1200">
     <Grid>
-        
+        <DataGrid Name="Temperature" Margin="20,50,969.6,369.4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Property}" Header="Property"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Value}" Header="Value"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Name="Humidity" Margin="20,351,963.6,72.4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Property}" Header="Property"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Value}" Header="Value"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <lvc:CartesianChart x:Name="GraphTemperature" Series="{Binding TemperatureCollection}" Width="500" Margin="271,42,422.6,372.4">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis x:Name="GraphTemperatureAxisX" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+        <lvc:CartesianChart x:Name="GraphHumidity" Series="{Binding HumiditiesCollection}" Width="500" Margin="281,346,412.6,68.4">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis x:Name="GraphHumidityAxisX" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
     </Grid>
 </Window>
