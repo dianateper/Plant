@@ -3,34 +3,39 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WebClient"
-      mc:Ignorable="d" Background="White"
-      Title="StatisticaPage" Height="495.386" Width="828.97">
+      xmlns:local="clr-namespace:WebClient" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d" Background="White"
+      Title="StatisticaPage" Height="495.386" Width="1100">
 
     <Grid>
-        <Grid x:Name="Field" ShowGridLines="True" Margin="50,50,50, 50" AllowDrop="True" MouseDown="Field_MouseDown">
+        <Grid x:Name="Field" ShowGridLines="True" Margin="21,67,469.6,99.6" AllowDrop="True" MouseDown="Field_MouseDown">
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
-                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
- 
 
+
+        </Grid>
+        <Grid Margin="638,113,23.6,143.6">
+            <lvc:CartesianChart Name="GraphFrequencyPlant" Series="{Binding PlantsCollection}" LegendLocation="None">
+
+            </lvc:CartesianChart>
         </Grid>
 
     </Grid>

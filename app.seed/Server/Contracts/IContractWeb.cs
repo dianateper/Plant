@@ -33,5 +33,10 @@ namespace Server.Contracts
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         Controller GetControllerByPosition(int X, int Y);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        Dictionary<Plant, int> GetFieldStatistic();
+
     }
 }

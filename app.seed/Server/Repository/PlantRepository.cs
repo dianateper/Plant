@@ -123,6 +123,34 @@ namespace Server.Repository
             return plants;
         }
 
+        public Dictionary<Plant, int> GetPlantFrequency()
+        {
+            Dictionary<Plant, int> plantFrequency = new Dictionary<Plant, int>();
 
+            NpgsqlCommand cmd = new NpgsqlCommand(
+                @"SELECT PLANT.plant_id, PLANT.name, count(*) as cnt
+                        from PLANT 
+                        inner join PLANT_POSITION on PLANT.plant_id = PLANT_POSITION.plant_id
+                           
+                        inner join dblink('controller_con', 'SELECT position_id, X, Y FROM Position') 
+                            AS ps(position_id int, X int, Y int)
+
+                        on PLANT_POSITION.position_id = ps.position_id GROUP BY PLANT.name, PLANT.plant_id", DBManager.con);
+
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Plant plant = new Plant();
+                plant.PlantId = reader.GetInt16(0);
+                plant.Name = reader.GetString(1);
+                plantFrequency.Add(plant, reader.GetInt32(2));
+            }
+            reader.Dispose();
+            cmd.Dispose();
+
+
+            return plantFrequency;
+        }
     }
 }

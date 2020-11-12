@@ -53,5 +53,10 @@ namespace Server.Services
         {
             return controllerRepository.GetControllerByXAndY(X, Y);
         }
+
+        public Dictionary<Plant, int> GetFieldStatistic()
+        {
+            return plantRepository.GetPlantFrequency();
+        }
     }
 }

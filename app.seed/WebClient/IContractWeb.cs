@@ -29,6 +29,9 @@ namespace WebClient
         [OperationContract]
         Controller GetControllerByPosition(int X, int Y);
 
+        [OperationContract]
+        Dictionary<Plant, int> GetFieldStatistic();
+
     }
 
 }
