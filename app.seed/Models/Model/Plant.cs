@@ -29,6 +29,8 @@ namespace Models.Model
             set { iconName = value; }
         }
 
+        public DateTime datetime { get; set; }
+
      
         public int X { get; set; }
 

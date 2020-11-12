@@ -12,8 +12,7 @@ namespace WebClient
     public partial class StatisticaPage : Window
     {
 
-        public static List<ControllerStatistica> controllersStatistica = new List<ControllerStatistica>();
-
+     
         public StatisticaPage()
         {
             InitializeComponent();
@@ -31,11 +30,10 @@ namespace WebClient
             {
                 for(int j = 0; j<col-9; j++)
                 {
-                    ControllerStatistica c = MainWindow.channel.GetControllerStatistica(i, j);
-                    controllersStatistica.Add(c);
-
+                    Controller controller = MainWindow.channel.GetControllerByPosition(i*2, j*2);
+                  
                     TextBlock textBlock = new TextBlock();
-                    textBlock.Text = "\n t:\nMin: " + c.statisticaTemperature.Min + "\nMax: " + c.statisticaTemperature.Max;
+                    textBlock.Text = "\nT: " + controller.temperature + "\nH: " + controller.humidity;
 
 
                     Grid.SetColumn(textBlock, j);
@@ -55,7 +53,7 @@ namespace WebClient
             int column = Grid.GetColumn(element);
 
                    
-            var detail = new StatisticaDetail(row, column);
+            var detail = new StatisticaDetail(row*2, column*2);
             detail.Show();
 
         }

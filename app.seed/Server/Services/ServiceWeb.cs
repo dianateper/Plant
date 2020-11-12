@@ -11,8 +11,7 @@ namespace Server.Services
     {
         PlantRepository plantRepository = new PlantRepository();
         ControllerRepository controllerRepository = new ControllerRepository();
-        PositionRepository positionRepository = new PositionRepository();
-
+      
         public List<Plant> GetListPlants()
         {
             List<Plant> plants = plantRepository.GetAllPlants();
@@ -26,11 +25,7 @@ namespace Server.Services
             return new List<Plant>(plants);
         }
 
-        public string Greeting()
-        {
-            return "Hello!";
-        }
-
+   
         public void SetPlants(List<Plant> plants)
         {
             plants.ForEach(plant => plantRepository.SetPlantPosition(plant.PlantId, plant.X, plant.Y));
@@ -54,6 +49,9 @@ namespace Server.Services
             return plantRepository.GetPlantsHistoryByPosition(X,Y);
         }
 
-
+        public Controller GetControllerByPosition(int X, int Y)
+        {
+            return controllerRepository.GetControllerByXAndY(X, Y);
+        }
     }
 }

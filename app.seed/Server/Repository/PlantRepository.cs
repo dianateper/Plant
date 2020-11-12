@@ -101,9 +101,11 @@ namespace Server.Repository
         {
             int positionId = positionRepository.GetPositionIdByXAndY(X, Y);
             List<Plant> plants = new List<Plant>();
-
-            NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT p.plant_id, p.name from PLANT p inner join planting_history h 
-                                        on p.plant_id=h.plant_id where position_id=" + positionId + " GROUP BY p.plant_id, p.name;", DBManager.con);
+           
+            NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT p.plant_id, p.name, h.datetime from PLANT p 
+                                        inner join planting_history h 
+                                        on p.plant_id=h.plant_id "  +
+                                        " where h.position_id=" + positionId + ";", DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader())
             {
@@ -112,7 +114,8 @@ namespace Server.Repository
                     Plant plant = new Plant();
                     plant.PlantId = reader.GetInt16(0);
                     plant.Name = reader.GetString(1);
-                    plant.IconName = reader.GetString(2);
+                    plant.datetime = reader.GetDateTime(2);
+
                     plants.Add(plant);
                 }
             }

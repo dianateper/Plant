@@ -33,6 +33,7 @@
         <DataGrid x:Name="PlantsHistoryGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="190" Margin="1019,67,0,0" VerticalAlignment="Top" Width="140">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding datetime}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

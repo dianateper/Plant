@@ -7,10 +7,6 @@ namespace Server.Contracts
     [ServiceContract]
     interface IContractWeb
     {
-
-        [OperationContract]
-        string Greeting();
-
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         [ServiceKnownType(typeof(Plant))]
@@ -33,5 +29,9 @@ namespace Server.Contracts
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         List<Plant> GetPlantsHistoryByPosition(int X, int Y);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        Controller GetControllerByPosition(int X, int Y);
     }
 }

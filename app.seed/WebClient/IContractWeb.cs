@@ -25,6 +25,10 @@ namespace WebClient
 
         [OperationContract]
         List<Plant> GetPlantsHistoryByPosition(int X, int Y);
+
+        [OperationContract]
+        Controller GetControllerByPosition(int X, int Y);
+
     }
 
 }

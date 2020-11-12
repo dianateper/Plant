@@ -54,10 +54,7 @@ namespace Server.Repository
             using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }
         }
 
-
-
-
-            public int GetContollerIdByPosition(int X, int Y)
+        public int GetContollerIdByPosition(int X, int Y)
         {
             NpgsqlCommand cmd = new NpgsqlCommand(
                 string.Format("SELECT controller_id FROM dblink('{0}','SELECT c.controller_id from CONTROLLER c inner join POSITION p on c.position_id=p.position_id where p.x=" + X + " and p.y=" + Y + "') AS t(controller_id int)", DBManager.DBController), DBManager.con);
@@ -71,6 +68,28 @@ namespace Server.Repository
 
             return rs;
         }
+
+        public Controller GetControllerByXAndY(int X, int Y)
+        {
+
+            NpgsqlCommand cmd = new NpgsqlCommand(
+                string.Format("SELECT controller_id, temperature, humidity FROM dblink('{0}','SELECT c.controller_id, c.temperature, c.humidity from CONTROLLER c inner join POSITION p on c.position_id=p.position_id where p.x=" + X + " and p.y=" + Y + "') AS t(controller_id int, temperature numeric, humidity numeric)", DBManager.DBController), DBManager.con);
+
+            Controller controller = new Controller();
+
+            
+            using (NpgsqlDataReader result = cmd.ExecuteReader())
+            {
+                result.Read();
+                controller.ControllerId = int.Parse(result["controller_id"].ToString());
+                controller.temperature = Double.Parse(result["temperature"].ToString());
+                controller.humidity = Double.Parse(result["humidity"].ToString());
+            }
+
+            return controller;
+        }
+
+
 
         public List<ControllerHistory> GetControllerHistory(int controller_id)
         {
