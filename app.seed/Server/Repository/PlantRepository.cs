@@ -152,5 +152,81 @@ namespace Server.Repository
 
             return plantFrequency;
         }
+
+        public List<Plant> GetFullPlantedPlants()
+        {
+            List<Plant> plants = new List<Plant>();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+                @"SELECT p.plant_id, p.name, p.icon_name, ps.temperature, ps.humidity, c.mintemperature, 
+                        c.maxtemperature, c.minhumidity, c.maxhumidity 
+                        from PLANT p
+                        inner join PLANT_POSITION pp on p.plant_id = pp.plant_id
+                        inner join dblink('controller_con', 'SELECT p.position_id, c.temperature, c.humidity 
+                            FROM Position p inner join Controller c on p.position_id=c.position_id') 
+                            AS ps(position_id int, temperature numeric, humidity numeric)
+                        on pp.position_id = ps.position_id
+                        inner join condition c on PLANT.condition_id=c.condition_id 
+                        where (ps.temperature not between c.mintemperature and c.maxtemperature) 
+                        or (ps.humidity mot between c.minhumidity and c.maxhumidity)
+                        ", DBManager.con);
+
+
+            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Plant plant = new Plant();
+                    plant.PlantId = reader.GetInt16(0);
+                    plant.Name = reader.GetString(1);
+                    plant.IconName = reader.GetString(2);
+                    plant.temperature = reader.GetDouble(3);
+                    plant.humidity = reader.GetDouble(4);
+                    plant.minTemperature = reader.GetDouble(5);
+                    plant.maxTemperature = reader.GetDouble(6);
+                    plant.minHumidity = reader.GetDouble(7);
+                    plant.maxHumidity = reader.GetDouble(8);
+                    plants.Add(plant);
+                }
+            }
+            return plants;
+        }
+
+        public Dictionary<Position,string> CheckPlantsForTemperatureAndHumidity()
+        {
+            Dictionary<Position, string> actions = new Dictionary<Position, string>();
+          
+            List<Plant> plants = GetFullPlantedPlants();
+
+            plants.ForEach(plant =>
+            {
+                if (plant.temperature < plant.minTemperature)
+                {
+
+                }
+
+                if (plant.temperature > plant.maxTemperature)
+                {
+
+                }
+
+                if (plant.humidity < plant.minHumidity)
+                {
+
+                }
+
+                if (plant.humidity > plant.maxHumidity)
+                {
+
+                }
+
+            });
+
+            return actions;
+
+        }
+
+
+
+
     }
 }

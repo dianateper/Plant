@@ -37,6 +37,18 @@ namespace Models.Model
     
         public int Y { get; set; }
 
+        public double minTemperature { get; set; }
+
+        public double maxTemperature { get; set; }
+
+        public double maxHumidity { get; set; }
+
+        public double minHumidity { get; set; }
+
+        public double temperature { get; set; }
+
+        public double humidity { get; set; }
+
         public Plant() { 
         }
 

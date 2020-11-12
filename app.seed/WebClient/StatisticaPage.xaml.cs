@@ -23,9 +23,6 @@ namespace WebClient
             InitializeComponent();
             SetGridValues();
             SetStatisticaValues();
-
-
-            
         }
 
         public void SetGridValues()
