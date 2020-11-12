@@ -10,7 +10,7 @@
 
     <Grid>
 
-        <Grid x:Name="Field" ShowGridLines="True" Margin="384,150,183,102" AllowDrop="True">
+        <Grid x:Name="Field" ShowGridLines="True" Margin="384,100,183,102" AllowDrop="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition Height="70"></RowDefinition>
@@ -202,7 +202,7 @@
             </DataGrid>
         </Grid>
 
-        <Button x:Name="button" Click="button_Click" Content="Save" HorizontalAlignment="Left" Margin="638,537,0,0" VerticalAlignment="Top" Width="75" Height="27" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="button" Click="button_Click" Content="Save" HorizontalAlignment="Left" Margin="595,499,0,0" VerticalAlignment="Top" Width="75" Height="27" RenderTransformOrigin="0.5,0.5">
            
         </Button>
 

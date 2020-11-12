@@ -44,8 +44,6 @@ namespace WebClient
             if (rowIndex < 0)
                 return;
 
-            Plant changedPlant = Plants[rowIndex];
-          
             var element = (UIElement)e.Source;
             int row = Grid.GetRow(element);
             int column = Grid.GetColumn(element);
@@ -61,8 +59,11 @@ namespace WebClient
 
             if (!check)
             {
+                Plant changedPlant = new Plant(Plants[rowIndex]);
+             
                 changedPlant.X = row*2;
                 changedPlant.Y = column*2;
+
 
                 TextBox item = new TextBox();
                 item.Text = changedPlant.Name;
@@ -99,6 +100,7 @@ namespace WebClient
             plantsGrid.SelectedIndex = rowIndex;
 
             Plant selectedSeed = plantsGrid.Items[rowIndex] as Plant;
+
             if (selectedSeed == null)
                 return;
             DragDropEffects dragdropeffects = DragDropEffects.Move;

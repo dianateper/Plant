@@ -35,5 +35,19 @@ namespace Models.Model
     
         public int Y { get; set; }
 
+        public Plant() { 
+        }
+
+        
+
+        public Plant(Plant plant)
+        {
+            this.plantId = plant.plantId;
+            this.name = plant.name;
+            this.iconName = plant.iconName;
+            this.X = plant.X;
+            this.Y = plant.Y;
+        }
+
     }
 }

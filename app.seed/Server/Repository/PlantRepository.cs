@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using Models.Model;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Server.Repository
 {
@@ -33,10 +34,10 @@ namespace Server.Repository
         public void SetPlantPosition(int plantId, int X, int Y)
         {
             int positionId = positionRepository.GetPositionIdByXAndY(X, Y);
-
             NpgsqlCommand cmd = new NpgsqlCommand(
                 string.Format("INSERT INTO PLANT_POSITION(plant_id, position_id) VALUES(" + plantId+", "+positionId+");"), DBManager.con);
-  
+            
+          
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
@@ -47,7 +48,7 @@ namespace Server.Repository
 
             NpgsqlCommand cmd = new NpgsqlCommand(
              string.Format("INSERT INTO PLANTING_HISTORY(plant_id, position_id, datetime, state) VALUES(" + plantId + ", " + positionId
-             + ", current_timestamp, " + state + ");"), DBManager.con);
+             + ", current_timestamp, '" + state + "');"), DBManager.con);
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();
