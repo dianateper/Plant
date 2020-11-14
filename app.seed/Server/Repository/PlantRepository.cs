@@ -105,7 +105,7 @@ namespace Server.Repository
             NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT p.plant_id, p.name, h.datetime from PLANT p 
                                         inner join planting_history h 
                                         on p.plant_id=h.plant_id "  +
-                                        " where h.position_id=" + positionId + ";", DBManager.con);
+                                        " where h.position_id=" + positionId + " order by h.datetime desc;", DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader())
             {
@@ -167,7 +167,7 @@ namespace Server.Repository
                         on pp.position_id = ps.position_id
                         inner join condition c on PLANT.condition_id=c.condition_id 
                         where (ps.temperature not between c.mintemperature and c.maxtemperature) 
-                        or (ps.humidity mot between c.minhumidity and c.maxhumidity)
+                        or (ps.humidity not between c.minhumidity and c.maxhumidity)
                         ", DBManager.con);
 
 
@@ -191,42 +191,45 @@ namespace Server.Repository
             return plants;
         }
 
-        public Dictionary<Position,string> CheckPlantsForTemperatureAndHumidity()
+        public Dictionary<Position, Action> CheckPlantsForTemperatureAndHumidity()
         {
-            Dictionary<Position, string> actions = new Dictionary<Position, string>();
+            Dictionary<Position, Action> actions = new Dictionary<Position, Action>();
           
             List<Plant> plants = GetFullPlantedPlants();
 
             plants.ForEach(plant =>
             {
+                Action action = Action.None;
+
+                int positionId = positionRepository.GetPositionIdByXAndY(plant.X, plant.Y);
+
                 if (plant.temperature < plant.minTemperature)
                 {
-
+                    action = Action.Raise_Temperature;
                 }
 
                 if (plant.temperature > plant.maxTemperature)
                 {
-
+                    action = Action.Lower_Temperature;
                 }
 
                 if (plant.humidity < plant.minHumidity)
                 {
-
+                    action = Action.Pour;
                 }
 
                 if (plant.humidity > plant.maxHumidity)
                 {
-
+                    action = Action.Dry;
                 }
+
+                actions.Add(new Position(positionId, plant.X, plant.Y), action);
 
             });
 
             return actions;
 
         }
-
-
-
 
     }
 }

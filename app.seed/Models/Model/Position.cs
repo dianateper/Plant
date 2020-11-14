@@ -14,5 +14,16 @@ namespace Models.Model
        
         public int Y { get; set; }
 
+
+
+        public Position() { }
+
+        public Position(int PositionId, int X, int Y)
+        {
+            this.PositionId = PositionId;
+            this.X = X;
+            this.Y = Y;
+        }
+
     }
 }

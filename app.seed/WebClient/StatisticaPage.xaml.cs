@@ -38,7 +38,7 @@ namespace WebClient
                     Controller controller = MainWindow.channel.GetControllerByPosition(i * 2, j * 2);
 
                     TextBlock textBlock = new TextBlock();
-                    textBlock.Text = "\nT: " + controller.temperature + "\nH: " + controller.humidity;
+                    textBlock.Text = i +"" + j + "\nT: " + string.Format("{0}\u00B0C", controller.temperature) + "\nH: " + controller.humidity + "%";
 
                     Grid.SetColumn(textBlock, j);
                     Grid.SetRow(textBlock, i);

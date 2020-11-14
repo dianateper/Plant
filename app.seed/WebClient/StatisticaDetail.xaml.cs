@@ -1,12 +1,10 @@
 ﻿using LiveCharts;
-using LiveCharts.Configurations;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace WebClient
@@ -22,7 +20,6 @@ namespace WebClient
         public SeriesCollection HumidityCollection { get; set; }
 
         public List<Plant> historyPlants { get; set; }
-
 
         public StatisticaDetail(int X, int Y)
         {
@@ -63,12 +60,15 @@ namespace WebClient
                 }
             };
 
-            GraphTemperatureAxisX.LabelFormatter = value => new DateTime((long)value).ToString("MM/dd/yy");
-            GraphHumidityAxisX.LabelFormatter = value => new DateTime((long)value).ToString("MM/dd/yy");
+
+            GraphTemperatureAxisX.LabelFormatter = value => new DateTime((long)value).ToString("dd/MM/yy");
+            GraphHumidityAxisX.LabelFormatter = value => new DateTime((long)value).ToString("dd/MM/yy");
 
             DataContext = this;
             GraphTemperature.Series = TemperatureCollection;
             GraphHumidity.Series = HumidityCollection;
+
+
         }
 
         public void ShowDetail(StatisticaView view, System.Windows.Controls.DataGrid grid)
@@ -111,7 +111,19 @@ namespace WebClient
             }
         }
 
+        private void minValueDate_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            GraphTemperatureAxisX.MinValue = minValueDate.SelectedDate.GetValueOrDefault().Ticks;
+            GraphHumidityAxisX.MinValue = minValueDate.SelectedDate.GetValueOrDefault().Ticks;
 
+        }
+
+        private void maxValueDate_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            GraphTemperatureAxisX.MaxValue = maxValueDate.SelectedDate.GetValueOrDefault().Ticks;
+            GraphHumidityAxisX.MaxValue = maxValueDate.SelectedDate.GetValueOrDefault().Ticks;
+
+        }
     }
 
 

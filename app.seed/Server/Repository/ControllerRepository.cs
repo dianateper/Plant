@@ -100,7 +100,7 @@ namespace Server.Repository
                                 dblink('{0}',
                                 'SELECT controller_history_id, temperature, humidity, datetime 
                                 from controller_history
-                                where controller_id="+controller_id+";') AS t(controller_history_id int, temperature numeric, humidity numeric, datetime date)", DBManager.DBController), 
+                                where controller_id="+controller_id+" order by datetime;') AS t(controller_history_id int, temperature numeric, humidity numeric, datetime date)", DBManager.DBController), 
                                 DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader())

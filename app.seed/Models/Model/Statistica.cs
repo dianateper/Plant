@@ -48,12 +48,12 @@ namespace Models.Model
                 sum += Math.Pow((a - mean), 2);
             });
 
-            return sum / array.Count();
+            return Math.Round(sum / array.Count(), 4);
         }
         //Середньоквадратичне відхилення
         public static double StandartDeriation(List<double> array)
         {
-            return Math.Sqrt(Variance(array));
+            return Math.Round(Math.Sqrt(Variance(array)), 4);
         }
         //Асиметрія
         public static double Skewnes(List<double> array)
@@ -75,7 +75,7 @@ namespace Models.Model
             });
 
 
-            return N * sum / (N - 1) / (N - 2);
+            return Math.Round(N * sum / (N - 1) / (N - 2), 4);
         }
         //Ексцес
         public static double Kurtosis(List<double> array)
@@ -95,7 +95,7 @@ namespace Models.Model
                 sum += Math.Pow((a-mean)/StdDev, 4);
             });
 
-            return N * (N + 1) * sum / (N - 1) / (N - 2) / (N - 3) - 3 * (N - 1) * (N - 1) / (N - 2) / (N - 3);
+            return Math.Round(N * (N + 1) * sum / (N - 1) / (N - 2) / (N - 3) - 3 * (N - 1) * (N - 1) / (N - 2) / (N - 3), 4);
         }
     }
 }

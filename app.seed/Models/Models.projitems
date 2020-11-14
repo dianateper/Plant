@@ -9,6 +9,7 @@
     <Import_RootNamespace>Models</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Action.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Condition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Controller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ControllerHistory.cs" />
