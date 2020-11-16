@@ -150,6 +150,11 @@ namespace WebClient
             MainWindow.channel.SetPlants(SavedPlants);
         }
 
-    
+        private void back_button_Click(object sender, RoutedEventArgs e)
+        {
+            var newForm = new MainWindow();
+            newForm.Show();
+            this.Close();
+        }
     }
 }

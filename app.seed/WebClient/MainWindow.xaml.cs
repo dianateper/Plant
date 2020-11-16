@@ -21,35 +21,9 @@ namespace WebClient
             InitializeComponent();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+
+        private void StatisticaPageBnt_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (factory == null)
-                {
-                    factory = new ChannelFactory<IContractWeb>(binding, new EndpointAddress(address));
-                    channel = factory.CreateChannel();
-                }
-                if (factory != null && channel != null)
-                {
-
-                    Planting planting = new Planting();
-
-                   
-                    var newForm = new Planting();
-                    newForm.Show();
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Hyperlink_RequestNavigate_1(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
-        {
-
             try
             {
                 if (factory == null)
@@ -64,6 +38,32 @@ namespace WebClient
 
 
                     var newForm = new StatisticaPage();
+                    newForm.Show();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void PlantingPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (factory == null)
+                {
+                    factory = new ChannelFactory<IContractWeb>(binding, new EndpointAddress(address));
+                    channel = factory.CreateChannel();
+                }
+                if (factory != null && channel != null)
+                {
+
+                    Planting planting = new Planting();
+
+
+                    var newForm = new Planting();
                     newForm.Show();
                     this.Close();
                 }

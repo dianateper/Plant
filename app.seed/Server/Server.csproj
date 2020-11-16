@@ -79,6 +79,7 @@
     <Compile Include="Dijkstra\SortedLinkedList.cs" />
     <Compile Include="Repository\ConditionRepository.cs" />
     <Compile Include="Repository\ControllerRepository.cs" />
+    <Compile Include="Repository\FertilizerRepository.cs" />
     <Compile Include="Repository\MachineRepository.cs" />
     <Compile Include="Repository\PlantRepository.cs" />
     <Compile Include="Repository\PositionRepository.cs" />

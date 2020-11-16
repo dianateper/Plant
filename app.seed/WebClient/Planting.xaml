@@ -7,9 +7,48 @@
         mc:Ignorable="d"
  
       Title="Planting" Height="600" Width="1200" Background="White">
+    <Window.Resources>
 
+        <Style x:Key="{x:Type DataGrid}" TargetType="{x:Type DataGrid}">
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
+            <Setter Property="Background" Value="Cornsilk"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBlack"></Setter>
+        </Style>
+
+
+
+        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+
+                    <Setter Property="Background" Value="Cornsilk"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="true">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+
+            <Setter Property="Background" Value="Cyan" />
+            <Setter Property="Foreground" Value="Cornsilk"/>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+
+        </Style>
+
+
+    </Window.Resources>
     <Grid>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="374" Width="643" Margin="377,95,0,0">
 
+
+        </Border>
         <Grid x:Name="Field" ShowGridLines="True" Margin="384,100,183,102" AllowDrop="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
@@ -170,7 +209,7 @@
 
             <Rectangle Grid.Column="8" Grid.Row="3"   />
             <TextBlock Grid.Column="8" Grid.Row="3" Text="38"/>
-            
+
             <Rectangle Grid.Column="8" Grid.Row="4"  />
             <TextBlock Grid.Column="8" Grid.Row="4" Text="48"/>
 
@@ -192,6 +231,7 @@
 
         </Grid>
 
+
         <Grid Background="Lavender" Width="1000" Height="400" Margin="65,0,900,9" >
             <DataGrid x:Name="plantsGrid"  SelectionMode="Extended"  AutoGenerateColumns="False"
                          ColumnWidth="*" >
@@ -202,9 +242,10 @@
             </DataGrid>
         </Grid>
 
-        <Button x:Name="button" Click="button_Click" Content="Save" HorizontalAlignment="Left" Margin="595,499,0,0" VerticalAlignment="Top" Width="75" Height="27" RenderTransformOrigin="0.5,0.5">
-           
+        <Button x:Name="button" Click="button_Click" Content="Plant" HorizontalAlignment="Left" Margin="566,500,0,0" VerticalAlignment="Top" Width="166" Height="47" RenderTransformOrigin="0.5,0.5">
+
         </Button>
+        <Button x:Name="back_button" Click="back_button_Click" Content="Go to menu" HorizontalAlignment="Left" Margin="1028,18,0,0" VerticalAlignment="Top" Width="143" Height="47" RenderTransformOrigin="0.5,0.5"/>
 
     </Grid>
 </Window>

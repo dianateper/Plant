@@ -6,26 +6,52 @@
         xmlns:local="clr-namespace:WebClient" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="StatisticaDetail" Height="700" Width="1200">
+    <Window.Resources>
+
+        <Style x:Key="{x:Type DataGrid}" TargetType="{x:Type DataGrid}">
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
+            <Setter Property="Background" Value="Cornsilk"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBlack"></Setter>
+        </Style>
+        <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBlack"></Setter>
+        </Style>
+        <Style x:Key="{x:Type DatePicker}" TargetType="{x:Type DatePicker}">
+            <Setter Property="SelectedDateFormat" Value="Short"></Setter>
+            <Setter Property="FontFamily"  Value="Century Gothic"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Text" Value="Choose date" />
+        </Style>
+
+
+    </Window.Resources>
     <Grid>
-        <DataGrid Name="Temperature" Margin="20,50,969.6,369.4">
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="279" Width="517" Margin="261,33,0,0"></Border>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="273" Width="517" Margin="261,355,0,0"></Border>
+        <DataGrid Name="Temperature" Margin="20,60,969.6,359.4">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Property}" Header="Property"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Value}" Header="Value"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Name="Humidity" Margin="20,351,963.6,72.4">
+        <DataGrid Name="Humidity" Margin="21,381,962.6,42.4">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Property}" Header="Property"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Value}" Header="Value"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <lvc:CartesianChart x:Name="GraphTemperature" Series="{Binding TemperatureCollection}" Width="500" Margin="271,42,422.6,372.4">
+        <lvc:CartesianChart x:Name="GraphTemperature" Series="{Binding TemperatureCollection}" Width="500" Margin="267,50,426.6,364.4">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis x:Name="GraphTemperatureAxisX" LabelFormatter="{Binding Formatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <lvc:CartesianChart x:Name="GraphHumidity" Series="{Binding HumiditiesCollection}" Width="500" Margin="281,346,412.6,68.4">
+        <lvc:CartesianChart x:Name="GraphHumidity" Series="{Binding HumiditiesCollection}" Width="500" Margin="267,370,426.6,44.4">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis x:Name="GraphHumidityAxisX" LabelFormatter="{Binding Formatter}" ></lvc:Axis>
             </lvc:CartesianChart.AxisX>
@@ -36,7 +62,12 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding datetime}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <DatePicker x:Name="minValueDate" FirstDayOfWeek="Monday" Text="Min" HorizontalAlignment="Left" Margin="837,77,0,0" VerticalAlignment="Top" SelectedDateChanged="minValueDate_SelectedDateChanged"/>
-        <DatePicker x:Name="maxValueDate" FirstDayOfWeek="Monday" Text="Max" HorizontalAlignment="Left" Margin="836,113,0,0" VerticalAlignment="Top" SelectedDateChanged="maxValueDate_SelectedDateChanged"/>
+        <DatePicker x:Name="minValueDate" FirstDayOfWeek="Monday" Text="Min" HorizontalAlignment="Left" Margin="801,43,0,0" VerticalAlignment="Top" SelectedDateChanged="minValueDate_SelectedDateChanged"/>
+        <DatePicker x:Name="maxValueDate" FirstDayOfWeek="Monday" Text="Max" HorizontalAlignment="Left" Margin="801,78,0,0" VerticalAlignment="Top" SelectedDateChanged="maxValueDate_SelectedDateChanged"/>
+        <Label x:Name="label" Content="Plants history" HorizontalAlignment="Left" Margin="1032,30,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Temperature statistica" HorizontalAlignment="Left" Margin="33,28,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy1" Content="Humiidity statistica" HorizontalAlignment="Left" Margin="49,345,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Temperature" HorizontalAlignment="Left" Margin="474,3,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.14,0.553"/>
+        <Label x:Name="label1_Copy" Content="Humidity" HorizontalAlignment="Left" Margin="470,323,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.14,0.553"/>
     </Grid>
 </Window>

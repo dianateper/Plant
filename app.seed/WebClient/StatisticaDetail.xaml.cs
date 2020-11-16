@@ -4,6 +4,7 @@ using LiveCharts.Wpf;
 using Models.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -68,6 +69,9 @@ namespace WebClient
             GraphTemperature.Series = TemperatureCollection;
             GraphHumidity.Series = HumidityCollection;
 
+
+            minValueDate.Text = statistica.controllerHistories.Select(x => x).FirstOrDefault().datetime.ToString();
+            maxValueDate.Text = statistica.controllerHistories.Select(x => x).LastOrDefault().datetime.ToString();
 
         }
 

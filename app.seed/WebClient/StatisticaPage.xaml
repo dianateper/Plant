@@ -6,8 +6,42 @@
       xmlns:local="clr-namespace:WebClient" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d" Background="White"
       Title="StatisticaPage" Height="495.386" Width="1100">
+    <Window.Resources>
+        <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBlack"></Setter>
+        </Style>
 
+        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+
+                    <Setter Property="Background" Value="Cornsilk"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="true">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+
+            <Setter Property="Background" Value="Cyan" />
+            <Setter Property="Foreground" Value="Cornsilk"/>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+
+        </Style>
+
+    </Window.Resources>
     <Grid>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="305" Width="613" Margin="13,66,0,0"></Border>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="267" Width="450" Margin="633,66,0,0">
+            <Label x:Name="label" Content="Histogram of plants" HorizontalAlignment="Center"/>
+        </Border>
+
         <Grid x:Name="Field" ShowGridLines="True" Margin="21,67,469.6,99.6" AllowDrop="True" MouseDown="Field_MouseDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"></RowDefinition>
@@ -37,6 +71,8 @@
 
             </lvc:CartesianChart>
         </Grid>
+        <Label x:Name="label1" Content="Temperature and humidity of all contoller" HorizontalAlignment="Left" Margin="159,33,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="back_button" Click="back_button_Click" Content="Go to menu" HorizontalAlignment="Left" Margin="937,8,0,0" VerticalAlignment="Top" Width="143" Height="47" RenderTransformOrigin="0.5,0.5"/>
 
     </Grid>
 </Window>
