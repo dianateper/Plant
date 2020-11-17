@@ -100,7 +100,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\play.png" />
+    <AndroidResource Include="Resources\drawable\catch_position.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\down.png" />
@@ -112,13 +112,16 @@
     <AndroidResource Include="Resources\drawable\pause.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\play.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\right.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\up.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\catch_position.png" />
+    <AndroidResource Include="Resources\drawable\connect.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\info.png" />

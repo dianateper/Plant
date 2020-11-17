@@ -12,63 +12,43 @@ namespace app.seed
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        Uri address = new Uri("https://ee12e8c92adf.ngrok.io");
+        Uri address = new Uri("https://a30284ac4598.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
 
         public List<Machine> Machines { get; set; }
-        public List<string> MachinesNames = new List<string>();
+        public List<string> MachinesNames
+        {
+            get
+            {
+                if (MachinesNames == null || MachinesNames.Count == 0)
+                {
+                    Connect();
+
+                    MachinesNames = GetMachinesNames();
+                }
+
+                return MachinesNames;
+            }
+            set
+            {
+                MachinesNames = new List<string>();
+            }
+        }
         public int selected_machine;
 
         public MainPage()
         {
             InitializeComponent();
 
+            //machineListPicker.ItemsSource = MachinesNames;
             BindingContext = this;
-            machineListPicker.ItemsSource = MachinesNames;
-        }
-
-        void Connect()
-        {
-            
-            try
-            {
-                if (factory == null)
-                {
-                    factory = new ChannelFactory<IContractXam>(binding, new EndpointAddress(address));
-                    channel = factory.CreateChannel();
-                }
-
-                if (factory != null && channel != null)
-                {
-                    Machines = channel.GetAllMachines();
-                    GetMachinesNames();
-
-                    Machines.ForEach(m =>
-                    {
-                        DisplayAlert(m.Name, "ok", "ok");
-                    });
-
-                }
-            }
-            catch (Exception)
-            {
-
-
-            }
-            
         }
 
 
 
-        void GetMachinesNames()
-        {
-            Machines.ForEach(i =>
-            {
-                MachinesNames.Add(i.Name);
-            });
-        }
+        #region other_methods
 
         private void machineListPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -131,6 +111,64 @@ namespace app.seed
         }
 
         private void change_mod_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        private void Grid_Position_Button_Clicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var row = Grid.GetRow(button);
+            var column = Grid.GetColumn(button);
+
+            DisplayAlert("", $"ItemTapped {row} {column}", "OK");
+        }
+
+        private void connect_button_Clicked(object sender, EventArgs e)
+        {
+            //Connect();
+
+            machineListPicker.ItemsSource = MachinesNames;
+            DisplayAlert("", $"binded ", "OK");
+        }
+
+        void Connect()
+        {
+
+            try
+            {
+                if (factory == null)
+                {
+                    factory = new ChannelFactory<IContractXam>(binding, new EndpointAddress(address));
+                    channel = factory.CreateChannel();
+                }
+
+                if (factory != null && channel != null)
+                {
+                    Machines = channel.GetAllMachines();
+                    DisplayAlert("", $"got ", "OK");
+
+                }
+            }
+            catch (Exception) { }
+        }
+
+        List<string> GetMachinesNames()
+        {
+            Machines.ForEach(i =>
+            {
+                MachinesNames.Add(i.Name);
+            });
+
+            return MachinesNames;
+        }
+
+
+
+
+        private void play_image_button_Clicked(object sender, EventArgs e)
         {
 
         }

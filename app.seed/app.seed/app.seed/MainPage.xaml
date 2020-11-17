@@ -11,106 +11,103 @@
         <ResourceDictionary>
             <Style x:Key="ImageButtonChangeViewStyle" TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="WidthRequest" Value="45" />
-                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="HeightRequest" Value="40" />
                 <!--<Setter Property="BorderWidth" Value="1" />
                 <Setter Property="BorderColor" Value="Black" />-->
             </Style>
             <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
                 <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HeightRequest" Value="30" />
+
             </Style>
+            
             <Style x:Key="GridStyle" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="Margin" Value="0" />
                 <Setter Property="ColumnSpacing" Value="3" />
                 <Setter Property="RowSpacing" Value="3" />
+                <Setter Property="Margin" Value="0" />
             </Style>
-            <Style x:Key="GridControlsStyle" TargetType="Grid">
+            <Style x:Key="GridControls1Style" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
                 <Setter Property="ColumnSpacing" Value="3" />
                 <Setter Property="RowSpacing" Value="3" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,10,0,0" />
             </Style>
+            <Style x:Key="GridControls2Style" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="#5b5b5b" />
+                <Setter Property="ColumnSpacing" Value="3" />
+                <Setter Property="RowSpacing" Value="3" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
             <Style x:Key="BoxViewPathStyle" TargetType="BoxView">
                 <Setter Property="Color" Value="Aquamarine" />
             </Style>
-            <Style x:Key="BoxViewStyle" TargetType="BoxView">
-                <Setter Property="Color" Value="#b5c1c0" />
-            </Style>
+
             <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
                 <Setter Property="Margin" Value="10" />
             </Style>
+
+            <Style x:Key="ButtonGridPathStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Aquamarine" />
+            </Style>
+            <Style x:Key="ButtonGridStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#b5c1c0" />
+            </Style>
+
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Style="{StaticResource StackLayoutStyle}" >
 
-        <RelativeLayout >
-            <Picker x:Name="machineListPicker" ItemsSource="{Binding MachinesNames}" Title="Select machine" WidthRequest="320" 
-                    SelectedIndexChanged="machineListPicker_SelectedIndexChanged" />
+        <Grid
+            RowDefinitions="40"
+            ColumnDefinitions="*, 30, 50"
+            >
 
-            <ImageButton x:Name="change_mod_image_button" Clicked="change_mod_image_button_Clicked" Source="info.png"
-                         Style="{StaticResource ImageButtonChangeViewStyle}"
-                         RelativeLayout.XConstraint= "{ConstraintExpression 
-                Type=RelativeToParent,           
-                Property=Width,
-                Factor=1, 
-                Constant=-45}"
-                         />
-        </RelativeLayout>
+            <Picker Grid.Row="0" Grid.Column="0" Title="Select machine" 
+                    x:Name="machineListPicker" ItemsSource="{Binding MachinesNames}" SelectedIndexChanged="machineListPicker_SelectedIndexChanged" />
 
-        <Grid Style="{StaticResource GridStyle}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" Source="connect.png" 
+                         x:Name="connect_button" Clicked="connect_button_Clicked" />
 
-            <BoxView Grid.Column="0" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ImageButtonChangeViewStyle}" Source="info.png" 
+                         x:Name="change_mod_image_button" Clicked="change_mod_image_button_Clicked" />
+
+        </Grid>
+
+        <!--
+        <Grid Style="{StaticResource GridStyle}"
+              RowDefinitions="*,10,*,10,*,10,*,10,*,10,*,10,*,10,*,10,*,10,*"
+              ColumnDefinitions="*,10,*,10,*,10,*,10,*"
+              >-->
+        <Grid Style="{StaticResource GridStyle}"
+              RowDefinitions="30,7,30,7,30,7,30,7,30,7,30,7,30,7,30,7,30,7,30"
+              ColumnDefinitions="*,7,*,7,*,7,*,7,*"
+              >
+
+            <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="6" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="8" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="10" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="12" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="14" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="16" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="0" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="0" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="0" Grid.Row="18" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
 
             <BoxView Grid.Column="1" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="1" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
@@ -132,25 +129,25 @@
             <BoxView Grid.Column="1" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="1" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
 
-            <BoxView Grid.Column="2" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="4" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="6" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="8" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="10" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="12" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="14" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="16" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="2" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="2" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="2" Grid.Row="18" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
 
             <BoxView Grid.Column="3" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="3" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
@@ -172,25 +169,25 @@
             <BoxView Grid.Column="3" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="3" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
 
-            <BoxView Grid.Column="4" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="2" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="4" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="6" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="8" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="10" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="12" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="14" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="16" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="4" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="4" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="4" Grid.Row="18" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
 
             <BoxView Grid.Column="5" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="5" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
@@ -212,25 +209,25 @@
             <BoxView Grid.Column="5" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="5" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
 
-            <BoxView Grid.Column="6" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="0" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="2" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="4" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="6" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="8" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="10" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="12" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="14" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="16" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="6" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="6" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="6" Grid.Row="18" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
 
             <BoxView Grid.Column="7" Grid.Row="0" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="7" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
@@ -252,43 +249,50 @@
             <BoxView Grid.Column="7" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
             <BoxView Grid.Column="7" Grid.Row="18" Style="{StaticResource BoxViewPathStyle}" />
 
-            <BoxView Grid.Column="8" Grid.Row="0" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="0" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="1" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="2" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="2" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="3" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="4" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="4" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="5" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="6" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="6" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="7" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="8" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="8" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="9" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="10" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="10" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="11" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="12" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="12" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="13" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="14" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="14" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="15" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="16" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="16" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
             <BoxView Grid.Column="8" Grid.Row="17" Style="{StaticResource BoxViewPathStyle}" />
-            <BoxView Grid.Column="8" Grid.Row="18" Style="{StaticResource BoxViewStyle}" />
+            <Button Grid.Column="8" Grid.Row="18" Style="{StaticResource ButtonGridStyle}" Clicked="Grid_Position_Button_Clicked" />
 
         </Grid>
 
-        <Grid Style="{StaticResource GridControlsStyle}" HeightRequest="120" 
-              RowDefinitions="*, *, *"
-              ColumnDefinitions="25, *, 25, 25, 25, *, 25"
+        <Grid Style="{StaticResource GridControls1Style}"
+              RowDefinitions="35"
+              ColumnDefinitions="40, 40, 40"
               >
-            <ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" x:Name="up_image_button" Source="up.png" Clicked="up_image_button_Clicked" />
-            <ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="left_image_button" Source="left.png" Clicked="left_image_button_Clicked" />
-            <ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource ImageButtonStyle}" x:Name="right_image_button" Source="right.png" Clicked="right_image_button_Clicked" />
-            <ImageButton Grid.Row="2" Grid.Column="3" Style="{StaticResource ImageButtonStyle}" x:Name="down_image_button" Source="down.png" Clicked="down_image_button_Clicked" />
 
-            <ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" Source="play.png" Clicked="ImageButton_Clicked_2" />
-            <ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="pause_image_button" Source="pause.png" Clicked="pause_image_button_Clicked" />
-            <ImageButton Grid.Row="2" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="catch_position_image_button" Source="catch_position.png" Clicked="catch_position_image_button_Clicked" />
+            <ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="play_image_button" Source="play.png" Clicked="play_image_button_Clicked" />
+            <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="pause_image_button" Source="pause.png" Clicked="pause_image_button_Clicked" />
+            <ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="catch_position_image_button" Source="catch_position.png" Clicked="catch_position_image_button_Clicked" />
 
         </Grid>
 
-        <Button Text="connect"  Clicked="Button_Clicked"></Button>
+        <Grid Style="{StaticResource GridControls2Style}" 
+              RowDefinitions="35, 35, 35, 35"
+              ColumnDefinitions="40, 40, 40"
+              >
+
+            <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="up_image_button" Source="up.png" Clicked="up_image_button_Clicked" />
+            <ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="left_image_button" Source="left.png" Clicked="left_image_button_Clicked" />
+            <ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="right_image_button" Source="right.png" Clicked="right_image_button_Clicked" />
+            <ImageButton Grid.Row="2" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="down_image_button" Source="down.png" Clicked="down_image_button_Clicked" />
+
+        </Grid>
+
     </StackLayout>
 </ContentPage>
