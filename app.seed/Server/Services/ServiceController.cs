@@ -4,6 +4,7 @@ using Server.Repository;
 using System.Collections.Generic;
 using System.ServiceModel.Channels;
 using System.Windows;
+using System;
 
 namespace Server.Services
 {
@@ -19,10 +20,10 @@ namespace Server.Services
             return new List<Controller>(controllers);
         }
 
-        public void SendControllers(List<Controller> controllers)
+        public void SendControllers(DateTime date, List<Controller> controllers)
         { 
             controllers.ForEach(c => { ControllerRepository.SetTempAndHumidity(c); });
-            controllers.ForEach(c => { ControllerRepository.SetHistory(c); });
+            controllers.ForEach(c => { ControllerRepository.SetHistory(date, c); });
         }
     }
 }
