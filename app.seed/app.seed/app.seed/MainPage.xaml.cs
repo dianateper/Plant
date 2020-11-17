@@ -12,7 +12,7 @@ namespace app.seed
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        Uri address = new Uri("http://10.0.2.2:4000/IContractXam");
+        Uri address = new Uri("https://ee12e8c92adf.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -23,15 +23,10 @@ namespace app.seed
 
         public MainPage()
         {
-            MachinesNames.Add("Jnt");
-            MachinesNames.Add("Two");
-            MachinesNames.Add("Tрwo");
-
-
             InitializeComponent();
-         
 
             BindingContext = this;
+            machineListPicker.ItemsSource = MachinesNames;
         }
 
         void Connect()
