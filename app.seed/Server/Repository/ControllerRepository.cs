@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Data;
 using System.Globalization;
+using NpgsqlTypes;
 
 namespace Server.Repository
 {
@@ -36,7 +37,7 @@ namespace Server.Repository
         {
           
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
-               @"SELECT dblink('{0}','UPDATE controller SET temperature={1} , humidity={2} WHERE controller_id={3}')", DBManager.DBController, 
+               @"SELECT dblink('{0}','UPDATE controller SET temperature={1}, humidity={2} WHERE controller_id={3}')", DBManager.DBController, 
                controller.temperature.ToString("0.0", CultureInfo.GetCultureInfo("en-US")), controller.humidity.ToString("0.0", CultureInfo.GetCultureInfo("en-US")), controller.ControllerId), DBManager.con);
            
 
@@ -44,14 +45,21 @@ namespace Server.Repository
     
         }
 
-        public void SetHistory(Controller controller)
+        public void SetHistory(DateTime date, Controller controller)
         {
+            var dateSql = $"'{new NpgsqlDateTime(date)}'";
+
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
                   @"SELECT dblink('{0}','INSERT INTO controller_history(controller_id, temperature, humidity, datetime) VALUES("
-                                      + controller.ControllerId + ", " + controller.temperature.ToString("0.0", CultureInfo.GetCultureInfo("en-US"))
-                                      + " ," + controller.humidity.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", current_timestamp);')", DBManager.DBController), DBManager.con);
+                                      + controller.ControllerId + ", "
+                                      + controller.temperature.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", "
+                                      + controller.humidity.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) 
+                                      + ", '"+ dateSql + "');')",
+                                        DBManager.DBController), DBManager.con);
 
-            using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }
+         
+           using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }
+           
         }
 
         public int GetContollerIdByPosition(int X, int Y)

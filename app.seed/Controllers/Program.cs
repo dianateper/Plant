@@ -1,6 +1,8 @@
 ﻿using Models.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.ServiceModel;
 
 namespace Controllers
@@ -12,6 +14,7 @@ namespace Controllers
         static ChannelFactory<IContractControllers> factory = null;
         public static IContractControllers channel = null;
         Random rnd = new Random();
+
         public static List<Controller> controllers = new List<Controller>();
 
         static void Main(string[] args)
@@ -36,16 +39,11 @@ namespace Controllers
             }
 
             pr.ShowMenu();
-            string action = Console.ReadLine();
-            while (action.Equals("1"))
-            {
-                pr.SetParameter();
-                pr.ShowController();
-                pr.ShowMenu();
-                channel.SendControllers(controllers);
-                action = Console.ReadLine();
-            }
 
+            if (Console.ReadLine().Equals("1"))
+            {
+                pr.ReadFile();
+            }
             Console.ReadLine();
            
         }
@@ -66,15 +64,11 @@ namespace Controllers
             Console.Write("\r\nSelect an option: ");
         }
 
-        void SetParameter()
+        void SetParameter(DateTime date, double temperature, double humidity)
         {
 
-            int temperature = rnd.Next(15, 31);
-            int humidity = rnd.Next(50, 81);
-
-
-            double minT = 0.3;
-            double maxT = 1.7;
+            double minT = 0.1;
+            double maxT = 1.1;
 
             double minH = 1;
             double maxH = 3;
@@ -84,6 +78,33 @@ namespace Controllers
                 c.temperature = Math.Round(temperature  + minT + rnd.NextDouble() * (maxT - minT), 1);
                 c.humidity = Math.Round(humidity + minH + rnd.NextDouble() * (maxH - minH),2);
             });
+
+            ShowController();
+            channel.SendControllers(date, controllers);
         }
+
+
+        void ReadFile()
+        {
+            int idx = 1;
+     
+            using (var rd = new StreamReader("../../weather_data_kiev_jun_jul_2020.csv"))
+            {
+                rd.ReadLine();
+                while (!rd.EndOfStream && idx != 6)
+                {
+                    var splits = rd.ReadLine().Split(',');
+                    idx++;
+                
+                    DateTime date = DateTime.ParseExact(splits[0], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    double humidity = double.Parse(splits[1], CultureInfo.InvariantCulture);
+                    double temperature = double.Parse(splits[2], CultureInfo.InvariantCulture);
+
+                    SetParameter(date, temperature, humidity);
+                }
+            }
+        }
+
+
     }
 }

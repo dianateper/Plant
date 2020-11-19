@@ -1,4 +1,5 @@
 ﻿using Models.Model;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -8,7 +9,7 @@ namespace Server.Contracts
     interface IContractControllers
     {
         [OperationContract]
-        void SendControllers(List<Controller> controllers);
+        void SendControllers(DateTime date, List<Controller> controllers);
 
         [OperationContract]
         List<Controller> GetAllControllers();
