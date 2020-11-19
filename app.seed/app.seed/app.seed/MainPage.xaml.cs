@@ -19,31 +19,12 @@ namespace app.seed
 
         RootModel rootModel = new RootModel();
 
-        public List<Machine> Machines { get; set; }
-
-        public Machine selectedMachine;
-
         public MainPage()
         {
             InitializeComponent();
 
-            //machineListPicker.ItemsSource = MachinesNames;
-            //BindingContext = this;
-
             this.BindingContext = rootModel;
-            /*new RootModel
-            {
-                MachineList = GetMachinesInfo()
-            };*/
         }
-
-        private List<Machine> GetMachinesInfo()
-        {
-//            var db = _connection.Table<Jobs>();
-            return channel.GetAllMachines(); 
-        }
-
-
 
         #region other_methods
 
@@ -141,10 +122,8 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
-                    //Machines = channel.GetAllMachines();
                     rootModel.MachineList = channel.GetAllMachines();
-                    DisplayAlert("", $"got ", "OK");
-
+                    DisplayAlert("", $"Got machines list", "OK");
                 }
             }
             catch (Exception) { }
