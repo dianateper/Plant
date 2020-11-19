@@ -26,89 +26,6 @@ namespace app.seed
             this.BindingContext = rootModel;
         }
 
-        #region other_methods
-
-        private void machineListPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void change_mod_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ImageButton_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void down_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void left_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void right_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pause_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ImageButton_Clicked_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ImageButton_Clicked_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void catch_position_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void up_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void change_mod_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void play_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        private void Grid_Position_Button_Clicked(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var row = Grid.GetRow(button);
-            var column = Grid.GetColumn(button);
-
-            DisplayAlert("", $"ItemTapped {row} {column}", "OK");
-        }
-
-        private void connect_button_Clicked(object sender, EventArgs e)
-        {
-            Connect();
-        }
-
         void Connect()
         {
 
@@ -124,14 +41,95 @@ namespace app.seed
                 {
                     rootModel.MachineList = channel.GetAllMachines();
                     DisplayAlert("", $"Got machines list", "OK");
+
+                    rootModel.PositionsList = channel.GetAllPositions();
+                    DisplayAlert("", $"Got positions list", "OK");
                 }
             }
             catch (Exception) { }
 
         }
 
+        #region controls grid1
 
+        private void connect_button_Clicked(object sender, EventArgs e)
+        {
+            Connect();
+        }
 
+        private void change_mod_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region controls grid2
+
+        private void grid_position_button_Clicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var row = Grid.GetRow(button);
+            var column = Grid.GetColumn(button);
+
+            rootModel.TargetPosition = rootModel.GetPositionInListByXY(column, row);
+
+            DisplayAlert("", $"Target position: {row} {column}", "OK");
+
+            channel.GetOptimalRoute(
+                rootModel.GetPositionInListByXY(
+                    rootModel.SelectedMachine.X,
+                    rootModel.SelectedMachine.Y
+                    ),
+                rootModel.TargetPosition);
+
+            rootModel.SelectedMachine.ShowMachinePosition(positions_grid);
+        }
+
+        #endregion
+
+        #region controls grid3 
+
+        private void play_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pause_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void execute_action_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region controls grid4 (move)
+
+        private void left_image_button_Clicked(object sender, EventArgs e)
+        {
+            rootModel.SelectedMachine.MoveMachineLeft(channel);
+        }
+
+        private void right_image_button_Clicked(object sender, EventArgs e)
+        {
+            rootModel.SelectedMachine.MoveMachineRight(channel);
+        }
+
+        private void up_image_button_Clicked(object sender, EventArgs e)
+        {
+            rootModel.SelectedMachine.MoveMachineUp(channel);
+        }
+
+        private void down_image_button_Clicked(object sender, EventArgs e)
+        {
+            rootModel.SelectedMachine.MoveMachineDown(channel);
+        }
+
+        #endregion
 
     }
 }
