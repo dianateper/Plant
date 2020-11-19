@@ -12,38 +12,35 @@ namespace app.seed
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        Uri address = new Uri("https://a30284ac4598.ngrok.io");
+        Uri address = new Uri("https://5395ee2dcae4.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
 
+        RootModel rootModel = new RootModel();
+
         public List<Machine> Machines { get; set; }
-        public List<string> MachinesNames
-        {
-            get
-            {
-                if (MachinesNames == null || MachinesNames.Count == 0)
-                {
-                    Connect();
 
-                    MachinesNames = GetMachinesNames();
-                }
-
-                return MachinesNames;
-            }
-            set
-            {
-                MachinesNames = new List<string>();
-            }
-        }
-        public int selected_machine;
+        public Machine selectedMachine;
 
         public MainPage()
         {
             InitializeComponent();
 
             //machineListPicker.ItemsSource = MachinesNames;
-            BindingContext = this;
+            //BindingContext = this;
+
+            this.BindingContext = rootModel;
+            /*new RootModel
+            {
+                MachineList = GetMachinesInfo()
+            };*/
+        }
+
+        private List<Machine> GetMachinesInfo()
+        {
+//            var db = _connection.Table<Jobs>();
+            return channel.GetAllMachines(); 
         }
 
 
@@ -52,17 +49,12 @@ namespace app.seed
 
         private void machineListPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selected_machine = machineListPicker.SelectedIndex;
+
         }
 
         private void change_mod_Clicked(object sender, EventArgs e)
         {
 
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Connect();
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)
@@ -115,6 +107,11 @@ namespace app.seed
 
         }
 
+        private void play_image_button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
 
         private void Grid_Position_Button_Clicked(object sender, EventArgs e)
@@ -128,10 +125,7 @@ namespace app.seed
 
         private void connect_button_Clicked(object sender, EventArgs e)
         {
-            //Connect();
-
-            machineListPicker.ItemsSource = MachinesNames;
-            DisplayAlert("", $"binded ", "OK");
+            Connect();
         }
 
         void Connect()
@@ -147,30 +141,18 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
-                    Machines = channel.GetAllMachines();
+                    //Machines = channel.GetAllMachines();
+                    rootModel.MachineList = channel.GetAllMachines();
                     DisplayAlert("", $"got ", "OK");
 
                 }
             }
             catch (Exception) { }
-        }
-
-        List<string> GetMachinesNames()
-        {
-            Machines.ForEach(i =>
-            {
-                MachinesNames.Add(i.Name);
-            });
-
-            return MachinesNames;
-        }
-
-
-
-
-        private void play_image_button_Clicked(object sender, EventArgs e)
-        {
 
         }
+
+
+
+
     }
 }
