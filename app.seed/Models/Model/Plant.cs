@@ -49,6 +49,13 @@ namespace Models.Model
 
         public double humidity { get; set; }
 
+
+        public double phMin { get; set; }
+
+        public double phMax { get; set; }
+
+        public string soil { get; set; }
+
         public Plant() { 
         }
 

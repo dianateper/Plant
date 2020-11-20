@@ -231,5 +231,40 @@ namespace Server.Repository
 
         }
 
+
+        public List<Plant> GetFullPlants()
+        {
+            List<Plant> plants = new List<Plant>();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+                @"SELECT p.plant_id, p.name, p.icon_name, c.minteperature, 
+                        c.maxtemperature, c.minhumidity, c.maxhumidity, c.phmin, c.phmax, s.name 
+                        from PLANT p 
+                        left join condition c on p.condition_id=c.condition_id 
+                        left join soil s on c.soil_id=s.soil_id
+                        ", DBManager.con);
+            
+
+            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Plant plant = new Plant();
+                    plant.PlantId = reader.GetInt16(0);
+                    plant.Name = reader.GetString(1);
+                    plant.IconName = reader.GetString(2);
+                    plant.minTemperature = reader.GetDouble(3);
+                    plant.maxTemperature = reader.GetDouble(4);
+                    plant.minHumidity = reader.GetDouble(5);
+                    plant.maxHumidity = reader.GetDouble(6);
+                    plant.phMin = reader.GetDouble(7);
+                    plant.phMax = reader.GetDouble(8);
+                    plant.soil = reader.GetString(9);
+                    plants.Add(plant);
+                }
+            }
+            return plants;
+        }
+
+
     }
 }
