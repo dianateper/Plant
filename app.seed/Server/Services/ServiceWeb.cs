@@ -11,7 +11,8 @@ namespace Server.Services
     {
         PlantRepository plantRepository = new PlantRepository();
         ControllerRepository controllerRepository = new ControllerRepository();
-      
+        FertilizerRepository fertilizer = new FertilizerRepository();
+
         public List<Plant> GetListPlants()
         {
             List<Plant> plants = plantRepository.GetAllPlants();
@@ -57,6 +58,16 @@ namespace Server.Services
         public Dictionary<Plant, int> GetFieldStatistic()
         {
             return plantRepository.GetPlantFrequency();
+        }
+
+        public List<Fertilizer> GetFeritilizerByPlantId(int plantId)
+        {
+            return fertilizer.GetFertilizersByPlantId(plantId);
+        }
+
+        public List<Plant> GetListFullPlants()
+        {
+            return plantRepository.GetFullPlants();
         }
     }
 }

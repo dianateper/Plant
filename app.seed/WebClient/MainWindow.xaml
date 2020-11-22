@@ -40,14 +40,19 @@
 
         <Label x:Name="label" Content="Main Menu" HorizontalAlignment="Left" Margin="255,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.319,-0.068" Width="98"/>
 
-        <Button x:Name="PlantingPageBtn" Click="PlantingPageBtn_Click" Margin="234,112,220.6,262" Width="Auto" RenderTransformOrigin="1.74,0.692" >
+        <Button x:Name="PlantingPageBtn" Click="PlantingPageBtn_Click" Margin="218,112,197.6,262" Width="Auto" RenderTransformOrigin="1.74,0.692" >
             Planting
         </Button>
 
 
-        <Button x:Name="StatisticaPageBnt" Click="StatisticaPageBnt_Click" Margin="234,173,219.6,202" Width="Auto" >
+        <Button x:Name="StatisticaPageBnt" Click="StatisticaPageBnt_Click" Margin="217,173,196.6,202" Width="Auto" >
             Statistica
         </Button>
+
+        <Button x:Name="PlantsDictionaryPageBtn" Click="PlantsDictionaryPageBtn_Click" Margin="215,233,195.6,142" Width="Auto" >
+            Plants dictionary
+        </Button>
+
 
     </Grid>
 

@@ -34,9 +34,6 @@ namespace WebClient
                 if (factory != null && channel != null)
                 {
 
-                    Planting planting = new Planting();
-
-
                     var newForm = new StatisticaPage();
                     newForm.Show();
                     this.Close();
@@ -58,12 +55,32 @@ namespace WebClient
                     channel = factory.CreateChannel();
                 }
                 if (factory != null && channel != null)
+                { 
+                    var newForm = new Planting();
+                    newForm.Show();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void PlantsDictionaryPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (factory == null)
+                {
+                    factory = new ChannelFactory<IContractWeb>(binding, new EndpointAddress(address));
+                    channel = factory.CreateChannel();
+                }
+                if (factory != null && channel != null)
                 {
 
-                    Planting planting = new Planting();
 
-
-                    var newForm = new Planting();
+                    var newForm = new PlantsDictionary();
                     newForm.Show();
                     this.Close();
                 }

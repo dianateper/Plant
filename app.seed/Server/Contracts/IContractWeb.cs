@@ -13,6 +13,11 @@ namespace Server.Contracts
         List<Plant> GetListPlants();
 
         [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        [ServiceKnownType(typeof(Plant))]
+        List<Plant> GetListFullPlants();
+
+        [OperationContract]
         [ServiceKnownType(typeof(Plant))]
         [FaultContract(typeof(FaultException))]
         void SetPlants(List<Plant> plants);
@@ -38,5 +43,8 @@ namespace Server.Contracts
         [FaultContract(typeof(FaultException))]
         Dictionary<Plant, int> GetFieldStatistic();
 
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<Fertilizer> GetFeritilizerByPlantId(int plantId);
     }
 }

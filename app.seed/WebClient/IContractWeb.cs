@@ -32,6 +32,12 @@ namespace WebClient
         [OperationContract]
         Dictionary<Plant, int> GetFieldStatistic();
 
+        [OperationContract]
+        List<Fertilizer> GetFeritilizerByPlantId(int plantId);
+
+        [OperationContract]
+        List<Plant> GetListFullPlants();
+
     }
 
 }
