@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using Xamarin.Forms;
 
@@ -12,7 +13,7 @@ namespace app.seed
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        Uri address = new Uri("https://5395ee2dcae4.ngrok.io");
+        Uri address = new Uri("https://8e8412410a01.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -23,7 +24,7 @@ namespace app.seed
         {
             InitializeComponent();
 
-            this.BindingContext = rootModel;
+            this.BindingContext = this.rootModel;
         }
 
         void Connect()
@@ -49,6 +50,8 @@ namespace app.seed
             catch (Exception) { }
 
         }
+
+
 
         #region controls grid1
 
@@ -83,7 +86,7 @@ namespace app.seed
                     ),
                 rootModel.TargetPosition);
 
-            rootModel.SelectedMachine.ShowMachinePosition(positions_grid);
+            //ShowMachinePosition();
         }
 
         #endregion

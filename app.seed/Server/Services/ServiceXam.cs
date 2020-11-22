@@ -14,7 +14,23 @@ namespace Server.Services
         MachineRepository MachineRepository = new MachineRepository();
         PositionRepository PositionRepository = new PositionRepository();
 
-        public LinkedList<Position> GetPath(Position start, Position end)
+
+        public List<Machine> GetAllMachines()
+        {
+            return MachineRepository.GetAllMachines();
+        }
+
+        public List<Position> GetAllPositions()
+        {
+            return PositionRepository.GetAllPosition();
+        }
+
+        public bool ChangeMachinePosition(Machine machine)
+        {
+            return MachineRepository.SetNewMachineLocation(machine);
+        }
+
+        public LinkedList<Position> GetOptimalRoute(Position start, Position end)
         {
             List<Position> positions = PositionRepository.GetAllPosition();
             
@@ -57,15 +73,7 @@ namespace Server.Services
             return graph;
         }
 
-        public List<Machine> GetAllMachines()
-        {
-            return MachineRepository.GetAllMachines();
-        }
 
 
-        public string Greeting()
-        {
-            return "Hello!";
-        }
     }
 }

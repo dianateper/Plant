@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Models.Model;
+using Xamarin.Forms;
 
 namespace app.seed
 {
     public class RootModel : INotifyPropertyChanged
     {
+        public static readonly Color colorSelectedMachine = Color.Red;
 
         public static int MinX = 0;
         public static int MaxX = 9;
@@ -39,6 +41,7 @@ namespace app.seed
                 {
                     selectedMachine = value;
                     OnPropertyChanged();
+                    ShowMachinePosition();
                 }
             }
         }
@@ -71,6 +74,21 @@ namespace app.seed
             }
         }
 
+        Grid positions_grid;
+        public Grid PositionsGrid
+        {
+            get { return positions_grid; }
+            set
+            {
+                if (positions_grid != value)
+                {
+                    positions_grid = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
         public Position GetPositionInListByXY(int x, int y)
         {
             Position position = new Position();
@@ -98,6 +116,13 @@ namespace app.seed
 
             */
 
+        }
+
+        public void ShowMachinePosition()
+        {
+            var boxview = (BoxView)PositionsGrid.GetChildElements(new Xamarin.Forms.Point(SelectedMachine.X, SelectedMachine.Y));
+            boxview.Color = colorSelectedMachine;
+            OnPropertyChanged();
         }
 
 

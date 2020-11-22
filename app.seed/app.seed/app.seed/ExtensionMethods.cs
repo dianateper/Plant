@@ -9,11 +9,7 @@ namespace app.seed
     public static class ExtensionMethods
     {
 
-        public static void ShowMachinePosition(this Machine machine, Grid grid)
-        {
-            var boxview = (BoxView) grid.GetChildElements(new Point(machine.X, machine.Y));
-            boxview.Color = Color.Red;
-        }
+        
 
         public static void GetPositionId(this Machine machine)
         {
@@ -113,6 +109,7 @@ namespace app.seed
 
         public static bool Pause(this Machine machine, IContractXam channel)
         {
+            /*
             if (channel != null)
             {
                 int temp_y = machine.Y + 1;
@@ -129,7 +126,7 @@ namespace app.seed
 
                 return false;
             }
-
+            */
             return false;
         }
 

@@ -81,7 +81,7 @@
 
         </Grid>
 
-        <Grid x:Name="positions_grid" x:FieldModifier="public" Style="{StaticResource GridStyle}"
+        <Grid x:Name="positions_grid" BindableLayout.ItemsSource="{Binding PositionsGrid}" Style="{StaticResource GridStyle}"
               RowDefinitions="30,7,30,7,30,7,30,7,30,7,30,7,30,7,30,7,30,7,30"
               ColumnDefinitions="*,7,*,7,*,7,*,7,*"
               >
