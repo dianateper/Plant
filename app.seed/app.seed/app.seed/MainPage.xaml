@@ -13,8 +13,6 @@
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />
                 <Setter Property="WidthRequest" Value="40" />
                 <Setter Property="HeightRequest" Value="40" />
-                <!--<Setter Property="BorderWidth" Value="1" />
-                <Setter Property="BorderColor" Value="Black" />-->
             </Style>
             <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="#5b5b5b" />

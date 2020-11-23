@@ -13,10 +13,111 @@ namespace app.seed
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        #region fields connection
+
         Uri address = new Uri("https://c8724f944704.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
+
+        #endregion
+
+        #region fields style
+
+        public static readonly Color colorSelectedMachine = Color.Red;
+        public static readonly Color colorOptimalRoute = Color.Green;
+
+        public static int MinX = 0;
+        public static int MaxX = 9;
+        public static int MinY = 0;
+        public static int MaxY = 19;
+
+        bool light_mode = false;
+        bool dark_mode = true;
+
+        #endregion
+
+        #region fields
+
+        List<Machine> machineList;
+        Machine selectedMachine;
+        Position targetPosition;
+        List<Position> positionsList;
+        LinkedList<Position> optimalRoute;
+
+        #endregion
+
+        #region properties
+        public List<Machine> MachineList
+        {
+            get { return machineList; }
+            set
+            {
+                if (machineList != value)
+                {
+                    machineList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public Machine SelectedMachine
+        {
+            get { return selectedMachine; }
+            set
+            {
+                if (selectedMachine != value)
+                {
+                    HideOldMachinePosition(selectedMachine);
+                    selectedMachine = value;
+                    OnPropertyChanged();
+                    ShowNewMachinePosition(selectedMachine);
+                }
+            }
+        }
+
+        public Position TargetPosition
+        {
+            get { return targetPosition; }
+            set
+            {
+                if (targetPosition != value)
+                {
+                    targetPosition = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<Position> PositionsList
+        {
+            get { return positionsList; }
+            set
+            {
+                if (positionsList != value)
+                {
+                    positionsList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public LinkedList<Position> OptimalRoute
+        {
+            get { return optimalRoute; }
+            set
+            {
+                if (optimalRoute != value)
+                {
+                    HideOldOptimalRoute(optimalRoute);
+                    optimalRoute = value;
+                    OnPropertyChanged();
+                    ShowNewOptimalRoute(optimalRoute);
+                }
+            }
+        }
+
+        #endregion
 
 
         public MainPage()
@@ -52,6 +153,94 @@ namespace app.seed
 
         }
 
+        private void HideOldMachinePosition(Machine machine)
+        {
+            Color color = Color.Blue;
+            if (light_mode)
+            {
+
+
+            }
+            else
+            if (dark_mode)
+            {
+                Style = Resources["ButtonGridPathStyle"] as Style;
+
+                foreach (Setter s in Style.Setters)
+                {
+                    if (s.Property.Equals("BackgroundColor"))
+                    {
+                        color = (Color)s.Value;
+                    }
+                }
+            }
+
+            ChangeCellColorPositionsGrid(machine.X, machine.Y, color);
+        }
+
+        public void ShowNewMachinePosition(Machine machine)
+        {
+            ChangeCellColorPositionsGrid(machine.X, machine.Y, colorSelectedMachine);
+        }
+
+        private void ChangeCellColorPositionsGrid(int x, int y, Color color)
+        {
+            if (x % 2 == 0 && y % 2 == 0)
+            {
+                var button = (Button)GetView(x, y);
+                button.BackgroundColor = color;
+            }
+            else
+            {
+                var boxview = (BoxView)GetView(x, y);
+                boxview.Color = color;
+            }
+
+            OnPropertyChanged();
+        }
+
+        public View GetView(int col, int row)
+        {
+            foreach (View v in positions_grid.Children)
+                if ((col == Grid.GetColumn(v)) && (row == Grid.GetRow(v)))
+                    return v;
+            return null;
+        }
+
+
+        private void HideOldOptimalRoute(LinkedList<Position> optimalRoute)
+        {
+            Color color = Color.Blue;
+            if (light_mode) { }
+            else
+            if (dark_mode)
+            {
+                Style = Resources["ButtonGridStyle"] as Style;
+
+                foreach (Setter s in Style.Setters)
+                {
+                    if (s.Property.Equals("BackgroundColor"))
+                    {
+                        color = (Color)s.Value;
+                    }
+                }
+            }
+
+            foreach (Position p in optimalRoute)
+            {
+                ChangeCellColorPositionsGrid(p.X, p.Y, color);
+            }
+        }
+
+        private void ShowNewOptimalRoute(LinkedList<Position> optimalRoute)
+        {
+            foreach (Position p in optimalRoute)
+            {
+                ChangeCellColorPositionsGrid(p.X, p.Y, colorOptimalRoute);
+            }
+        }
+
+
 
 
         #region controls grid1
@@ -80,14 +269,13 @@ namespace app.seed
 
             DisplayAlert("", $"Target position: {row} {column}", "OK");
 
-            channel.GetOptimalRoute(
+            OptimalRoute = channel.GetOptimalRoute(
                 GetPositionInListByXY(
                     SelectedMachine.X,
                     SelectedMachine.Y
                     ),
                 TargetPosition);
 
-            //ShowMachinePosition();
         }
 
         #endregion
@@ -133,84 +321,14 @@ namespace app.seed
             SelectedMachine.MoveMachineDown(channel);
         }
 
-        #endregion
-
-
-        #region fields
-
-        #region style
-        
-        public static readonly Color colorSelectedMachine = Color.Red;
-
-        public static int MinX = 0;
-        public static int MaxX = 9;
-        public static int MinY = 0;
-        public static int MaxY = 19;
-
-        #endregion
-
-        List<Machine> machineList;
-        Machine selectedMachine;
-        Position targetPosition;
-        List<Position> positionsList;
-
-        #endregion
-
-        #region properties
-        public List<Machine> MachineList
+        void ChangeStyle()
         {
-            get { return machineList; }
-            set
-            {
-                if (machineList != value)
-                {
-                    machineList = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public Machine SelectedMachine
-        {
-            get { return selectedMachine; }
-            set
-            {
-                if (selectedMachine != value)
-                {
-                    selectedMachine = value;
-                    OnPropertyChanged();
-                    ShowMachinePosition();
-                }
-            }
-        }
-
-        public Position TargetPosition
-        {
-            get { return targetPosition; }
-            set
-            {
-                if (targetPosition != value)
-                {
-                    targetPosition = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public List<Position> PositionsList
-        {
-            get { return positionsList; }
-            set
-            {
-                if (positionsList != value)
-                {
-                    positionsList = value;
-                    OnPropertyChanged();
-                }
-            }
         }
 
         #endregion
+
+
+
 
 
 
@@ -229,34 +347,7 @@ namespace app.seed
             return position;
         }
 
-        /*
-        public void ShowMachinePosition()
-        {
-            var boxview = (BoxView)PositionsGrid.GetChildElements(new Xamarin.Forms.Point(SelectedMachine.X, SelectedMachine.Y));
-            boxview.Color = colorSelectedMachine;
-            OnPropertyChanged();
-        }
-        */
-        
 
-        public void ShowMachinePosition()
-        {
-            var boxview = (BoxView) GetView(SelectedMachine.X, SelectedMachine.Y);
-            boxview.Color = colorSelectedMachine;
-            
-            //DisplayAlert("", $"Got machines list", "OK");
-
-            OnPropertyChanged();
-        }
-
-
-        public View GetView(int col, int row)
-        {
-            foreach (View v in positions_grid.Children)
-                if ((col == Grid.GetColumn(v)) && (row == Grid.GetRow(v)))
-                    return v;
-            return null;
-        }
 
 
     }
