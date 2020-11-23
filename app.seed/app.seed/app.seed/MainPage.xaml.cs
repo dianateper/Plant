@@ -13,18 +13,17 @@ namespace app.seed
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        Uri address = new Uri("https://8e8412410a01.ngrok.io");
+        Uri address = new Uri("https://c8724f944704.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
 
-        RootModel rootModel = new RootModel();
 
         public MainPage()
         {
             InitializeComponent();
 
-            this.BindingContext = this.rootModel;
+            this.BindingContext = this;//.rootModel;
         }
 
         void Connect()
@@ -40,10 +39,12 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
-                    rootModel.MachineList = channel.GetAllMachines();
+                    //rootModel.MachineList = channel.GetAllMachines();
+                    MachineList = channel.GetAllMachines();
                     DisplayAlert("", $"Got machines list", "OK");
 
-                    rootModel.PositionsList = channel.GetAllPositions();
+                    //rootModel.PositionsList = channel.GetAllPositions();
+                    PositionsList = channel.GetAllPositions();
                     DisplayAlert("", $"Got positions list", "OK");
                 }
             }
@@ -75,16 +76,16 @@ namespace app.seed
             var row = Grid.GetRow(button);
             var column = Grid.GetColumn(button);
 
-            rootModel.TargetPosition = rootModel.GetPositionInListByXY(column, row);
+            TargetPosition = GetPositionInListByXY(column, row);
 
             DisplayAlert("", $"Target position: {row} {column}", "OK");
 
             channel.GetOptimalRoute(
-                rootModel.GetPositionInListByXY(
-                    rootModel.SelectedMachine.X,
-                    rootModel.SelectedMachine.Y
+                GetPositionInListByXY(
+                    SelectedMachine.X,
+                    SelectedMachine.Y
                     ),
-                rootModel.TargetPosition);
+                TargetPosition);
 
             //ShowMachinePosition();
         }
@@ -114,25 +115,149 @@ namespace app.seed
 
         private void left_image_button_Clicked(object sender, EventArgs e)
         {
-            rootModel.SelectedMachine.MoveMachineLeft(channel);
+            SelectedMachine.MoveMachineLeft(channel);
         }
 
         private void right_image_button_Clicked(object sender, EventArgs e)
         {
-            rootModel.SelectedMachine.MoveMachineRight(channel);
+            SelectedMachine.MoveMachineRight(channel);
         }
 
         private void up_image_button_Clicked(object sender, EventArgs e)
         {
-            rootModel.SelectedMachine.MoveMachineUp(channel);
+            SelectedMachine.MoveMachineUp(channel);
         }
 
         private void down_image_button_Clicked(object sender, EventArgs e)
         {
-            rootModel.SelectedMachine.MoveMachineDown(channel);
+            SelectedMachine.MoveMachineDown(channel);
         }
 
         #endregion
+
+
+        #region fields
+
+        #region style
+        
+        public static readonly Color colorSelectedMachine = Color.Red;
+
+        public static int MinX = 0;
+        public static int MaxX = 9;
+        public static int MinY = 0;
+        public static int MaxY = 19;
+
+        #endregion
+
+        List<Machine> machineList;
+        Machine selectedMachine;
+        Position targetPosition;
+        List<Position> positionsList;
+
+        #endregion
+
+        #region properties
+        public List<Machine> MachineList
+        {
+            get { return machineList; }
+            set
+            {
+                if (machineList != value)
+                {
+                    machineList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public Machine SelectedMachine
+        {
+            get { return selectedMachine; }
+            set
+            {
+                if (selectedMachine != value)
+                {
+                    selectedMachine = value;
+                    OnPropertyChanged();
+                    ShowMachinePosition();
+                }
+            }
+        }
+
+        public Position TargetPosition
+        {
+            get { return targetPosition; }
+            set
+            {
+                if (targetPosition != value)
+                {
+                    targetPosition = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<Position> PositionsList
+        {
+            get { return positionsList; }
+            set
+            {
+                if (positionsList != value)
+                {
+                    positionsList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+
+
+        public Position GetPositionInListByXY(int x, int y)
+        {
+            Position position = new Position();
+            positionsList.ForEach(i =>
+            {
+                if (i.X == x && i.Y == y)
+                {
+                    position = i;
+                }
+
+            });
+
+            return position;
+        }
+
+        /*
+        public void ShowMachinePosition()
+        {
+            var boxview = (BoxView)PositionsGrid.GetChildElements(new Xamarin.Forms.Point(SelectedMachine.X, SelectedMachine.Y));
+            boxview.Color = colorSelectedMachine;
+            OnPropertyChanged();
+        }
+        */
+        
+
+        public void ShowMachinePosition()
+        {
+            var boxview = (BoxView) GetView(SelectedMachine.X, SelectedMachine.Y);
+            boxview.Color = colorSelectedMachine;
+            
+            //DisplayAlert("", $"Got machines list", "OK");
+
+            OnPropertyChanged();
+        }
+
+
+        public View GetView(int col, int row)
+        {
+            foreach (View v in positions_grid.Children)
+                if ((col == Grid.GetColumn(v)) && (row == Grid.GetRow(v)))
+                    return v;
+            return null;
+        }
+
 
     }
 }

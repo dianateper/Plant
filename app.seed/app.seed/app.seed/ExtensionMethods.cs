@@ -24,8 +24,8 @@ namespace app.seed
             {
                 int temp_x = machine.X - 1;
 
-                if (RootModel.MinX <= temp_x &&
-                    temp_x < RootModel.MaxX &&
+                if (MainPage.MinX <= temp_x &&
+                    temp_x < MainPage.MaxX &&
                     machine.Y % 2 != 0
                     )
                 {
@@ -46,8 +46,8 @@ namespace app.seed
             {
                 int temp_x = machine.X + 1;
 
-                if (RootModel.MinX <= temp_x &&
-                    temp_x < RootModel.MaxX &&
+                if (MainPage.MinX <= temp_x &&
+                    temp_x < MainPage.MaxX &&
                     machine.Y % 2 != 0
                     )
                 {
@@ -68,8 +68,8 @@ namespace app.seed
             {
                 int temp_y = machine.Y - 1;
 
-                if (RootModel.MinY <= temp_y &&
-                    temp_y < RootModel.MaxY &&
+                if (MainPage.MinY <= temp_y &&
+                    temp_y < MainPage.MaxY &&
                     machine.X % 2 != 0
                     )
                 {
@@ -90,8 +90,8 @@ namespace app.seed
             {
                 int temp_y = machine.Y + 1;
 
-                if (RootModel.MinY <= temp_y &&
-                    temp_y < RootModel.MaxY &&
+                if (MainPage.MinY <= temp_y &&
+                    temp_y < MainPage.MaxY &&
                     machine.X % 2 != 0
                     )
                 {
