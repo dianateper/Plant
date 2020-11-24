@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://c8724f944704.ngrok.io");
+        Uri address = new Uri("https://169c525f4f48.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -68,7 +68,12 @@ namespace app.seed
             {
                 if (selectedMachine != value)
                 {
-                    HideOldMachinePosition(selectedMachine);
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!SelectedMachine set is working");
+                    if (selectedMachine != null)
+                    {
+                        HideOldMachinePosition(selectedMachine);
+                    }
+
                     selectedMachine = value;
                     OnPropertyChanged();
                     ShowNewMachinePosition(selectedMachine);
@@ -109,7 +114,10 @@ namespace app.seed
             {
                 if (optimalRoute != value)
                 {
-                    HideOldOptimalRoute(optimalRoute);
+                    if (optimalRoute != null)
+                    {
+                        HideOldOptimalRoute(optimalRoute);
+                    }
                     optimalRoute = value;
                     OnPropertyChanged();
                     ShowNewOptimalRoute(optimalRoute);
@@ -124,7 +132,7 @@ namespace app.seed
         {
             InitializeComponent();
 
-            this.BindingContext = this;//.rootModel;
+            this.BindingContext = this;
         }
 
         void Connect()
@@ -156,11 +164,8 @@ namespace app.seed
         private void HideOldMachinePosition(Machine machine)
         {
             Color color = Color.Blue;
-            if (light_mode)
-            {
-
-
-            }
+            /*
+            if (light_mode) { }
             else
             if (dark_mode)
             {
@@ -174,12 +179,15 @@ namespace app.seed
                     }
                 }
             }
-
+            */
+            Console.WriteLine("HideOldMachinePosition machine.X = " + machine.X + ", machine.Y = " + machine.Y + ", color = " + color.ToString());
             ChangeCellColorPositionsGrid(machine.X, machine.Y, color);
         }
 
         public void ShowNewMachinePosition(Machine machine)
         {
+            Console.WriteLine("HideOldMachinePosition machine.X = " + machine.X + ", machine.Y = " + machine.Y + ", color = " + colorSelectedMachine.ToString());
+
             ChangeCellColorPositionsGrid(machine.X, machine.Y, colorSelectedMachine);
         }
 
@@ -303,26 +311,23 @@ namespace app.seed
 
         private void left_image_button_Clicked(object sender, EventArgs e)
         {
-            SelectedMachine.MoveMachineLeft(channel);
+            SelectedMachine = SelectedMachine.MoveMachineLeft(channel);
+            OnPropertyChanged();
         }
 
         private void right_image_button_Clicked(object sender, EventArgs e)
         {
-            SelectedMachine.MoveMachineRight(channel);
+            SelectedMachine = SelectedMachine.MoveMachineRight(channel);
         }
 
         private void up_image_button_Clicked(object sender, EventArgs e)
         {
-            SelectedMachine.MoveMachineUp(channel);
+            SelectedMachine = SelectedMachine.MoveMachineUp(channel);
         }
 
         private void down_image_button_Clicked(object sender, EventArgs e)
         {
-            SelectedMachine.MoveMachineDown(channel);
-        }
-
-        void ChangeStyle()
-        {
+            SelectedMachine = SelectedMachine.MoveMachineDown(channel);
         }
 
         #endregion
