@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://169c525f4f48.ngrok.io");
+        Uri address = new Uri("https://96004e8e4318.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -61,22 +61,44 @@ namespace app.seed
             }
         }
 
-        public Machine SelectedMachine
+        public Machine SelectedMachinePicker
         {
             get { return selectedMachine; }
             set
             {
                 if (selectedMachine != value)
                 {
-                    Console.WriteLine("!!!!!!!!!!!!!!!!!SelectedMachine set is working");
-                    if (selectedMachine != null)
-                    {
-                        HideOldMachinePosition(selectedMachine);
-                    }
+                    selectedMachine = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+
+        public Machine SelectedMachine
+        {
+            get { return selectedMachine; }
+            set
+            {
+                if (selectedMachine == null)
+                {
                     selectedMachine = value;
                     OnPropertyChanged();
                     ShowNewMachinePosition(selectedMachine);
+                }
+                else
+                {
+                    Console.WriteLine("selma" + selectedMachine.Str());
+                    Console.WriteLine("value" + value.Str());
+
+                    if (!selectedMachine.IsEqual(value))
+                    {
+                        Console.WriteLine("!!!!!!!!!!!selectedMachine.IsEqual(value) is working");
+                        HideOldMachinePosition(selectedMachine);
+                        selectedMachine = value;
+                        OnPropertyChanged();
+                        ShowNewMachinePosition(selectedMachine);
+                    }
                 }
             }
         }
@@ -148,11 +170,9 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
-                    //rootModel.MachineList = channel.GetAllMachines();
                     MachineList = channel.GetAllMachines();
                     DisplayAlert("", $"Got machines list", "OK");
 
-                    //rootModel.PositionsList = channel.GetAllPositions();
                     PositionsList = channel.GetAllPositions();
                     DisplayAlert("", $"Got positions list", "OK");
                 }
@@ -180,14 +200,13 @@ namespace app.seed
                 }
             }
             */
-            Console.WriteLine("HideOldMachinePosition machine.X = " + machine.X + ", machine.Y = " + machine.Y + ", color = " + color.ToString());
+            Console.WriteLine("!!!HideOldMachinePosition" + machine.Str() + ", color = " + color.ToString());
             ChangeCellColorPositionsGrid(machine.X, machine.Y, color);
         }
 
         public void ShowNewMachinePosition(Machine machine)
         {
-            Console.WriteLine("HideOldMachinePosition machine.X = " + machine.X + ", machine.Y = " + machine.Y + ", color = " + colorSelectedMachine.ToString());
-
+            Console.WriteLine("!!!ShowNewMachinePosition" + machine.Str() + ", color = " + colorSelectedMachine.ToString());
             ChangeCellColorPositionsGrid(machine.X, machine.Y, colorSelectedMachine);
         }
 
@@ -247,9 +266,6 @@ namespace app.seed
                 ChangeCellColorPositionsGrid(p.X, p.Y, colorOptimalRoute);
             }
         }
-
-
-
 
         #region controls grid1
 
@@ -311,8 +327,30 @@ namespace app.seed
 
         private void left_image_button_Clicked(object sender, EventArgs e)
         {
+            Machine machine = SelectedMachine.ToClone();
+            //Console.WriteLine("machine = " + machine.Str());
+            //Console.WriteLine("SelectedMachine = " + SelectedMachine.Str());
+
+            machine.MoveMachineLeft(channel);
+            //Console.WriteLine("machine.MoveMachineLeft" + machine.Str());
+            //Console.WriteLine("SelectedMachine after machine.MoveMachineLeft" + SelectedMachine.Str());
+            MachineList.ForEach(i =>
+            {
+                if (i.IsEqual(SelectedMachine))
+                {
+                    i = machine;
+                }
+            });
+
+
+            SelectedMachine = machine;
+            //Console.WriteLine("changed" + SelectedMachine.Str());
+
+
+            /*
             SelectedMachine = SelectedMachine.MoveMachineLeft(channel);
-            OnPropertyChanged();
+            Console.WriteLine("Changed" + SelectedMachine.Str());
+            */
         }
 
         private void right_image_button_Clicked(object sender, EventArgs e)
@@ -327,7 +365,8 @@ namespace app.seed
 
         private void down_image_button_Clicked(object sender, EventArgs e)
         {
-            SelectedMachine = SelectedMachine.MoveMachineDown(channel);
+            Machine machine = SelectedMachine.MoveMachineDown(channel);
+            SelectedMachine = machine;
         }
 
         #endregion

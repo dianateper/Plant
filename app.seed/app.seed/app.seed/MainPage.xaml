@@ -68,7 +68,7 @@
 
             <Picker Grid.Row="0" Grid.Column="0" Title="Select machine" 
                     x:Name="machineListPicker" 
-                    ItemsSource="{Binding MachineList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedMachine}"
+                    ItemsSource="{Binding MachineList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedMachinePicker}"
                     />
 
             <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" Source="connect.png" 
