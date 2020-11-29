@@ -12,6 +12,8 @@ namespace Models.Model
 
         string iconName;
 
+       
+
         public int PlantId { 
             get { return plantId; } 
             set { plantId = value; }
@@ -31,9 +33,8 @@ namespace Models.Model
 
         public DateTime datetime { get; set; }
 
-     
+        public double Price { get; set; }
         public int X { get; set; }
-
     
         public int Y { get; set; }
 

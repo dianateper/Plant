@@ -90,5 +90,52 @@ namespace WebClient
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void ReportsPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                if (factory == null)
+                {
+                    factory = new ChannelFactory<IContractWeb>(binding, new EndpointAddress(address));
+                    channel = factory.CreateChannel();
+                }
+                if (factory != null && channel != null)
+                {
+
+
+                    var newForm = new ReportsPage();
+                    newForm.Show();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddingItemsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (factory == null)
+                {
+                    factory = new ChannelFactory<IContractWeb>(binding, new EndpointAddress(address));
+                    channel = factory.CreateChannel();
+                }
+                if (factory != null && channel != null)
+                { 
+                    var newForm = new AddingItemsPage();
+                    newForm.Show();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

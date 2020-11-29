@@ -17,7 +17,8 @@ namespace WebClient
         Dictionary<Plant, int> fieldStatistic = new Dictionary<Plant, int>();
         public SeriesCollection PlantsCollection;
         public List<string> Labels = new List<string>();
-      
+
+   
         public StatisticaPage()
         {
             InitializeComponent();

@@ -46,5 +46,26 @@ namespace Server.Contracts
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         List<Fertilizer> GetFeritilizerByPlantId(int plantId);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<Fertilizer> GetAllFertilizer();
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<Soil> GetAllSoils();
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<double> MakeArimaPrediction(int forecast, List<double> parameters);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<Pricing> GetPrice();
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        void AddPlant(Plant plant, Condition condition, Soil soil, Fertilizer fertilizer);
+
     }
 }

@@ -7,10 +7,44 @@ namespace Server.Repository
     class FertilizerRepository
     {
 
+
+        public int AddFertilizer(Fertilizer fertilizer)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand(
+
+             string.Format("INSERT INTO FERTILIZER(name)" +
+                " VALUES(" + fertilizer.Name + "') RETURNING fertilizer_id;"), DBManager.con);
+
+            int fertilizerId = 0;
+            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    fertilizerId = reader.GetInt32(0);
+                }
+            }
+            
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+
+            return fertilizerId;
+        }
+
+        public void AddFertilizerCondition(int fertilizerId,int conditionId, int count)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand(
+
+             string.Format("INSERT INTO CONDITION_FERTILIZER(fertilizer_id, condition_id, count)" +
+                " VALUES(" + fertilizerId + ", " + conditionId + "," + count + ");"), DBManager.con);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
+
+
         public List<Fertilizer> GetAllFertilizer()
         {
             List<Fertilizer> fertilizers = new List<Fertilizer>();
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT fertilizer_id, name  from FERTILIZER", DBManager.con);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT fertilizer_id, name from FERTILIZER", DBManager.con);
 
             using (NpgsqlDataReader reader = cmd.ExecuteReader())
             {
@@ -48,6 +82,7 @@ namespace Server.Repository
             return fertilizers;
         }
 
+     
 
     }
 }

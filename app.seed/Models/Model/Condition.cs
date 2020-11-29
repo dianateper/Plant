@@ -3,7 +3,7 @@
 namespace Models.Model
 {
     
-    class Condition
+    public class Condition
     {
      
         public int ConditionId { get; set; }
@@ -21,5 +21,9 @@ namespace Models.Model
 
         public double MaxHumidity { get; set; }
 
+
+        public double phMin { get; set; }
+
+        public double phMax { get; set; }
     }
 }

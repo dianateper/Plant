@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using Models.Model;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 
 namespace Server.Repository
@@ -9,6 +10,17 @@ namespace Server.Repository
     {
 
         PositionRepository positionRepository = new PositionRepository();
+
+        public void AddPlant(Plant plant, int conditionId)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand(
+            string.Format("INSERT INTO plant(name, price, condition_id) VALUES('" + plant.Name 
+            + "', " + plant.Price.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", " + conditionId + ");"), DBManager.con);
+
+            MessageBox.Show(cmd.CommandText);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
 
         public List<Plant> GetAllPlants()
         {
@@ -231,7 +243,6 @@ namespace Server.Repository
 
         }
 
-
         public List<Plant> GetFullPlants()
         {
             List<Plant> plants = new List<Plant>();
@@ -265,6 +276,30 @@ namespace Server.Repository
             return plants;
         }
 
+        public List<Pricing> GetSumPlantsByMonth()
+        {
+          
+            List<Pricing> pricings = new List<Pricing>();
+            NpgsqlCommand cmd = new NpgsqlCommand(@"SELECT  sum(p.price), sum(f.price), date_trunc('month', h.datetime) as date from PLANT p 
+                                        inner join planting_history h on p.plant_id=h.plant_id  
+                                        inner join condition c on p.condition_id=c.condition_id 
+                                        inner join condition_fertilizer cf on cf.condition_id=c.condition_id
+                                        inner join fertilizer f on f.fertilizer_id=cf.fertilizer_id " +
+                                     "group by date_trunc('month', h.datetime);", DBManager.con);
+            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Pricing price = new Pricing();
+                    price.PriceForPlant = reader.GetDouble(0);
+                    price.PriceForFertilizer = reader.GetDouble(1);
+                    price.Month = reader.GetDateTime(2).ToString("MMMM", CultureInfo.InvariantCulture);
+                    pricings.Add(price);
+                }
+            }
+
+            return pricings;
+        }
 
     }
 }
