@@ -66,6 +66,15 @@ namespace Server.Contracts
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         void AddPlant(Plant plant, Condition condition, Soil soil, Fertilizer fertilizer);
+        
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        void AddSoil(Soil soil);
+        
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        void AddFertilizer(Fertilizer fertilizer);
+
 
     }
 }

@@ -52,6 +52,13 @@ namespace WebClient
 
         [OperationContract]
         void AddPlant(Plant plant, Condition condition, Soil soil, Fertilizer fertilizer);
+
+
+        [OperationContract]
+        void AddSoil(Soil soil);
+
+        [OperationContract]
+        void AddFertilizer(Fertilizer fertilizer);
     }
 
 }

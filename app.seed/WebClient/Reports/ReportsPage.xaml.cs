@@ -1,4 +1,7 @@
-﻿using Models.Model;
+﻿using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +25,8 @@ namespace WebClient
     {
 
         List<Pricing> prices = new List<Pricing>();
-        
+        public SeriesCollection PriceCollection { get; set; }
+
         public ReportsPage()
         {
             InitializeComponent();
@@ -31,6 +35,31 @@ namespace WebClient
             PriceDataGrid.ItemsSource = prices;
 
             MakeForecastForNextMonth();
+
+            PriceCollection = new SeriesCollection
+            {
+                new  LineSeries
+                {
+                    Title = "Price for plants",
+                    Values = new ChartValues<double>(prices.Select(x=>x.PriceForPlant).ToArray())
+                    
+                },
+                new  LineSeries
+                {
+                    Title = "Price for fertilizers",
+                    Values = new ChartValues<double>(prices.Select(x=>x.PriceForFertilizer).ToArray())
+                   
+                }
+            };
+
+            GraphReports.AxisX.Add(new Axis
+            {
+                Labels = prices.Select(x=>x.Month).ToArray()
+            });
+
+            DataContext = this;
+            GraphReports.Series = PriceCollection;
+           
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -54,5 +83,7 @@ namespace WebClient
             forecastText.Text = forecast.ToString();
 
         }
+
+        
     }
 }

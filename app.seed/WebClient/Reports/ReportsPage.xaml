@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WebClient"
+        xmlns:local="clr-namespace:WebClient" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="ReportsPage" Height="450" Width="600">
+        Title="ReportsPage" Height="450" Width="800">
     <Window.Resources>
 
         <Style x:Key="{x:Type DataGrid}" TargetType="{x:Type DataGrid}">
@@ -42,7 +42,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Button x:Name="button" Content="Back" Click="button_Click" HorizontalAlignment="Left" Margin="466,47,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button" Content="Back" Click="button_Click" HorizontalAlignment="Left" Margin="670,372,0,0" VerticalAlignment="Top" Width="75"/>
         <DataGrid x:Name="PriceDataGrid" HorizontalAlignment="Left" Height="234" Margin="56,38,0,0" VerticalAlignment="Top" Width="300">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Month" Binding="{Binding Month}"></DataGridTextColumn>
@@ -50,6 +50,11 @@
                 <DataGridTextColumn Header="Price for fertilizer" Binding="{Binding PriceForFertilizer}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <lvc:CartesianChart x:Name="GraphReports" Series="{Binding PriceCollection}" Margin="388,43,23.6,149">
+            
+        </lvc:CartesianChart>
+
         <TextBlock x:Name="forecastText" HorizontalAlignment="Left" Margin="60,346,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="49" Width="298"/>
         <Label x:Name="label" Content="Price forecast for next month: " HorizontalAlignment="Left" Margin="59,301,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,1.196" Width="219"/>
 

@@ -66,6 +66,8 @@ namespace WebClient
                 {
                     MainWindow.channel.AddPlant(plant, condition, selectedSoil, selectedFertilizer);
                 }
+
+                MessageBox.Show(plantNameText.Text + " added.");
             }
 
             catch(Exception ex)

@@ -96,5 +96,15 @@ namespace Server.Services
             plantRepository.AddPlant(plant, 2);
            
         }
+
+        public void AddSoil(Soil soil)
+        {
+            conditionRepository.AddSoil(soil);
+        }
+
+        public void AddFertilizer(Fertilizer fertilizer)
+        {
+            fertilizerRepository.AddFertilizer(fertilizer);
+        }
     }
 }

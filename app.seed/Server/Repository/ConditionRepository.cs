@@ -8,11 +8,11 @@ namespace Server.Repository
     class ConditionRepository
     {
 
-        public void AddSoil(string name)
+        public void AddSoil(Soil soil)
         {
             NpgsqlCommand cmd = new NpgsqlCommand(
 
-            string.Format("INSERT INTO SOIL(name) VALUES(" +name+ "');"), DBManager.con);
+            string.Format("INSERT INTO SOIL(name) VALUES(" +soil.Name+ "');"), DBManager.con);
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();

@@ -46,13 +46,15 @@
     <Grid>
         <TextBox x:Name="soilNameText" HorizontalAlignment="Left" Height="23" Margin="122,60,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label" Content="Soil name: " HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.66,0.095"/>
-        <Button x:Name="button" Content="Add soil" HorizontalAlignment="Left" Margin="66,97,0,0" VerticalAlignment="Top" Width="146" Height="29"/>
+        <Button x:Name="button" Content="Add soil" HorizontalAlignment="Left" Margin="80,135,0,0" VerticalAlignment="Top" Width="146" Height="43" Click="button_Click"/>
 
-        <TextBox x:Name="fetilizerNameText" HorizontalAlignment="Left" Height="23" Margin="124,187,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label1" Content="Fetilizer name: " HorizontalAlignment="Left" Margin="24,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.66,0.095"/>
-        <TextBox x:Name="fetilizerPriceText" HorizontalAlignment="Left" Height="23" Margin="124,226,0,0" TextWrapping="Wrap" Text="price" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label2" Content="Fetilizer price: " HorizontalAlignment="Left" Margin="25,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.66,0.095"/>
-        <Button x:Name="button1" Content="Add fertilizer" HorizontalAlignment="Left" Margin="68,270,0,0" VerticalAlignment="Top" Width="147"/>
+        <TextBox x:Name="fetilizerNameText" HorizontalAlignment="Left" Height="23" Margin="406,53,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Content="Fetilizer name: " HorizontalAlignment="Left" Margin="306,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.66,0.095"/>
+        <TextBox x:Name="fetilizerPriceText" HorizontalAlignment="Left" Height="23" Margin="406,91,0,0" TextWrapping="Wrap" Text="price" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label2" Content="Fetilizer price: " HorizontalAlignment="Left" Margin="307,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.66,0.095"/>
+        <Button x:Name="button1" Content="Add fertilizer" HorizontalAlignment="Left" Margin="350,136,0,0" VerticalAlignment="Top" Width="147" Click="button1_Click" Height="43"/>
+        <Button x:Name="button2" Content="Back" Click="button2_Click" HorizontalAlignment="Left" Margin="494,357,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.291,0.593"/>
 
     </Grid>
+    
 </Window>
