@@ -62,18 +62,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Planting.xaml.cs">
+    <Compile Include="EditedItem\AddingItemsPage.xaml.cs">
+      <DependentUpon>AddingItemsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditedItem\AddPlantPage.xaml.cs">
+      <DependentUpon>AddPlantPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditedItem\Planting.xaml.cs">
       <DependentUpon>Planting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlantsDictionary.xaml.cs">
+    <Compile Include="EditedItem\SoilFetilizerAddPage.xaml.cs">
+      <DependentUpon>SoilFetilizerAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PlantsDictionary.xaml.cs">
       <DependentUpon>PlantsDictionary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatisticaDetail.xaml.cs">
+    <Compile Include="Reports\ReportsPage.xaml.cs">
+      <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Statistica\StatisticaDetail.xaml.cs">
       <DependentUpon>StatisticaDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatisticaPage.xaml.cs">
+    <Compile Include="Statistica\StatisticaPage.xaml.cs">
       <DependentUpon>StatisticaPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="EditedItem\AddingItemsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditedItem\AddPlantPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditedItem\SoilFetilizerAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -87,19 +111,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Planting.xaml">
+    <Page Include="EditedItem\Planting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PlantsDictionary.xaml">
+    <Page Include="Reports\PlantsDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatisticaDetail.xaml">
+    <Page Include="Reports\ReportsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatisticaPage.xaml">
+    <Page Include="Statistica\StatisticaDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Statistica\StatisticaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,9 +157,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Models\Models.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

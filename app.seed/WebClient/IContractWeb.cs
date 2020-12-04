@@ -38,6 +38,27 @@ namespace WebClient
         [OperationContract]
         List<Plant> GetListFullPlants();
 
+        [OperationContract]
+        List<double> MakeArimaPrediction(int forecast, List<double> parameters);
+
+        [OperationContract]
+        List<Pricing> GetPrice();
+
+        [OperationContract]
+        List<Fertilizer> GetAllFertilizer();
+
+        [OperationContract]
+        List<Soil> GetAllSoils();
+
+        [OperationContract]
+        void AddPlant(Plant plant, Condition condition, Soil soil, Fertilizer fertilizer);
+
+
+        [OperationContract]
+        void AddSoil(Soil soil);
+
+        [OperationContract]
+        void AddFertilizer(Fertilizer fertilizer);
     }
 
 }

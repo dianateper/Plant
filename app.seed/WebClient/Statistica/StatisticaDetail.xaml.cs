@@ -29,7 +29,10 @@ namespace WebClient
             historyPlants = MainWindow.channel.GetPlantsHistoryByPosition(X,Y);
 
             SetGridsVariable();
-            SetChartsVariable();  
+            SetChartsVariable();
+
+
+        
         }
 
         public void SetGridsVariable()
@@ -39,16 +42,37 @@ namespace WebClient
             PlantsHistoryGrid.ItemsSource = historyPlants;
         }
 
+
+        List<double> temperature = new List<double>();
+        List<double> humidity = new List<double>();
+
+
+        List<double> temperatureForecast = new List<double>();
+        List<double> humidityForecast = new List<double>();
+
+
         public void SetChartsVariable()
         {
+
             TemperatureCollection = new SeriesCollection
             {
                 new  LineSeries
                 {
                     Title = "Temperature",
                     Values = RawDataSeriesTemperature,
-                    Fill = new SolidColorBrush(Colors.Bisque)
+                    Fill = new SolidColorBrush(Colors.Bisque),
+                    Opacity = 0.5
+                },
+                new  LineSeries
+                {
+                    Title = "Temperature forecast",
+                    Values = RawDataSeriesTemperatureForecast,
+                    StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 20 }),
+                    Fill = Brushes.Transparent
+
                 }
+
+
             };
 
             HumidityCollection = new SeriesCollection
@@ -57,21 +81,33 @@ namespace WebClient
                 {
                     Title = "Humidity",
                     Values = RawDataSeriesHumidity,
-                    Fill = new SolidColorBrush(Colors.Bisque)
+                    Fill = new SolidColorBrush(Colors.Bisque),
+                    Opacity = 0.5
+                },
+                new  LineSeries
+                {
+                    Title = "Humidity",
+                    Values = RawDataSeriesHumidityForecast,
+                    StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 20 }),
+                    Fill = Brushes.Transparent
                 }
             };
 
+           
 
             GraphTemperatureAxisX.LabelFormatter = value => new DateTime((long)value).ToString("dd/MM/yy");
             GraphHumidityAxisX.LabelFormatter = value => new DateTime((long)value).ToString("dd/MM/yy");
+
+
 
             DataContext = this;
             GraphTemperature.Series = TemperatureCollection;
             GraphHumidity.Series = HumidityCollection;
 
-
+           
             minValueDate.Text = statistica.controllerHistories.Select(x => x).FirstOrDefault().datetime.ToString();
             maxValueDate.Text = statistica.controllerHistories.Select(x => x).LastOrDefault().datetime.ToString();
+
 
         }
 
@@ -97,7 +133,34 @@ namespace WebClient
                 foreach (ControllerHistory history in statistica.controllerHistories)
                 {
                     Values.Add(new DateTimePoint(history.datetime, history.temperature));
+                    temperature.Add(history.temperature);
                 }
+                return Values;
+            }
+        }
+
+
+        public ChartValues<DateTimePoint> RawDataSeriesTemperatureForecast
+        {
+            get
+            {
+                temperatureForecast = MainWindow.channel.MakeArimaPrediction(3, temperature);
+                DateTime date = new DateTime();
+                ChartValues<DateTimePoint> Values = new ChartValues<DateTimePoint>();
+                foreach (ControllerHistory history in statistica.controllerHistories)
+                {
+                    Values.Add(new DateTimePoint(history.datetime, history.temperature));
+                    date = history.datetime;
+                }
+
+                int days = 1;
+                foreach (double temperature in temperatureForecast)
+                {
+
+                    Values.Add(new DateTimePoint(date.AddDays(days), temperature));
+                    days++;
+                }
+
                 return Values;
             }
         }
@@ -110,10 +173,39 @@ namespace WebClient
                 foreach (ControllerHistory history in statistica.controllerHistories)
                 {
                     Values.Add(new DateTimePoint(history.datetime, history.humidity));
+                    humidity.Add(history.humidity);
                 }
                 return Values;
             }
         }
+
+        public ChartValues<DateTimePoint> RawDataSeriesHumidityForecast
+        {
+            get
+            {
+                humidityForecast = MainWindow.channel.MakeArimaPrediction(3, humidity);
+                DateTime date = new DateTime();
+                ChartValues<DateTimePoint> Values = new ChartValues<DateTimePoint>();
+                foreach (ControllerHistory history in statistica.controllerHistories)
+                {
+                    Values.Add(new DateTimePoint(history.datetime, history.humidity));
+                    date = history.datetime;
+                }
+
+                int days = 1;
+                foreach(double humidity in humidityForecast)
+                {
+
+                    Values.Add(new DateTimePoint(date.AddDays(days),humidity));
+                    days++;
+                }
+
+
+                return Values;
+            }
+        }
+
+
 
         private void minValueDate_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

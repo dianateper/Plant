@@ -11,7 +11,8 @@ namespace Server.Services
     {
         PlantRepository plantRepository = new PlantRepository();
         ControllerRepository controllerRepository = new ControllerRepository();
-        FertilizerRepository fertilizer = new FertilizerRepository();
+        FertilizerRepository fertilizerRepository = new FertilizerRepository();
+        ConditionRepository conditionRepository = new ConditionRepository();
 
         public List<Plant> GetListPlants()
         {
@@ -26,13 +27,11 @@ namespace Server.Services
             return new List<Plant>(plants);
         }
 
-   
         public void SetPlants(List<Plant> plants)
         {
             plants.ForEach(plant => plantRepository.SetPlantPosition(plant.PlantId, plant.X, plant.Y));
             plants.ForEach(plant => plantRepository.SetPlantHistory(plant.PlantId, plant.X, plant.Y, "Planted"));
         }
-
 
         public ControllerStatistica GetControllerStatistica(int X, int Y)
         {
@@ -43,7 +42,6 @@ namespace Server.Services
             return controllerStatistica;
 
         }
-
 
         public List<Plant> GetPlantsHistoryByPosition(int X, int Y)
         {
@@ -62,12 +60,52 @@ namespace Server.Services
 
         public List<Fertilizer> GetFeritilizerByPlantId(int plantId)
         {
-            return fertilizer.GetFertilizersByPlantId(plantId);
+            return fertilizerRepository.GetFertilizersByPlantId(plantId);
         }
 
         public List<Plant> GetListFullPlants()
         {
             return plantRepository.GetFullPlants();
+        }
+
+        public List<double> MakeArimaPrediction(int forecast, List<double> parameters)
+        {
+
+            Arima.Arima a = new Arima.Arima(parameters.ToArray(), forecast, 1, 1, 1);
+            return a.MakePredition();
+        }
+
+        public List<Pricing> GetPrice()
+        {
+            return plantRepository.GetSumPlantsByMonth();
+        }
+
+        public List<Fertilizer> GetAllFertilizer()
+        {
+            return fertilizerRepository.GetAllFertilizer();
+        }
+
+        public List<Soil> GetAllSoils()
+        {
+            return conditionRepository.GetAllSoil();
+        }
+
+        public void AddPlant(Plant plant, Models.Model.Condition condition, Soil soil, Fertilizer fertilizer)
+        {
+            int conditionId = conditionRepository.AddCondition(condition, soil.SoilId);
+            fertilizerRepository.AddFertilizerCondition(fertilizer.FertilizerId, conditionId, fertilizer.Count);
+            plantRepository.AddPlant(plant, 2);
+           
+        }
+
+        public void AddSoil(Soil soil)
+        {
+            conditionRepository.AddSoil(soil);
+        }
+
+        public void AddFertilizer(Fertilizer fertilizer)
+        {
+            fertilizerRepository.AddFertilizer(fertilizer);
         }
     }
 }

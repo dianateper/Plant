@@ -31,27 +31,9 @@ namespace Server
             using (NpgsqlDataReader dr = cmd.ExecuteReader()){}
 
         }
-
         public void CloseConnection()
         {
             con.Close();
-        }
-
-
-        public void test()
-        {
-
-            NpgsqlCommand cmd = new NpgsqlCommand(string.Format("SELECT op_col,name FROM dblink('{0}','SELECT test_id,name from test') AS t(op_col int, name varchar)", DBController), con);
-            NpgsqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                MessageBox.Show(reader.GetInt16(0).ToString());
-                MessageBox.Show(reader.GetString(1));
-            }
-
-            reader.Dispose();
-            cmd.Dispose();
         }
     }
 }

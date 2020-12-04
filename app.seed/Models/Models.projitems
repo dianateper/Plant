@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Machine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Plant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Position.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Pricing.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Soil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Statistica.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\StatisticaView.cs" />
   </ItemGroup>

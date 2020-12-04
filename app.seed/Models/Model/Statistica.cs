@@ -64,11 +64,7 @@ namespace Models.Model
 
             int N = array.Count();
 
-            if (N < 3)
-            {
-                return 0;
-            }
-
+       
             array.ForEach(a =>
             {
                 sum += Math.Pow(((a - mean) / stdDev), 3);
@@ -86,10 +82,7 @@ namespace Models.Model
 
             int N = array.Count();
 
-            if (N < 4) {
-                return 0;
-            }
-
+           
             array.ForEach(a =>
             {
                 sum += Math.Pow((a-mean)/StdDev, 4);

@@ -56,7 +56,7 @@
                 <lvc:Axis x:Name="GraphHumidityAxisX" LabelFormatter="{Binding Formatter}" ></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <DataGrid x:Name="PlantsHistoryGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="190" Margin="1019,67,0,0" VerticalAlignment="Top" Width="140">
+        <DataGrid x:Name="PlantsHistoryGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="190" Margin="976,67,0,0" VerticalAlignment="Top" Width="183">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date" Binding="{Binding datetime}"></DataGridTextColumn>

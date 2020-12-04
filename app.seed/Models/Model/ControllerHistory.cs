@@ -16,8 +16,6 @@ namespace Models.Model
 
         public DateTime datetime { get; set; }
 
-
-
-
     }
 }
+
