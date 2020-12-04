@@ -6,34 +6,16 @@ namespace Models.Model
 
     public class Plant
     {
-        int plantId;
+        public int PlantId { get; set; }
 
-        string name;
+        public string Name { get; set; }
 
-        string iconName;
-
-       
-
-        public int PlantId { 
-            get { return plantId; } 
-            set { plantId = value; }
-        }
-
-    
-        public string Name {
-            get { return name; }
-            set { name = value; }
-        }
-
-     
-        public string IconName {
-            get { return iconName; }
-            set { iconName = value; }
-        }
+        public string IconName { get; set; }
 
         public DateTime datetime { get; set; }
 
         public double Price { get; set; }
+
         public int X { get; set; }
     
         public int Y { get; set; }
@@ -50,7 +32,6 @@ namespace Models.Model
 
         public double humidity { get; set; }
 
-
         public double phMin { get; set; }
 
         public double phMax { get; set; }
@@ -60,16 +41,13 @@ namespace Models.Model
         public Plant() { 
         }
 
-        
-
         public Plant(Plant plant)
         {
-            this.plantId = plant.plantId;
-            this.name = plant.name;
-            this.iconName = plant.iconName;
+            this.PlantId = plant.PlantId;
+            this.Name = plant.Name;
+            this.IconName = plant.IconName;
             this.X = plant.X;
             this.Y = plant.Y;
         }
-
     }
 }

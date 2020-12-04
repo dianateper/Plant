@@ -14,10 +14,10 @@ namespace Server.Repository
         public void AddPlant(Plant plant, int conditionId)
         {
             NpgsqlCommand cmd = new NpgsqlCommand(
-            string.Format("INSERT INTO plant(name, price, condition_id) VALUES('" + plant.Name 
-            + "', " + plant.Price.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", " + conditionId + ");"), DBManager.con);
+            string.Format("INSERT INTO plant(name, price, condition_id) VALUES('" 
+            + plant.Name + "', " + plant.Price.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", " 
+            + conditionId + ");"), DBManager.con);
 
-            MessageBox.Show(cmd.CommandText);
             cmd.ExecuteNonQuery();
             cmd.Dispose();
         }
