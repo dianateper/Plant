@@ -9,101 +9,125 @@ namespace app.seed
     public static class ExtensionMethods
     {
 
-        
-
-        public static void GetPositionId(this Machine machine)
+        public static string Str(this Machine machine1)
         {
+            return
+                String.Format("!!!!!!!!!!! Machine {0}, type {1}, name {2}, x = {3}, y = {4}",
+                machine1.machineId, machine1.Type, machine1.Name, machine1.X, machine1.Y);
+        }
 
+        public static bool IsEqual(this Machine machine1, Machine machine2)
+        {
+            if (machine1.machineId == machine2.machineId &&
+                machine1.Type == machine2.Type &&
+                machine1.Name.Equals(machine2.Name) &&
+                machine1.X == machine2.X && machine1.Y == machine2.Y)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
+        public static Machine ToClone(this Machine machine)
+        {
+            Machine new_machine = new Machine();
+
+            new_machine.machineId = machine.machineId;
+            new_machine.Type = machine.Type;
+            new_machine.Name = machine.Name;
+            new_machine.X = machine.X;
+            new_machine.Y = machine.Y;
+
+            return new_machine;
         }
 
 
-        public static bool MoveMachineLeft(this Machine machine, IContractXam channel)
+        public static Machine MoveMachineLeft(this Machine machine, IContractXam channel)
         {
+            Machine temp_machine = machine.ToClone();
+
             if (channel != null)
             {
-                int temp_x = machine.X - 1;
+                temp_machine.X--;
 
-                if (RootModel.MinX <= temp_x &&
-                    temp_x < RootModel.MaxX &&
-                    machine.Y % 2 != 0
+                if (MainPage.MinX <= temp_machine.X &&
+                    temp_machine.X < MainPage.MaxX &&
+                    temp_machine.Y % 2 != 0
                     )
                 {
-                    machine.X--;
+                    //channel.ChangeMachinePosition(machine);
 
-                    return channel.ChangeMachinePosition(machine);
+                    return temp_machine;
                 }
-
-                return false;
             }
 
-            return false;
+            return machine;
         }
 
-        public static bool MoveMachineRight(this Machine machine, IContractXam channel)
+        public static Machine MoveMachineRight(this Machine machine, IContractXam channel)
         {
+            Machine temp_machine = machine;
+            
             if (channel != null)
             {
-                int temp_x = machine.X + 1;
-
-                if (RootModel.MinX <= temp_x &&
-                    temp_x < RootModel.MaxX &&
-                    machine.Y % 2 != 0
+                temp_machine.X++;
+                
+                if (MainPage.MinX <= temp_machine.X &&
+                    temp_machine.X < MainPage.MaxX &&
+                    temp_machine.Y % 2 != 0
                     )
                 {
-                    machine.X++;
-
-                    return channel.ChangeMachinePosition(machine);
+                    //channel.ChangeMachinePosition(machine);
+                    return temp_machine;
                 }
-
-                return false;
             }
 
-            return false;
+            return machine;
         }
 
-        public static bool MoveMachineUp(this Machine machine, IContractXam channel)
+        public static Machine MoveMachineUp(this Machine machine, IContractXam channel)
         {
+            Machine temp_machine = machine;
+            
             if (channel != null)
             {
-                int temp_y = machine.Y - 1;
-
-                if (RootModel.MinY <= temp_y &&
-                    temp_y < RootModel.MaxY &&
-                    machine.X % 2 != 0
+                temp_machine.Y--;
+                
+                if (MainPage.MinY <= temp_machine.Y &&
+                    temp_machine.Y < MainPage.MaxY &&
+                    temp_machine.X % 2 != 0
                     )
                 {
-                    machine.Y--;
-
-                    return channel.ChangeMachinePosition(machine);
+                    //channel.ChangeMachinePosition(machine);
+                    return temp_machine;
                 }
-
-                return false;
             }
 
-            return false;
+            return machine;
         }
 
-        public static bool MoveMachineDown(this Machine machine, IContractXam channel)
+        public static Machine MoveMachineDown(this Machine machine, IContractXam channel)
         {
+            Machine temp_machine = machine;
+            
             if (channel != null)
             {
-                int temp_y = machine.Y + 1;
+                temp_machine.Y++;
 
-                if (RootModel.MinY <= temp_y &&
-                    temp_y < RootModel.MaxY &&
-                    machine.X % 2 != 0
+                if (MainPage.MinY <= temp_machine.Y &&
+                    temp_machine.Y < MainPage.MaxY &&
+                    temp_machine.X % 2 != 0
                     )
                 {
-                    machine.Y++;
-
-                    return channel.ChangeMachinePosition(machine);
+                    //channel.ChangeMachinePosition(machine);
+                    return temp_machine;
                 }
-
-                return false;
             }
 
-            return false;
+            return machine;
         }
 
 
