@@ -47,7 +47,7 @@ namespace app.seed
 
         public static Machine MoveMachineLeft(this Machine machine, IContractXam channel)
         {
-            Machine temp_machine = machine;
+            Machine temp_machine = machine.ToClone();
 
             if (channel != null)
             {

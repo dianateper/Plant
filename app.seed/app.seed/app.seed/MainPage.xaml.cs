@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://96004e8e4318.ngrok.io");
+        Uri address = new Uri("https://e45a75b4bf69.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -61,14 +61,16 @@ namespace app.seed
             }
         }
 
+        Machine selectedMachinePicker;
         public Machine SelectedMachinePicker
         {
-            get { return selectedMachine; }
+            get { return selectedMachinePicker; }
             set
             {
-                if (selectedMachine != value)
+                if (selectedMachinePicker != value)
                 {
-                    selectedMachine = value;
+                    selectedMachinePicker = value;
+                    SelectedMachine = value;
                     OnPropertyChanged();
                 }
             }
@@ -331,9 +333,10 @@ namespace app.seed
             //Console.WriteLine("machine = " + machine.Str());
             //Console.WriteLine("SelectedMachine = " + SelectedMachine.Str());
 
-            machine.MoveMachineLeft(channel);
+            machine = machine.MoveMachineLeft(channel);
             //Console.WriteLine("machine.MoveMachineLeft" + machine.Str());
             //Console.WriteLine("SelectedMachine after machine.MoveMachineLeft" + SelectedMachine.Str());
+            /*
             MachineList.ForEach(i =>
             {
                 if (i.IsEqual(SelectedMachine))
@@ -341,6 +344,7 @@ namespace app.seed
                     i = machine;
                 }
             });
+            */
 
 
             SelectedMachine = machine;
