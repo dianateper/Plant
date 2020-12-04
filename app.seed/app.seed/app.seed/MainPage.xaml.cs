@@ -320,26 +320,22 @@ namespace app.seed
 
         private void left_image_button_Clicked(object sender, EventArgs e)
         {
-            Machine machine = SelectedMachine.ToClone();
-            SelectedMachine = machine.MoveMachineLeft(channel);
+            SelectedMachine = SelectedMachine.MoveMachineLeft(channel);
         }
 
         private void right_image_button_Clicked(object sender, EventArgs e)
         {
-            Machine machine = SelectedMachine.ToClone();
-            SelectedMachine = machine.MoveMachineRight(channel);
+            SelectedMachine = SelectedMachine.MoveMachineRight(channel);
         }
 
         private void up_image_button_Clicked(object sender, EventArgs e)
         {
-            Machine machine = SelectedMachine.ToClone();
-            SelectedMachine = machine.MoveMachineUp(channel);
+            SelectedMachine = SelectedMachine.MoveMachineUp(channel);
         }
 
         private void down_image_button_Clicked(object sender, EventArgs e)
         {
-            Machine machine = SelectedMachine.ToClone();
-            SelectedMachine = machine.MoveMachineDown(channel);
+            SelectedMachine = SelectedMachine.MoveMachineDown(channel);
         }
 
         #endregion

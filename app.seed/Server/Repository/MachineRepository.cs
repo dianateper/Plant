@@ -56,6 +56,7 @@ namespace Server.Repository
 
         public bool SetNewMachineLocation(Machine machine)
         {
+            Console.WriteLine("Server: machine {0}, x={1}, y={2}", machine.machineId, machine.X, machine.Y);
             int position_id = positionRepository.GetPositionIdByXAndY(machine.X, machine.Y);
 
             NpgsqlCommand cmd = new NpgsqlCommand(string.Format(

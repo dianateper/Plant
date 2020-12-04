@@ -57,7 +57,8 @@ namespace app.seed
                     temp_machine.Y % 2 != 0
                     )
                 {
-                    channel.ChangeMachinePosition(machine);
+                    Console.WriteLine("Before sending " + machine.Str());
+                    channel.ChangeMachinePosition(temp_machine);
 
                     return temp_machine;
                 }
@@ -79,7 +80,7 @@ namespace app.seed
                     temp_machine.Y % 2 != 0
                     )
                 {
-                    channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(temp_machine);
 
                     return temp_machine;
                 }
@@ -101,7 +102,7 @@ namespace app.seed
                     temp_machine.X % 2 != 0
                     )
                 {
-                    channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(temp_machine);
 
                     return temp_machine;
                 }
@@ -123,7 +124,7 @@ namespace app.seed
                     temp_machine.X % 2 != 0
                     )
                 {
-                    channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(temp_machine);
 
                     return temp_machine;
                 }
