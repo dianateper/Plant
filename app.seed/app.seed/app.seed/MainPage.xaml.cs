@@ -77,21 +77,17 @@ namespace app.seed
             get { return selectedMachine; }
             set
             {
-                //TODO update MachineList
                 if (selectedMachine == null)
                 {
                     selectedMachine = value;
-                    OnPropertyChanged();
                     ShowNewMachinePosition(selectedMachine);
+
+                    OnPropertyChanged();
                 }
                 else
                 {
-                    Console.WriteLine("selma" + selectedMachine.Str());
-                    Console.WriteLine("value" + value.Str());
-
                     if (!selectedMachine.IsEqual(value))
                     {
-                        Console.WriteLine("!!!!!!!!!!!selectedMachine.IsEqual(value) is working");
                         HideOldMachinePosition(selectedMachine);
 
                         MachineList.ForEach(i =>
@@ -104,8 +100,9 @@ namespace app.seed
                         });
 
                         selectedMachine = value;
-                        OnPropertyChanged();
                         ShowNewMachinePosition(selectedMachine);
+
+                        OnPropertyChanged();
                     }
                 }
             }
@@ -142,16 +139,17 @@ namespace app.seed
             get { return optimalRoute; }
             set
             {
-                if (optimalRoute != value)
+                if (optimalRoute != null)
                 {
-                    if (optimalRoute != null)
-                    {
-                        HideOldOptimalRoute(optimalRoute);
-                    }
-                    optimalRoute = value;
-                    OnPropertyChanged();
-                    ShowNewOptimalRoute(optimalRoute);
+                    HideOldOptimalRoute(optimalRoute);
                 }
+                optimalRoute = value;
+                foreach(Position p in optimalRoute)
+                {
+                    Console.WriteLine("Optimal route: x={0}, y={1}", p.X, p.Y);
+                }
+                OnPropertyChanged();
+                ShowNewOptimalRoute(optimalRoute);
             }
         }
 
@@ -165,18 +163,34 @@ namespace app.seed
             this.BindingContext = this;
         }
 
-
+        #region view methods
 
         private void HideOldMachinePosition(Machine machine)
         {
-            Console.WriteLine("!!!HideOldMachinePosition" + machine.Str() + ", color = " + Color.Blue.ToString());
             ChangeCellColorPositionsGrid(machine.X, machine.Y, colorHidePath);
         }
 
         public void ShowNewMachinePosition(Machine machine)
         {
-            Console.WriteLine("!!!ShowNewMachinePosition" + machine.Str() + ", color = " + colorSelectedMachine.ToString());
             ChangeCellColorPositionsGrid(machine.X, machine.Y, colorSelectedMachine);
+        }
+
+        private void HideOldOptimalRoute(LinkedList<Position> optimalRoute)
+        {
+            Color color = Color.Blue;
+
+            foreach (Position p in optimalRoute)
+            {
+                ChangeCellColorPositionsGrid(p.X, p.Y, color);
+            }
+        }
+
+        private void ShowNewOptimalRoute(LinkedList<Position> optimalRoute)
+        {
+            foreach (Position p in optimalRoute)
+            {
+                ChangeCellColorPositionsGrid(p.X, p.Y, colorOptimalRoute);
+            }
         }
 
         private void ChangeCellColorPositionsGrid(int x, int y, Color color)
@@ -203,40 +217,9 @@ namespace app.seed
             return null;
         }
 
+        #endregion
 
-        private void HideOldOptimalRoute(LinkedList<Position> optimalRoute)
-        {
-            Color color = Color.Blue;
-            if (light_mode) { }
-            else
-            if (dark_mode)
-            {
-                Style = Resources["ButtonGridStyle"] as Style;
-
-                foreach (Setter s in Style.Setters)
-                {
-                    if (s.Property.Equals("BackgroundColor"))
-                    {
-                        color = (Color)s.Value;
-                    }
-                }
-            }
-
-            foreach (Position p in optimalRoute)
-            {
-                ChangeCellColorPositionsGrid(p.X, p.Y, color);
-            }
-        }
-
-        private void ShowNewOptimalRoute(LinkedList<Position> optimalRoute)
-        {
-            foreach (Position p in optimalRoute)
-            {
-                ChangeCellColorPositionsGrid(p.X, p.Y, colorOptimalRoute);
-            }
-        }
-
-        #region controls grid1
+        #region grid header
 
         void Connect()
         {
@@ -251,6 +234,7 @@ namespace app.seed
 
                 if (factory != null && channel != null)
                 {
+                    //TODO picker
                     MachineList = channel.GetAllMachines();
                     DisplayAlert("", $"Got machines list", "OK");
 
@@ -274,7 +258,7 @@ namespace app.seed
 
         #endregion
 
-        #region controls grid2
+        #region grid positions
 
         private void grid_position_button_Clicked(object sender, EventArgs e)
         {
@@ -297,26 +281,7 @@ namespace app.seed
 
         #endregion
 
-        #region controls grid3 
-
-        private void play_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pause_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void execute_action_image_button_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        #region controls grid4 (move)
+        #region controls grid move
 
         private void left_image_button_Clicked(object sender, EventArgs e)
         {
@@ -336,6 +301,11 @@ namespace app.seed
         private void down_image_button_Clicked(object sender, EventArgs e)
         {
             SelectedMachine = SelectedMachine.MoveMachineDown(channel);
+        }
+        
+        private void execute_action_image_button_Clicked(object sender, EventArgs e)
+        {
+
         }
 
         #endregion
