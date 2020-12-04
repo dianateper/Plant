@@ -5,58 +5,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="app.seed.MainPage"
-             Background="#5b5b5b"
+             Background="White"
              >
     <ContentPage.Resources>
         <ResourceDictionary>
+            <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10" />
+            </Style>
+            
             <Style x:Key="ImageButtonChangeViewStyle" TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
+                <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="WidthRequest" Value="40" />
                 <Setter Property="HeightRequest" Value="40" />
             </Style>
             <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
+                <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="Aspect" Value="AspectFit" />
                 <Setter Property="HeightRequest" Value="30" />
 
             </Style>
-            
+
             <Style x:Key="GridStyle" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="ColumnSpacing" Value="3" />
-                <Setter Property="RowSpacing" Value="3" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="ColumnSpacing" Value="0" />
+                <Setter Property="RowSpacing" Value="0" />
                 <Setter Property="Margin" Value="0" />
             </Style>
-            <Style x:Key="GridControls1Style" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="ColumnSpacing" Value="3" />
-                <Setter Property="RowSpacing" Value="3" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="Margin" Value="0,10,0,0" />
-            </Style>
-            <Style x:Key="GridControls2Style" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="#5b5b5b" />
-                <Setter Property="ColumnSpacing" Value="3" />
-                <Setter Property="RowSpacing" Value="3" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-            </Style>
-
             <Style x:Key="BoxViewPathStyle" TargetType="BoxView">
-                <Setter Property="Color" Value="Aquamarine" />
-            </Style>
-
-            <Style x:Key="StackLayoutStyle" TargetType="StackLayout">
-                <Setter Property="Margin" Value="10" />
-            </Style>
-
-            <Style x:Key="ButtonGridPathStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="Aquamarine" />
+                <Setter Property="Color" Value="White" />
             </Style>
             <Style x:Key="ButtonGridStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#b5c1c0" />
+                <Setter Property="BackgroundColor" Value="#dcd3cd" />
             </Style>
 
-
+            <Style x:Key="GridControls2Style" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="ColumnSpacing" Value="0" />
+                <Setter Property="RowSpacing" Value="0" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Style="{StaticResource StackLayoutStyle}" >
@@ -80,8 +67,8 @@
         </Grid>
 
         <Grid x:Name="positions_grid" BindableLayout.ItemsSource="{Binding PositionsGrid}" Style="{StaticResource GridStyle}"
-              RowDefinitions="30,7,30,7,30,7,30,7,30,7,30,7,30,7,30,7,30,7,30"
-              ColumnDefinitions="*,7,*,7,*,7,*,7,*"
+              RowDefinitions="37,10,37,10,37,10,37,10,37,10,37,10,37,10,37,10,37,10,37"
+              ColumnDefinitions="*,10,*,10,*,10,*,10,*"
               >
 
             <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource ButtonGridStyle}" Clicked="grid_position_button_Clicked" />
@@ -266,18 +253,6 @@
 
         </Grid>
 
-        <Grid Style="{StaticResource GridControls1Style}"
-              RowDefinitions="35"
-              ColumnDefinitions="40, 40, 40"
-              >
-
-            <ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="play_image_button" Source="play.png" Clicked="play_image_button_Clicked" />
-            <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="pause_image_button" Source="pause.png" Clicked="pause_image_button_Clicked" />
-            <ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="execute_action_image_button" Source="execute_action.png" Clicked="execute_action_image_button_Clicked" />
-
-
-        </Grid>
-
         <Grid Style="{StaticResource GridControls2Style}" 
               RowDefinitions="35, 35, 35, 35"
               ColumnDefinitions="40, 40, 40"
@@ -285,6 +260,7 @@
 
             <ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="up_image_button" Source="up.png" Clicked="up_image_button_Clicked" />
             <ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" x:Name="left_image_button" Source="left.png" Clicked="left_image_button_Clicked" />
+            <ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="execute_action_image_button" Source="execute_action.png" Clicked="execute_action_image_button_Clicked" />
             <ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ImageButtonStyle}" x:Name="right_image_button" Source="right.png" Clicked="right_image_button_Clicked" />
             <ImageButton Grid.Row="2" Grid.Column="1" Style="{StaticResource ImageButtonStyle}" x:Name="down_image_button" Source="down.png" Clicked="down_image_button_Clicked" />
 

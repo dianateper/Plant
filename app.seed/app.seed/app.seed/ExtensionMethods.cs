@@ -12,7 +12,7 @@ namespace app.seed
         public static string Str(this Machine machine1)
         {
             return
-                String.Format("!!!!!!!!!!! Machine {0}, type {1}, name {2}, x = {3}, y = {4}",
+                String.Format("Machine {0}, type {1}, name {2}, x = {3}, y = {4}",
                 machine1.machineId, machine1.Type, machine1.Name, machine1.X, machine1.Y);
         }
 
@@ -44,7 +44,6 @@ namespace app.seed
             return new_machine;
         }
 
-
         public static Machine MoveMachineLeft(this Machine machine, IContractXam channel)
         {
             Machine temp_machine = machine.ToClone();
@@ -58,7 +57,7 @@ namespace app.seed
                     temp_machine.Y % 2 != 0
                     )
                 {
-                    //channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(machine);
 
                     return temp_machine;
                 }
@@ -69,18 +68,19 @@ namespace app.seed
 
         public static Machine MoveMachineRight(this Machine machine, IContractXam channel)
         {
-            Machine temp_machine = machine;
-            
+            Machine temp_machine = machine.ToClone();
+
             if (channel != null)
             {
                 temp_machine.X++;
-                
+
                 if (MainPage.MinX <= temp_machine.X &&
                     temp_machine.X < MainPage.MaxX &&
                     temp_machine.Y % 2 != 0
                     )
                 {
-                    //channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(machine);
+
                     return temp_machine;
                 }
             }
@@ -90,18 +90,19 @@ namespace app.seed
 
         public static Machine MoveMachineUp(this Machine machine, IContractXam channel)
         {
-            Machine temp_machine = machine;
-            
+            Machine temp_machine = machine.ToClone();
+
             if (channel != null)
             {
                 temp_machine.Y--;
-                
+
                 if (MainPage.MinY <= temp_machine.Y &&
                     temp_machine.Y < MainPage.MaxY &&
                     temp_machine.X % 2 != 0
                     )
                 {
-                    //channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(machine);
+
                     return temp_machine;
                 }
             }
@@ -111,8 +112,8 @@ namespace app.seed
 
         public static Machine MoveMachineDown(this Machine machine, IContractXam channel)
         {
-            Machine temp_machine = machine;
-            
+            Machine temp_machine = machine.ToClone();
+
             if (channel != null)
             {
                 temp_machine.Y++;
@@ -122,7 +123,8 @@ namespace app.seed
                     temp_machine.X % 2 != 0
                     )
                 {
-                    //channel.ChangeMachinePosition(machine);
+                    channel.ChangeMachinePosition(machine);
+
                     return temp_machine;
                 }
             }
@@ -131,28 +133,6 @@ namespace app.seed
         }
 
 
-        public static bool Pause(this Machine machine, IContractXam channel)
-        {
-            /*
-            if (channel != null)
-            {
-                int temp_y = machine.Y + 1;
-
-                if (RootModel.MinY <= temp_y &&
-                    temp_y < RootModel.MaxY &&
-                    machine.X % 2 != 0
-                    )
-                {
-                    machine.Y++;
-
-                    return channel.ChangeMachinePosition(machine);
-                }
-
-                return false;
-            }
-            */
-            return false;
-        }
-
     }
+
 }

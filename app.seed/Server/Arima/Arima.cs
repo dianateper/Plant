@@ -54,7 +54,7 @@ namespace Server.Arima
 
         public List<double> MakePredition()
         {
-            List<double> forecast = new List<double>();
+            List<double> forecast = new List<double>();/*
             try
             {
                 var psi = new ProcessStartInfo();
@@ -85,10 +85,11 @@ namespace Server.Arima
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }*/
             return forecast;
 
         }
+
 
 
         
