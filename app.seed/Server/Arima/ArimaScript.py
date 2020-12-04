@@ -65,7 +65,27 @@ class ARIMA(LinearModel):
         self.ar = None
         self.resid = None
 
-    
+
+    def fit_predict(self, x): 
+        features, x = self.prepare_features(x)
+        super().fit(features, x)
+        features = features
+        return self.predict(x, prepared=(features))
+
+
+
+    def forecast(self, x, n):
+        features, x = self.prepare_features(x)
+        y = super().predict(features)
+        y_len = len(y)
+        y = np.r_[y, np.zeros(n)]
+        
+        for i in range(n):
+            feat = np.r_[y[-(self.p + n) + i: -n + i], np.zeros(self.q)]
+            y[x.shape[0] + i] = super().predict(feat[None, :])
+        return self.return_output(y)[y_len:]
+
+
     def prepare_features(self, x):
        
         if self.d > 0:
@@ -98,13 +118,7 @@ class ARIMA(LinearModel):
             features = ar_features[:n]
         
         return features, x[:n]
-   
-
-    def fit_predict(self, x): 
-        features, x = self.prepare_features(x)
-        super().fit(features, x)
-        features = features
-        return self.predict(x, prepared=(features))
+  
     
 
     def predict(self, x, **kwargs):
@@ -124,16 +138,7 @@ class ARIMA(LinearModel):
         return x
     
 
-    def forecast(self, x, n):
-        features, x = self.prepare_features(x)
-        y = super().predict(features)
-        y_len = len(y)
-        y = np.r_[y, np.zeros(n)]
-        
-        for i in range(n):
-            feat = np.r_[y[-(self.p + n) + i: -n + i], np.zeros(self.q)]
-            y[x.shape[0] + i] = super().predict(feat[None, :])
-        return self.return_output(y)[y_len:]
+   
 
 
 def ArimaMakePredition(data, p, d, q, f):

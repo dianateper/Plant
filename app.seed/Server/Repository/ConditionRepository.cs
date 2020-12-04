@@ -12,7 +12,7 @@ namespace Server.Repository
         {
             NpgsqlCommand cmd = new NpgsqlCommand(
 
-            string.Format("INSERT INTO SOIL(name) VALUES(" +soil.Name+ "');"), DBManager.con);
+            string.Format("INSERT INTO SOIL(name) VALUES('" +soil.Name+ "');"), DBManager.con);
 
             cmd.ExecuteNonQuery();
             cmd.Dispose();

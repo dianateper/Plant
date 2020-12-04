@@ -45,11 +45,11 @@
 
     </Window.Resources>
     <Grid>
-        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="374" Width="643" Margin="377,95,0,0">
+        <Border HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Height="374" Width="721" Margin="381,95,0,0">
 
 
         </Border>
-        <Grid x:Name="Field" ShowGridLines="True" Margin="384,100,183,102" AllowDrop="True">
+        <Grid x:Name="Field" ShowGridLines="True" Margin="384,100,91.6,102.4" AllowDrop="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition Height="70"></RowDefinition>
@@ -232,9 +232,9 @@
         </Grid>
 
 
-        <Grid Background="Lavender" Width="1000" Height="400" Margin="65,0,900,9" >
+        <Grid Background="Lavender" Width="1030" Height="400" Margin="65,0,900,9" >
             <DataGrid x:Name="plantsGrid"  SelectionMode="Extended"  AutoGenerateColumns="False"
-                         ColumnWidth="*" >
+                         ColumnWidth="*" HorizontalAlignment="Left" Width="1030" >
 
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="Name"  Binding="{Binding Name}" />
