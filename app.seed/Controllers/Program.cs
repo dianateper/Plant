@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.ServiceModel;
+using System.Threading;
 
 namespace Controllers
 {
@@ -81,6 +82,9 @@ namespace Controllers
 
             ShowController();
             channel.SendControllers(date, controllers);
+            Thread.Sleep(5000);
+            
+            Console.WriteLine("-----Send-----");
         }
 
 
@@ -91,7 +95,7 @@ namespace Controllers
             using (var rd = new StreamReader("../../weather_data_kiev_jun_jul_2020.csv"))
             {
                 rd.ReadLine();
-                while (!rd.EndOfStream && idx != 6)
+                while (!rd.EndOfStream && idx != 16)
                 {
                     var splits = rd.ReadLine().Split(',');
                     idx++;
@@ -101,6 +105,8 @@ namespace Controllers
                     double temperature = double.Parse(splits[2], CultureInfo.InvariantCulture);
 
                     SetParameter(date, temperature, humidity);
+                    
+                   
                 }
             }
         }

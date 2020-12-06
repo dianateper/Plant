@@ -73,7 +73,6 @@ class ARIMA(LinearModel):
         return self.predict(x, prepared=(features))
 
 
-
     def forecast(self, x, n):
         features, x = self.prepare_features(x)
         y = super().predict(features)

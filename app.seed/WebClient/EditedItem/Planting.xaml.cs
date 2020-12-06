@@ -1,6 +1,7 @@
 ﻿using Models.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -79,8 +80,10 @@ namespace WebClient
         {
             string imageLocation = string.Format(imgPath, iconName);
 
+            bool fileExist = File.Exists(imageLocation);
+
             ImageBrush imgBrush = new ImageBrush();
-            imgBrush.ImageSource = new BitmapImage(new Uri(imageLocation, UriKind.Relative));
+            imgBrush.ImageSource = new BitmapImage(new Uri(File.Exists(imageLocation)? imageLocation: @"..\..\..\Images\seeds.png", UriKind.Relative));
 
             Rectangle rect = new Rectangle();
             rect.Fill = imgBrush;

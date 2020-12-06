@@ -14,8 +14,8 @@ namespace Server.Repository
         public void AddPlant(Plant plant, int conditionId)
         {
             NpgsqlCommand cmd = new NpgsqlCommand(
-            string.Format("INSERT INTO plant(name, price, condition_id) VALUES('" 
-            + plant.Name + "', " + plant.Price.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", " 
+            string.Format("INSERT INTO plant(name, icon_name, price, condition_id) VALUES('" 
+            + plant.Name + "', '" + plant.Name.ToLower() + "'," + plant.Price.ToString("0.0", CultureInfo.GetCultureInfo("en-US")) + ", " 
             + conditionId + ");"), DBManager.con);
 
             cmd.ExecuteNonQuery();
@@ -35,7 +35,8 @@ namespace Server.Repository
                     Plant plant = new Plant();
                     plant.PlantId = reader.GetInt16(0);
                     plant.Name = reader.GetString(1);
-                    plant.IconName = reader.GetString(2);
+                    plant.IconName = reader.GetString(2) != ""? reader.GetString(2): "seeds";
+
                     plants.Add(plant);
                 }
             }

@@ -46,7 +46,6 @@ namespace Server.Arima
             try
             {
                 var psi = new ProcessStartInfo();
-                //psi.FileName = @"C:\Users\admin\AppData\Local\Programs\Python\Python39\python.exe";
                 psi.FileName = GetPythonPath();
                 var script = @"..\..\Arima\ArimaScript.py";
                
@@ -66,7 +65,8 @@ namespace Server.Arima
                     errors = process.StandardError.ReadToEnd();
                     results = process.StandardOutput.ReadToEnd();
                 }
-               
+
+
                 foreach(string res in results.Split(','))
                 {
                     forecast.Add(double.Parse(res, CultureInfo.InvariantCulture));

@@ -17,15 +17,12 @@ namespace WebClient
             plants = MainWindow.channel.GetListFullPlants();
             plantsGrid.ItemsSource = plants;
             ConditionGrid.ItemsSource = plants;
-          
         }
 
         private void plantsGrid_Selected(object sender, RoutedEventArgs e)
         {
             Plant plant = (Plant)plantsGrid.SelectedItem;
-
             feritilizerldGrid.ItemsSource = MainWindow.channel.GetFeritilizerByPlantId(plant.PlantId);
-
             ConditionGrid.ItemsSource = new List<Plant> { plant };
         }
 
