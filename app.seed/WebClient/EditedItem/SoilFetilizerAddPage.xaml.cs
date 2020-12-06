@@ -1,17 +1,6 @@
 ﻿using Models.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WebClient.EditedItem
 {
@@ -35,7 +24,7 @@ namespace WebClient.EditedItem
             try
             {
                 MainWindow.channel.AddSoil(soil);
-                MessageBox.Show(soilNameText.Text + " added.");
+                MessageBox.Show(soilNameText.Text + " added!");
             }
             catch(Exception ex)
             {
@@ -48,13 +37,13 @@ namespace WebClient.EditedItem
         {
             //add fertilizer
             Fertilizer fertilizer = new Fertilizer();
-            fertilizer.Name = fetilizerNameText.Text;
-            fertilizer.Count = int.Parse(fetilizerPriceText.Text);
-
             try
             {
+                fertilizer.Name = fetilizerNameText.Text;
+                fertilizer.Count = int.Parse(fetilizerPriceText.Text);
+
                 MainWindow.channel.AddFertilizer(fertilizer);
-                MessageBox.Show(fetilizerNameText.Text + " added.");
+                MessageBox.Show(fetilizerNameText.Text + " added!");
             }
             catch (Exception ex)
             {

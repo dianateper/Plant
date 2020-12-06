@@ -13,7 +13,7 @@ namespace Server.Repository
             NpgsqlCommand cmd = new NpgsqlCommand(
 
              string.Format("INSERT INTO FERTILIZER(name)" +
-                " VALUES(" + fertilizer.Name + "') RETURNING fertilizer_id;"), DBManager.con);
+                " VALUES('" + fertilizer.Name + "') RETURNING fertilizer_id;"), DBManager.con);
 
             int fertilizerId = 0;
             using (NpgsqlDataReader reader = cmd.ExecuteReader())

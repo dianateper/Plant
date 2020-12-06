@@ -70,9 +70,8 @@ namespace Server.Services
 
         public List<double> MakeArimaPrediction(int forecast, List<double> parameters)
         {
-
             Arima.Arima a = new Arima.Arima(parameters.ToArray(), forecast, 1, 1, 1);
-            return a.MakePredition();
+            return a.MakeArimaPrediction();
         }
 
         public List<Pricing> GetPrice()

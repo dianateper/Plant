@@ -2,11 +2,8 @@
 using Extreme.Statistics.TimeSeriesAnalysis;
 using Extreme.Mathematics;
 using System.Linq;
-using IronPython.Hosting;
-using System.IO;
 using System;
 using System.Windows;
-using Microsoft.Scripting.Hosting;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -22,9 +19,6 @@ namespace Server.Arima
         private int d;
         private int q;
 
-        
-        private readonly double[][] diff_seasonal;
-
         public Arima(double[] data, int predictionSize, int p, int d, int q)
         {
             this.predictionSize = predictionSize;
@@ -39,22 +33,14 @@ namespace Server.Arima
             this.p = p;
             this.d = d;
             this.q = q;
-            diff_seasonal = new double[d][];
+           
         }
 
-        public List<double> MakeArimaPrediction()
-        {
-            ArimaModel model = new ArimaModel(data, p, d, q);
-            model.Fit();
-            Vector<double> nextValues = model.Forecast(predictionSize);
-
-            return new List<double>(nextValues).Select(x => System.Math.Round(x, 2)).ToList();
-        }
-
+     
 
         public List<double> MakePredition()
         {
-            List<double> forecast = new List<double>();/*
+            List<double> forecast = new List<double>();
             try
             {
                 var psi = new ProcessStartInfo();
@@ -77,6 +63,8 @@ namespace Server.Arima
                     errors = process.StandardError.ReadToEnd();
                     results = process.StandardOutput.ReadToEnd();
                 }
+                MessageBox.Show(results);
+                MessageBox.Show(errors);
                 foreach(string res in results.Split(','))
                 {
                     forecast.Add(double.Parse(res, CultureInfo.InvariantCulture));
@@ -85,14 +73,23 @@ namespace Server.Arima
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }*/
+            }
             return forecast;
 
         }
 
 
 
-        
+        public List<double> MakeArimaPrediction()
+        {
+            ArimaModel model = new ArimaModel(data, p, d, q);
+            model.Fit();
+            Vector<double> nextValues = model.Forecast(predictionSize);
+
+            return new List<double>(nextValues).Select(x => System.Math.Round(x, 2)).ToList();
+        }
+
+
 
     }
 }

@@ -147,7 +147,15 @@ namespace WebClient
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.channel.SetPlants(SavedPlants);
+            try
+            {
+                MainWindow.channel.SetPlants(SavedPlants);
+                MessageBox.Show("Seeds added!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void back_button_Click(object sender, RoutedEventArgs e)
@@ -156,5 +164,7 @@ namespace WebClient
             newForm.Show();
             this.Close();
         }
+
+      
     }
 }
