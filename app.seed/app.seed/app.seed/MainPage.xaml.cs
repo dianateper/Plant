@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://94feac4801ec.ngrok.io");
+        Uri address = new Uri("https://63f7c1a66b45.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -25,8 +25,10 @@ namespace app.seed
         #region fields style
 
         public static readonly Color colorHidePath = Color.White;
-        public static readonly Color colorSelectedMachine = Color.Red;
-        public static readonly Color colorOptimalRoute = Color.Green;
+        public static readonly Color colorSelectedMachine = Color.LightCoral;
+        public static readonly Color colorOptimalRoute = Color.Lime;
+        public static readonly Color colorGridButtonDefault = Color.MistyRose;
+        public static readonly Color colorGridButtonTarget = Color.LimeGreen;
 
         public static int MinX = 0;
         public static int MaxX = 9;
@@ -50,7 +52,7 @@ namespace app.seed
         #endregion
 
         #region properties
-        
+
         public List<Machine> MachineList
         {
             get { return machineList; }
@@ -153,7 +155,7 @@ namespace app.seed
                     HideOldOptimalRoute(optimalRoute);
                 }
                 optimalRoute = value;
-                foreach(Position p in optimalRoute)
+                foreach (Position p in optimalRoute)
                 {
                     Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!Optimal route: x={0}, y={1}", p.X, p.Y);
                 }
@@ -186,12 +188,24 @@ namespace app.seed
 
         private void HideOldOptimalRoute(LinkedList<Position> optimalRoute)
         {
-            Color color = Color.Blue;
-
             foreach (Position p in optimalRoute)
             {
-                ChangeCellColorPositionsGrid(p.X, p.Y, color);
+                ChangeCellColorPositionsGrid(p.X, p.Y, colorHidePath);
             }
+
+            ChangeCellColorPositionsGrid(
+                optimalRoute.First.Value.X,
+                optimalRoute.First.Value.Y,
+                colorGridButtonDefault);
+
+
+            ChangeCellColorPositionsGrid(
+                optimalRoute.Last.Value.X,
+                optimalRoute.Last.Value.Y,
+                colorGridButtonDefault);
+
+            ShowNewMachinePosition(selectedMachine);
+
         }
 
         private void ShowNewOptimalRoute(LinkedList<Position> optimalRoute)
@@ -200,6 +214,20 @@ namespace app.seed
             {
                 ChangeCellColorPositionsGrid(p.X, p.Y, colorOptimalRoute);
             }
+
+
+            ChangeCellColorPositionsGrid(
+                optimalRoute.First.Value.X, 
+                optimalRoute.First.Value.Y,
+                colorGridButtonTarget);
+
+
+            ChangeCellColorPositionsGrid(
+                optimalRoute.Last.Value.X,
+                optimalRoute.Last.Value.Y,
+                colorGridButtonTarget);
+
+            ShowNewMachinePosition(selectedMachine);
         }
 
         private void ChangeCellColorPositionsGrid(int x, int y, Color color)
@@ -275,18 +303,13 @@ namespace app.seed
             var row = Grid.GetRow(button);
             var column = Grid.GetColumn(button);
 
-            TargetPosition = GetPositionInListByXY(column, row);
             Position start_position = GetPositionInListByXY(
                 SelectedMachine.X,
                 SelectedMachine.Y
                 );
+            TargetPosition = GetPositionInListByXY(column, row);
 
-            DisplayAlert("", $"Start position: {start_position.X} {start_position.Y}", "OK");
-            DisplayAlert("", $"Target position: {TargetPosition.X} {TargetPosition.Y}", "OK");
-
-            OptimalRoute = channel.GetOptimalRoute(start_position,
-                TargetPosition);
-
+            OptimalRoute = channel.GetOptimalRoute(start_position, TargetPosition);
         }
 
         #endregion
@@ -312,7 +335,7 @@ namespace app.seed
         {
             SelectedMachine = SelectedMachine.MoveMachineDown(channel);
         }
-        
+
         private void execute_action_image_button_Clicked(object sender, EventArgs e)
         {
 

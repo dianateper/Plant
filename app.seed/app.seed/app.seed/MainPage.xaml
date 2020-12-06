@@ -35,7 +35,7 @@
                 <Setter Property="Color" Value="White" />
             </Style>
             <Style x:Key="ButtonGridStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#dcd3cd" />
+                <Setter Property="BackgroundColor" Value="MistyRose" />
             </Style>
 
             <Style x:Key="GridControls2Style" TargetType="Grid">
