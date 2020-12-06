@@ -7,14 +7,24 @@ namespace Server.Contracts
     [ServiceContract]
     public interface IContractXam
     {
-        [OperationContract]
-        string Greeting();
 
         [OperationContract]
         List<Machine> GetAllMachines();
 
         [OperationContract]
-        LinkedList<Position> GetPath(Position start, Position end);
+        List<Position> GetAllPositions();
 
+        [OperationContract]
+        LinkedList<Position> GetOptimalRoute(Position start, Position end);
+
+        [OperationContract]
+        bool ChangeMachinePosition(Machine machine);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        Controller GetControllerByPosition(int X, int Y);
+
+        [OperationContract]
+        List<Controller> GetAllControllers();
     }
 }

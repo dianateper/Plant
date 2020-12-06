@@ -33,6 +33,32 @@ namespace Server.Repository
             return controllers;
         }
 
+        public List<Controller> GetAllControllersData()
+        {
+            List<Controller> controllers = new List<Controller>();
+
+            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(@"SELECT controller_id, position_id, temperature, humidity FROM 
+                                dblink('{0}','SELECT controller_id, position_id, temperature, humidity from controller') 
+                                AS t(controller_id int, position_id int, temperature numeric, humidity numeric)", DBManager.DBController), DBManager.con);
+
+            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Controller controller = new Controller();
+
+                    controller.ControllerId = reader.GetInt16(0);
+                    controller.PositionId = reader.GetInt16(1);
+                    controller.temperature = reader.GetDouble(2);
+                    controller.humidity = reader.GetDouble(3);
+
+                    controllers.Add(controller);
+                }
+            }
+
+            return controllers;
+        }
+
         public void SetTempAndHumidity(Controller controller)
         {
           

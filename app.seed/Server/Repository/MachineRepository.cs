@@ -54,5 +54,19 @@ namespace Server.Repository
             using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }
         }
 
+        public bool SetNewMachineLocation(Machine machine)
+        {
+            Console.WriteLine("Server: machine {0}, x={1}, y={2}", machine.machineId, machine.X, machine.Y);
+            int position_id = positionRepository.GetPositionIdByXAndY(machine.X, machine.Y);
+
+            NpgsqlCommand cmd = new NpgsqlCommand(string.Format(
+                @"SELECT dblink('{0}','UPDATE machine SET position_id={1} WHERE machine_id={2}')", DBManager.DBController,
+                position_id, machine.machineId), DBManager.con);
+
+            using (NpgsqlDataReader reader = cmd.ExecuteReader()) { }
+
+            return true;
+        }
+
     }
 }
