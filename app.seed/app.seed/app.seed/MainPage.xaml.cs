@@ -46,6 +46,8 @@ namespace app.seed
         Position targetPosition;
         List<Position> positionsList;
         LinkedList<Position> optimalRoute;
+        List<Controller> controllersList;
+        bool show_controllers_data = false;
 
         #endregion
 
@@ -144,6 +146,16 @@ namespace app.seed
             set
             {
                 positionsList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Controller> ControllersList
+        {
+            get { return controllersList; }
+            set
+            {
+                controllersList = value;
                 OnPropertyChanged();
             }
         }
@@ -322,10 +334,9 @@ namespace app.seed
             }
         }
 
-        List<Controller> controllers;
         private void SetControllerValues()
         {
-            controllers = channel.GetAllControllers();
+            ControllersList = channel.GetAllControllers();
 
             int row = positions_grid.RowDefinitions.Count;
             int col = positions_grid.ColumnDefinitions.Count;
@@ -347,7 +358,30 @@ namespace app.seed
 
         private void change_mod_image_button_Clicked(object sender, EventArgs e)
         {
-            SetControllerValues();
+            if (show_controllers_data)
+            {
+                ClearPositionsGrid();
+                show_controllers_data = false;
+            }
+            else
+            {
+                SetControllerValues();
+                show_controllers_data = true;
+            }
+
+
+        }
+
+        private void ClearPositionsGrid()
+        {
+            for (int i = 0; i < positions_grid.ColumnDefinitions.Count; i += 2)
+            {
+                for (int j = 0; j < positions_grid.RowDefinitions.Count; j += 2)
+                {
+                    var button = (Button)GetView(i, j);
+                    button.Text = "";
+                }
+            }
         }
 
         #endregion
@@ -420,7 +454,7 @@ namespace app.seed
 
         public Controller FindControllerByPositionId(int position_id)
         {
-            foreach (Controller c in controllers)
+            foreach (Controller c in ControllersList)
             {
                 if (c.PositionId == position_id)
                 {
