@@ -138,9 +138,6 @@ class ARIMA(LinearModel):
         return x
     
 
-   
-
-
 def ArimaMakePredition(data, p, d, q, f):
     model = ARIMA(q, d, p)
     model.fit_predict(data)
