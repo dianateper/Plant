@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://63f7c1a66b45.ngrok.io");
+        Uri address = new Uri("https://baace7b4bf68.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -35,9 +35,6 @@ namespace app.seed
         public static int MinY = 0;
         public static int MaxY = 19;
 
-        bool light_mode = false;
-        bool dark_mode = true;
-
         #endregion
 
         #region fields
@@ -45,6 +42,7 @@ namespace app.seed
         List<Machine> machineList;
         Machine selectedMachinePicker;
         Machine selectedMachine;
+        Position start_position;
         Position targetPosition;
         List<Position> positionsList;
         LinkedList<Position> optimalRoute;
@@ -107,6 +105,26 @@ namespace app.seed
                         OnPropertyChanged();
                     }
                 }
+
+                if (TargetPosition != null)
+                {
+                    StartPosition = GetPositionInListByXY(
+                        SelectedMachine.X,
+                        SelectedMachine.Y
+                        );
+
+                    GetOptimalRoute();
+                }
+            }
+        }
+
+        public Position StartPosition
+        {
+            get { return start_position; }
+            set
+            {
+                start_position = value;
+                OnPropertyChanged();
             }
         }
 
@@ -192,11 +210,11 @@ namespace app.seed
             {
                 ChangeCellColorPositionsGrid(p.X, p.Y, colorHidePath);
             }
-
+            
             ChangeCellColorPositionsGrid(
                 optimalRoute.First.Value.X,
                 optimalRoute.First.Value.Y,
-                colorGridButtonDefault);
+                colorHidePath); 
 
 
             ChangeCellColorPositionsGrid(
@@ -217,7 +235,7 @@ namespace app.seed
 
 
             ChangeCellColorPositionsGrid(
-                optimalRoute.First.Value.X, 
+                optimalRoute.First.Value.X,
                 optimalRoute.First.Value.Y,
                 colorGridButtonTarget);
 
@@ -232,7 +250,7 @@ namespace app.seed
 
         private void ChangeCellColorPositionsGrid(int x, int y, Color color)
         {
-            if (x % 2 == 0 && y % 2 == 0)
+            if (IsButton(x, y))
             {
                 var button = (Button)GetView(x, y);
                 button.BackgroundColor = color;
@@ -246,12 +264,32 @@ namespace app.seed
             OnPropertyChanged();
         }
 
-        public View GetView(int col, int row)
+        private View GetView(int col, int row)
         {
             foreach (View v in positions_grid.Children)
                 if ((col == Grid.GetColumn(v)) && (row == Grid.GetRow(v)))
                     return v;
             return null;
+        }
+
+        private bool IsButton(Position position)
+        {
+            if (position.X % 2 == 0 && position.Y % 2 == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsButton(int x, int y)
+        {
+            if (x % 2 == 0 && y % 2 == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
@@ -303,13 +341,18 @@ namespace app.seed
             var row = Grid.GetRow(button);
             var column = Grid.GetColumn(button);
 
-            Position start_position = GetPositionInListByXY(
+            StartPosition = GetPositionInListByXY(
                 SelectedMachine.X,
                 SelectedMachine.Y
                 );
             TargetPosition = GetPositionInListByXY(column, row);
 
-            OptimalRoute = channel.GetOptimalRoute(start_position, TargetPosition);
+            GetOptimalRoute();
+        }
+
+        private void GetOptimalRoute()
+        {
+            OptimalRoute = channel.GetOptimalRoute(StartPosition, TargetPosition);
         }
 
         #endregion
