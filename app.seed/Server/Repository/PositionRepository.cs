@@ -20,6 +20,8 @@ namespace Server.Repository
                 position.PositionId = reader.GetInt16(0);
                 position.X = reader.GetInt16(1);
                 position.Y = reader.GetInt16(2);
+
+                positions.Add(position);
             }
             reader.Dispose();
             cmd.Dispose();

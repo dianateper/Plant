@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://763059102637.ngrok.io");
+        Uri address = new Uri("https://94feac4801ec.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -113,11 +113,15 @@ namespace app.seed
             get { return targetPosition; }
             set
             {
+                targetPosition = value;
+                OnPropertyChanged();
+                /*
                 if (targetPosition != value)
                 {
                     targetPosition = value;
                     OnPropertyChanged();
                 }
+                */
             }
         }
 
@@ -126,11 +130,16 @@ namespace app.seed
             get { return positionsList; }
             set
             {
+                positionsList = value;
+                Console.WriteLine("!!!!!!PPPPPPPPEDJKJVBRHGBEIHFH!!!!!!!!!!!!!!" + value.Count);
+                OnPropertyChanged();
+                /*
                 if (positionsList != value)
                 {
                     positionsList = value;
                     OnPropertyChanged();
                 }
+                */
             }
         }
 
@@ -146,7 +155,7 @@ namespace app.seed
                 optimalRoute = value;
                 foreach(Position p in optimalRoute)
                 {
-                    Console.WriteLine("Optimal route: x={0}, y={1}", p.X, p.Y);
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!Optimal route: x={0}, y={1}", p.X, p.Y);
                 }
                 OnPropertyChanged();
                 ShowNewOptimalRoute(optimalRoute);
@@ -267,14 +276,15 @@ namespace app.seed
             var column = Grid.GetColumn(button);
 
             TargetPosition = GetPositionInListByXY(column, row);
+            Position start_position = GetPositionInListByXY(
+                SelectedMachine.X,
+                SelectedMachine.Y
+                );
 
-            DisplayAlert("", $"Target position: {row} {column}", "OK");
+            DisplayAlert("", $"Start position: {start_position.X} {start_position.Y}", "OK");
+            DisplayAlert("", $"Target position: {TargetPosition.X} {TargetPosition.Y}", "OK");
 
-            OptimalRoute = channel.GetOptimalRoute(
-                GetPositionInListByXY(
-                    SelectedMachine.X,
-                    SelectedMachine.Y
-                    ),
+            OptimalRoute = channel.GetOptimalRoute(start_position,
                 TargetPosition);
 
         }
@@ -317,19 +327,46 @@ namespace app.seed
 
         public Position GetPositionInListByXY(int x, int y)
         {
-            Position position = new Position();
-            positionsList.ForEach(i =>
+            foreach (Position p in positionsList)
             {
-                if (i.X == x && i.Y == y)
+                if (p.X == x && p.Y == y)
                 {
-                    position = i;
+                    return p;
                 }
+            }
 
-            });
-
-            return position;
+            return null;
         }
+        /*
+        void Method()
+        {
+            public void SetGridValues()
+            {
 
+                int row = Field.RowDefinitions.Count;
+                int col = Field.ColumnDefinitions.Count;
+
+                for (int i = 0; i < row; i++)
+                {
+                    for (int j = 0; j < col; j++)
+                    {
+                        Controller controller = MainWindow.channel.GetControllerByPosition(i * 2, j * 2);
+
+                        TextBlock textBlock = new TextBlock();
+                        textBlock.Text = i + "" + j + "\nT: " + string.Format("{0}\u00B0C", controller.temperature) + "\nH: " + controller.humidity + "%";
+
+                        Grid.SetColumn(textBlock, j);
+                        Grid.SetRow(textBlock, i);
+
+                        Field.Children.Add(textBlock);
+
+                    }
+                }
+            }
+
+
+        }
+        */
 
 
 

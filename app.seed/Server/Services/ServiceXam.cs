@@ -35,15 +35,21 @@ namespace Server.Services
             List<Position> positions = PositionRepository.GetAllPosition();
             
             Dijkstra.GraphBuilder graphBuilder = new Dijkstra.GraphBuilder();
-            Dijkstra.Graph<Position> graph = SetGraph(positions);
+            Dijkstra.Graph<Position> graph = SetGraph(positions, start, end);
             
             return graphBuilder.Search(start, end, graph);
         }
 
-        Dijkstra.Graph<Position> SetGraph(List<Position> positions)
+        Dijkstra.Graph<Position> SetGraph(List<Position> positions, Position start, Position end)
         {
             Dijkstra.Graph<Position> graph = new Dijkstra.Graph<Position>();
             List<Position> addedPositions = new List<Position>();
+
+            graph.AddNode(start);
+            addedPositions.Add(start);
+
+            graph.AddNode(end);
+            addedPositions.Add(end);
 
             positions.ForEach(i =>
             {
@@ -59,10 +65,10 @@ namespace Server.Services
                 addedPositions.ForEach(j =>
                 {
                     if (
-                    i.X == j.X + 1 ||
-                    i.X == j.X - 1 ||
-                    i.Y == j.Y + 1 ||
-                    i.Y == j.Y - 1
+                    (i.X == j.X + 1 && i.Y == j.Y) ||
+                    (i.X == j.X - 1 && i.Y == j.Y) ||
+                    (i.Y == j.Y + 1 && i.X == j.X) ||
+                    (i.Y == j.Y - 1 && i.X == j.X)
                     )
                     {
                         graph.AddEdge(i, j, 1);
@@ -72,7 +78,6 @@ namespace Server.Services
 
             return graph;
         }
-
 
 
     }
