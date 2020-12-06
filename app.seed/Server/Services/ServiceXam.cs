@@ -13,7 +13,7 @@ namespace Server.Services
     {
         MachineRepository MachineRepository = new MachineRepository();
         PositionRepository PositionRepository = new PositionRepository();
-
+        ControllerRepository ControllerRepository = new ControllerRepository();
 
         public List<Machine> GetAllMachines()
         {
@@ -78,7 +78,15 @@ namespace Server.Services
 
             return graph;
         }
+        
+        public Controller GetControllerByPosition(int X, int Y)
+        {
+            return ControllerRepository.GetControllerByXAndY(X, Y);
+        }
 
-
+        public List<Controller> GetAllControllers()
+        {
+            return ControllerRepository.GetAllControllersData();
+        }
     }
 }

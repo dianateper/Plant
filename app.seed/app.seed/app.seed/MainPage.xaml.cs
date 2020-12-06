@@ -15,7 +15,7 @@ namespace app.seed
     {
         #region fields connection
 
-        Uri address = new Uri("https://baace7b4bf68.ngrok.io");
+        Uri address = new Uri("https://20f2f6c1403f.ngrok.io");
         BasicHttpBinding binding = new BasicHttpBinding();
         ChannelFactory<IContractXam> factory = null;
         IContractXam channel = null;
@@ -135,13 +135,6 @@ namespace app.seed
             {
                 targetPosition = value;
                 OnPropertyChanged();
-                /*
-                if (targetPosition != value)
-                {
-                    targetPosition = value;
-                    OnPropertyChanged();
-                }
-                */
             }
         }
 
@@ -151,15 +144,7 @@ namespace app.seed
             set
             {
                 positionsList = value;
-                Console.WriteLine("!!!!!!PPPPPPPPEDJKJVBRHGBEIHFH!!!!!!!!!!!!!!" + value.Count);
                 OnPropertyChanged();
-                /*
-                if (positionsList != value)
-                {
-                    positionsList = value;
-                    OnPropertyChanged();
-                }
-                */
             }
         }
 
@@ -173,17 +158,12 @@ namespace app.seed
                     HideOldOptimalRoute(optimalRoute);
                 }
                 optimalRoute = value;
-                foreach (Position p in optimalRoute)
-                {
-                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!Optimal route: x={0}, y={1}", p.X, p.Y);
-                }
                 OnPropertyChanged();
                 ShowNewOptimalRoute(optimalRoute);
             }
         }
 
         #endregion
-
 
         public MainPage()
         {
@@ -210,11 +190,11 @@ namespace app.seed
             {
                 ChangeCellColorPositionsGrid(p.X, p.Y, colorHidePath);
             }
-            
+
             ChangeCellColorPositionsGrid(
                 optimalRoute.First.Value.X,
                 optimalRoute.First.Value.Y,
-                colorHidePath); 
+                colorHidePath);
 
 
             ChangeCellColorPositionsGrid(
@@ -223,7 +203,6 @@ namespace app.seed
                 colorGridButtonDefault);
 
             ShowNewMachinePosition(selectedMachine);
-
         }
 
         private void ShowNewOptimalRoute(LinkedList<Position> optimalRoute)
@@ -232,7 +211,6 @@ namespace app.seed
             {
                 ChangeCellColorPositionsGrid(p.X, p.Y, colorOptimalRoute);
             }
-
 
             ChangeCellColorPositionsGrid(
                 optimalRoute.First.Value.X,
@@ -326,9 +304,50 @@ namespace app.seed
             Connect();
         }
 
+        private void SetControllerValuesManyQueries()
+        {
+            int row = positions_grid.RowDefinitions.Count;
+            int col = positions_grid.ColumnDefinitions.Count;
+
+            for (int i = 0; i < col; i += 2)
+            {
+                for (int j = 0; j < row; j += 2)
+                {
+                    var button = (Button)GetView(i, j);
+                    Controller controller = channel.GetControllerByPosition(i, j);
+                    Console.WriteLine("controller.PositionId={0}, controller.temperature={1}, controller.humidity={2}", controller.PositionId, controller.temperature, controller.humidity);
+                    button.FontSize = 8;
+                    button.Text = i + "" + j + "\nT: " + string.Format("{0}\u00B0C", controller.temperature) + "\nH: " + controller.humidity + "%";
+                }
+            }
+        }
+
+        List<Controller> controllers;
+        private void SetControllerValues()
+        {
+            controllers = channel.GetAllControllers();
+
+            int row = positions_grid.RowDefinitions.Count;
+            int col = positions_grid.ColumnDefinitions.Count;
+
+            for (int i = 0; i < col; i += 2)
+            {
+                for (int j = 0; j < row; j += 2)
+                {
+                    var button = (Button)GetView(i, j);
+                    Position position = GetPositionInListByXY(i, j);
+                    Controller controller = FindControllerByPositionId(position.PositionId);
+
+                    button.FontSize = 7;
+                    button.Text = "T: " + string.Format("{0}\u00B0C", controller.temperature) + "\nH: " + controller.humidity + "%";
+                    //button.Text = i/2 + "" + j/2 + "\nT: " + string.Format("{0}\u00B0C", controller.temperature) + "\nH: " + controller.humidity + "%";
+                }
+            }
+        }
+
         private void change_mod_image_button_Clicked(object sender, EventArgs e)
         {
-
+            SetControllerValues();
         }
 
         #endregion
@@ -386,11 +405,6 @@ namespace app.seed
 
         #endregion
 
-
-
-
-
-
         public Position GetPositionInListByXY(int x, int y)
         {
             foreach (Position p in positionsList)
@@ -403,36 +417,22 @@ namespace app.seed
 
             return null;
         }
-        /*
-        void Method()
+
+        public Controller FindControllerByPositionId(int position_id)
         {
-            public void SetGridValues()
+            foreach (Controller c in controllers)
             {
-
-                int row = Field.RowDefinitions.Count;
-                int col = Field.ColumnDefinitions.Count;
-
-                for (int i = 0; i < row; i++)
+                if (c.PositionId == position_id)
                 {
-                    for (int j = 0; j < col; j++)
-                    {
-                        Controller controller = MainWindow.channel.GetControllerByPosition(i * 2, j * 2);
-
-                        TextBlock textBlock = new TextBlock();
-                        textBlock.Text = i + "" + j + "\nT: " + string.Format("{0}\u00B0C", controller.temperature) + "\nH: " + controller.humidity + "%";
-
-                        Grid.SetColumn(textBlock, j);
-                        Grid.SetRow(textBlock, i);
-
-                        Field.Children.Add(textBlock);
-
-                    }
+                    return c;
                 }
             }
 
-
+            return null;
         }
-        */
+
+
+
 
 
 

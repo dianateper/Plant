@@ -20,5 +20,11 @@ namespace Server.Contracts
         [OperationContract]
         bool ChangeMachinePosition(Machine machine);
 
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        Controller GetControllerByPosition(int X, int Y);
+
+        [OperationContract]
+        List<Controller> GetAllControllers();
     }
 }
